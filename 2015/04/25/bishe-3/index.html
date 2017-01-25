@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>pi-switch(3)——树莓派准备 | spy&#39;s blog</title>
+  <meta name="author" content="spy19930412">
+  
+  <meta name="description" content="sometimes ever sometimes never">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="pi-switch(3)——树莓派准备"/>
+  <meta property="og:site_name" content="spy&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+ <!--  <link href="/favicon.png" rel="icon"> -->
+ <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="spy&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">spy&#39;s blog</a></h1>
+  <h2><a href="/">sometimes ever sometimes never</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">存档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+      <li><a href="/todolist">Todo</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-04-25T08:50:32.000Z"><a href="/2015/04/25/bishe-3/">2015-04-25</a></time>
+      
+      
+  
+    <h1 class="title">pi-switch(3)——树莓派准备</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>本篇介绍：</p>
+<ul>
+<li>什么是树莓派</li>
+<li>树莓派配件清单</li>
+<li>给树莓派装个系统</li>
+<li>远程连接方法</li>
+<li>基础命令</li>
+</ul>
+<a id="more"></a>
+<h2 id="1-什么是树莓派"><a href="#1-什么是树莓派" class="headerlink" title="1.什么是树莓派"></a>1.什么是树莓派</h2><p>树莓派（英语：Raspberry Pi），是一款基于Linux系统的只有一张信用卡大小的单板机电脑。<br><a href="http://yun.baidu.com/s/1Es5Am" target="_blank" rel="external">入门资料</a></p>
+<h2 id="2-树莓派配件清单"><a href="#2-树莓派配件清单" class="headerlink" title="2.树莓派配件清单"></a>2.树莓派配件清单</h2><p>除了一个B+板和充电电源，我们还需要：<br><a href="http://item.jd.com/509932.html" target="_blank" rel="external">无线网卡</a><br><a href="http://item.jd.com/679771.html" target="_blank" rel="external">TF卡</a></p>
+<h2 id="3-给树莓派装个系统"><a href="#3-给树莓派装个系统" class="headerlink" title="3.给树莓派装个系统"></a>3.给树莓派装个系统</h2><p>-格式化TF卡，选择TF32格式<br>-下载<a href="http://www.raspberrypi.org/downloads" target="_blank" rel="external">debian系统</a>至电脑中<br>-下载<a href="http://pan.baidu.com/s/1qW6Wxsg" target="_blank" rel="external">Win32DiskImager</a>烧录系统，密码ukya，看见write就是烧好了</p>
+<h2 id="4-远程连接方法"><a href="#4-远程连接方法" class="headerlink" title="4.远程连接方法"></a>4.远程连接方法</h2><p>-给树莓派插好网线：一端插在树莓派上，一端插在路由器上(试过插在交换机上，就搜索不到，不知道为什么，有人知道可以给我留个言~~~)<br>-使用<a href="http://yun.baidu.com/s/1jkrZg" target="_blank" rel="external">ipscan</a>查看树莓派的ip，看见名称处显示raspberry pi的对应地址就是路由器分配给树莓派的ip地址<br>-现在，可以用<a href="http://yun.baidu.com/s/1mgoV8U0" target="_blank" rel="external">putty</a>尝试远程连接树莓派了<br>在配置页面中，host name(or ip address)中填入刚才搜索出的树莓派ip地址，然后点击open<br>-我们选择普通用户登录，用户名pi;密码raspberry<br>运行如下代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo raspi-config</div><div class="line">sudo apt-get install xrdp</div></pre></td></tr></table></figure></p>
+<p>在这里我们选择了给树莓派安装xrdp的方式使笔记本可以通过”远程桌面连接”的方式远程树莓派操作<br>p.s.这里需要补充说明一下的是，我在第一次弄这个的时候按照上述步骤就可以远程上树莓派，然而重新了一次系统之后无论如何装不上xrdp，解决的方法有二：<br>1.<a href="http://shumeipai.nxez.com/2013/08/31/raspbian-chinese-software-source.html" target="_blank" rel="external">添加软件源</a><br>2.<a href="http://jingyan.baidu.com/article/870c6fc32c028eb03fe4be30.html" target="_blank" rel="external">修改DNS</a></p>
+<p>之后，按下win+R，输入mastc，之后键入树莓派的ip,用户名pi，密码raspberry<br><img src="http://i1.tietuku.com/7ed6f24c7d10f477.png" alt=""></p>
+<h2 id="5-基础命令"><a href="#5-基础命令" class="headerlink" title="5.基础命令"></a>5.基础命令</h2><p>1.安装软件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get install softname1 softname2 softname3...</div></pre></td></tr></table></figure></p>
+<p>2.卸载软件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get remove softname1 softname2 softname3...</div></pre></td></tr></table></figure></p>
+<p>3.更新软件信息数据库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get update</div></pre></td></tr></table></figure></p>
+<p>4.root账号设置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo passwd root//会让你输入两次新密码</div></pre></td></tr></table></figure></p>
+<p>执行完之后，用reroot命令重启就可以用root登陆了</p>
+<h2 id="5-无线网卡配置"><a href="#5-无线网卡配置" class="headerlink" title="5.无线网卡配置"></a>5.无线网卡配置</h2><p>叙述麻烦但真心不难，推荐大家看<a href="http://www.52pi.net/forum.php?mod=viewthread&amp;tid=347&amp;extra=page%3D4" target="_blank" rel="external">树莓派上手实战之在命令行下配置无线网卡</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/毕业设计/">毕业设计</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/毕业设计/">毕业设计</a>
+  </div>
+
+        <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+    
+    <a href="/2015/04/26/front-end/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2015/04/21/bishe-2/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+  <!-- 多说评论框 start -->
+    <div class="ds-thread" ></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'undefined'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>17</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript-ES6/">javascript+ES6</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>1</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>1</small></li>
+  
+    <li><a href="/categories/博客/">博客</a><small>1</small></li>
+  
+    <li><a href="/categories/毕业设计/">毕业设计</a><small>4</small></li>
+  
+    <li><a href="/categories/面试准备/">面试准备</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Sass/" style="font-size: 12px;">Sass</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/edx/" style="font-size: 10px;">edx</a> <a href="/tags/前端/" style="font-size: 18px;">前端</a> <a href="/tags/博客/" style="font-size: 12px;">博客</a> <a href="/tags/博客，文章/" style="font-size: 14px;">博客，文章</a> <a href="/tags/托业/" style="font-size: 10px;">托业</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/毕业设计/" style="font-size: 16px;">毕业设计</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试准备/" style="font-size: 14px;">面试准备</a>
+  </div>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="https://github.com/spy19930412 " title="spy19930412">my github</a></li>
+<li><a href="http://wwj718.github.io/ " title="友情互链">writing for time超级棒</a></li>
+<li><a href="http://xueyi1230.github.io/ " title="友情互链">削一个博客一直施工中</a></li>
+</ul>
+</div>
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2298271483&verifier=401a0bfd&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 spy19930412
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

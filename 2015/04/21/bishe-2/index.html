@@ -1,0 +1,216 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>pi-switch(2)——硬件连接 | spy&#39;s blog</title>
+  <meta name="author" content="spy19930412">
+  
+  <meta name="description" content="sometimes ever sometimes never">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="pi-switch(2)——硬件连接"/>
+  <meta property="og:site_name" content="spy&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+ <!--  <link href="/favicon.png" rel="icon"> -->
+ <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="spy&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">spy&#39;s blog</a></h1>
+  <h2><a href="/">sometimes ever sometimes never</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">存档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+      <li><a href="/todolist">Todo</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-04-21T08:55:22.000Z"><a href="/2015/04/21/bishe-2/">2015-04-21</a></time>
+      
+      
+  
+    <h1 class="title">pi-switch(2)——硬件连接</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>本篇介绍： </p>
+<ul>
+<li>12V单路学习型无线遥控开关与无线遥控器学习对码 </li>
+<li>315M无线发射与树莓派引脚连接 </li>
+<li>参考文献  </li>
+</ul>
+<a id="more"></a>
+<h2 id="1-12V单路学习型无线遥控开关与无线遥控器学习对码"><a href="#1-12V单路学习型无线遥控开关与无线遥控器学习对码" class="headerlink" title="1.12V单路学习型无线遥控开关与无线遥控器学习对码"></a>1.12V单路学习型无线遥控开关与无线遥控器学习对码</h2><p><a href="http://item.taobao.com/item.htm?spm=a1z09.2.9.11.if74pG&amp;id=9490765868&amp;_u=mmshbv00c9e" target="_blank" rel="external">12V单路学习型无线遥控开关</a><br><a href="http://item.taobao.com/item.htm?spm=a1z09.2.9.22.if74pG&amp;id=13747477962&amp;_u=mmshbv05177" target="_blank" rel="external">无线遥控器</a><br>先来连接设备，电路图如下：<br><img src="http://i2.tietuku.com/82037a1f4bab7084.png" alt=""><br>其实这时我发现工作电压在9V-16V，那就买6节电池串联即可工作，不必苦恼220V-12V变压器<br>之后尝试使用，说明书如下:<br><img src="http://i1.tietuku.com/9df763b91b24a029.png" alt=""><br>在这里，我们选择输出方式为C：信号互锁<br>首先清除编码：按住接收器侧面的学习键(S1)不要放，知道见到LED灯闪烁时就OK<br>然后设置互锁学习对码：按一下S1，LED灯点亮时(实际操作中这个很拼人品)进入学习状态，紧接着，按下遥控器上A，见到LED闪烁2下转为常亮按B，见到LED亮3下熄灭为学习完毕。<br>如果连接无误，那现在按A，灯(我的负载)亮，按B，灯灭。可以听见继电器开启和断开的咔咔的声响。</p>
+<h2 id="2-315M无线发射模块与树莓派引脚连接"><a href="#2-315M无线发射模块与树莓派引脚连接" class="headerlink" title="2.315M无线发射模块与树莓派引脚连接"></a>2.315M无线发射模块与树莓派引脚连接</h2><blockquote>
+<p>原理：树莓派运行linux系统，有GPIO扩展，可控制其它设备。通过控制树莓派上的GPIO输出高电平和低电平，来控制继电器开关，继电器与其它设备相连，这样就能达到控制设备开关的目的了 </p>
+</blockquote>
+<p><a href="http://item.taobao.com/item.htm?spm=a1z09.2.9.39.YxDNp4&amp;id=18431673466&amp;_u=m284jt03a861" target="_blank" rel="external">315M无线发射模块</a><br>我的树莓派板子型号是MODEL B+ 40个GRIO引脚模式，然而原po主是B板26引脚模式，原文中的电路图是这样子的：<br><img src="http://i2.tietuku.com/234b6664b418329b.jpg" alt=""><br>经过查阅多篇博文，26脚的分布图是这样的<br><img src="http://i2.tietuku.com/ec1df06fe63d21f6.png" alt=""><br>40脚的分布图是这样的<br><img src="http://i2.tietuku.com/1bab40fba79dd45c.jpg" alt=""><br>最后，将我画好的电路图献上<br><img src="http://i1.tietuku.com/bf978c7307c41bfc.png" alt=""><br> 啊，原谅我如此爱偷懒（逃<br> 这部分的参考博文很多，但是这部分并不是我要记录的重点，不赘述，贴出几篇好文章<br><a href="http://blog.csdn.net/xukai871105/article/details/12684617" target="_blank" rel="external">GPIO功能学习</a><br><a href="https://www.zybuluo.com/hzl201/note/38736" target="_blank" rel="external">树莓派通过GPIO控制继电器开关</a></p>
+<h2 id="3-参考文献"><a href="#3-参考文献" class="headerlink" title="3.参考文献"></a>3.参考文献</h2><p><a href="http://www.shumeipai.net/thread-7315-1-1.html" target="_blank" rel="external">树莓派无线控制开关，开启智能家居的第一步</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/毕业设计/">毕业设计</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/毕业设计/">毕业设计</a>
+  </div>
+
+        <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+    
+    <a href="/2015/04/25/bishe-3/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2015/04/21/bishe-1/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+  <!-- 多说评论框 start -->
+    <div class="ds-thread" ></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'undefined'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>17</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript-ES6/">javascript+ES6</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>1</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>1</small></li>
+  
+    <li><a href="/categories/博客/">博客</a><small>1</small></li>
+  
+    <li><a href="/categories/毕业设计/">毕业设计</a><small>4</small></li>
+  
+    <li><a href="/categories/面试准备/">面试准备</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Sass/" style="font-size: 12px;">Sass</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/edx/" style="font-size: 10px;">edx</a> <a href="/tags/前端/" style="font-size: 18px;">前端</a> <a href="/tags/博客/" style="font-size: 12px;">博客</a> <a href="/tags/博客，文章/" style="font-size: 14px;">博客，文章</a> <a href="/tags/托业/" style="font-size: 10px;">托业</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/毕业设计/" style="font-size: 16px;">毕业设计</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试准备/" style="font-size: 14px;">面试准备</a>
+  </div>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="https://github.com/spy19930412 " title="spy19930412">my github</a></li>
+<li><a href="http://wwj718.github.io/ " title="友情互链">writing for time超级棒</a></li>
+<li><a href="http://xueyi1230.github.io/ " title="友情互链">削一个博客一直施工中</a></li>
+</ul>
+</div>
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2298271483&verifier=401a0bfd&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 spy19930412
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>pi-switch(4)--程序运行 | spy&#39;s blog</title>
+  <meta name="author" content="spy19930412">
+  
+  <meta name="description" content="sometimes ever sometimes never">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="pi-switch(4)--程序运行"/>
+  <meta property="og:site_name" content="spy&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+ <!--  <link href="/favicon.png" rel="icon"> -->
+ <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="spy&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">spy&#39;s blog</a></h1>
+  <h2><a href="/">sometimes ever sometimes never</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">存档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+      <li><a href="/todolist">Todo</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-05-09T13:13:25.000Z"><a href="/2015/05/09/php1/">2015-05-09</a></time>
+      
+      
+  
+    <h1 class="title">pi-switch(4)--程序运行</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>本篇介绍：</p>
+<ul>
+<li>什么是LAMP系统</li>
+<li>搭建LAMP系统</li>
+<li>微信公众平台的申请及简单配置</li>
+<li>ngrok&amp;tunnel</li>
+<li>程序运行</li>
+</ul>
+<a id="more"></a>
+<h2 id="1-什么是LAMP系统"><a href="#1-什么是LAMP系统" class="headerlink" title="1.什么是LAMP系统"></a>1.什么是LAMP系统</h2><p>LAMP是Linux,Apache,MySQL,PHP（Perl/Python）的首字母缩写，是一种Web网络应用和开发环境，是一个成熟的Web网站解决方案，该解决方案中的所有组件都免费开源，也因此获得了许多丰富的资源。<br><img src="http://i1.tietuku.com/c597a595380349ac.png" alt=""></p>
+<h2 id="2-搭建LAMP系统"><a href="#2-搭建LAMP系统" class="headerlink" title="2.搭建LAMP系统"></a>2.搭建LAMP系统</h2><p>一、安装apache<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">apt-get install apache2    <span class="comment">#安装apache，根据提示输入y安装</span></div><div class="line">service apache2 start  <span class="comment">#启动apache</span></div><div class="line">service apache2 restart  <span class="comment">#重启</span></div><div class="line">apt-get install chkconfig  <span class="comment">#安装chkconfig</span></div><div class="line">chkconfig  apache2  on   <span class="comment">#开机启动apache</span></div></pre></td></tr></table></figure></p>
+<p>二、安装MySQL<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">apt-get install  mysql-server   <span class="comment">#安装mysql，根据提示输入y安装</span></div><div class="line">安装过程中，系统会提示要求输入root密码的界面</div><div class="line">请输入2次密码，会继续安装</div><div class="line">service mysql start   <span class="comment">#启动</span></div><div class="line">chkconfig mysql on    <span class="comment">#开机启动mysql</span></div><div class="line">service mysql restart   <span class="comment">#重启</span></div></pre></td></tr></table></figure></p>
+<p>三、安装php<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">1、apt-get  install php5   <span class="comment">#安装php5，根据提示输入y安装</span></div><div class="line">2、安装PHP组件，使PHP支持 MySQL</div><div class="line">apt-get install php5-mysql php5-gd libjpeg8-dev php5-imap php5-ldap php5-odbc php*-pear php*-xml php5-xmlrpc  php5-mcrypt  php5-mhash libmcrypt* libmcrypt-dev php-fpdf</div><div class="line">/etc/init.d/mysql restart  <span class="comment">#重启mysql</span></div><div class="line">/etc/init.d/apache2 restart <span class="comment">#重启apache2</span></div><div class="line">ln <span class="_">-s</span> /etc/php5/apache2/php.ini  /etc/php.ini  <span class="comment">#把php配置文件链接到系统默认位置</span></div><div class="line">这时我们已经装好了LAMP的全部组成部分，在terminal中输入</div><div class="line"><span class="built_in">cd</span> /var/www  <span class="comment">#进入默认站点目录</span></div><div class="line">nano index.php   <span class="comment">#新建测试文件</span></div><div class="line">&lt;?php</div><div class="line">phpinfo();</div><div class="line">?&gt;</div><div class="line">ctrl+o  <span class="comment">#保存</span></div><div class="line">ctrl+x  <span class="comment">#退出</span></div></pre></td></tr></table></figure></p>
+<p>此时打开浏览器访问127.0.0.1可以看见服务器配置信息，至此，采用了LAMP解决方案的Web网站服务器搭建完成。</p>
+<h2 id="3-微信公众平台的申请及简单配置"><a href="#3-微信公众平台的申请及简单配置" class="headerlink" title="3.微信公众平台的申请及简单配置"></a>3.微信公众平台的申请及简单配置</h2><p>申请微信公众平台账号需要申请者手持本人身份证进行实名认证，在通过实名认证后方可注册申请好微信公众平台账号，登陆微信公众平台账号，点击进入左侧列表的最下方的“开发者中心”。进入服务器配置填写框，点击“修改配置”按钮，此处的URL为树莓派Web网端口映射后的地址，而token在index.php中定义为weixin，EncodingAESKey则不用填，点击“随机生成”让自动生成一个，选择“明文模式”消息加解密方式，最后，点击“提交”按钮，在接下来的询问中依此确定，从而完成微信公众平台开发模式的配置。</p>
+<p>有关于微信公众平台的配置问题，详情推荐方倍实验室的<a href="http://www.cnblogs.com/txw1958/p/wechat-tutorial.html" target="_blank" rel="external">相关文章</a>，很棒。</p>
+<p>最后，在服务器配置的时候，微信服务器总是反应慢半拍，实在是能给人憋疯.如果你也出现了这样的情况，建议阅读这个<a href="">页面</a>还有这个<a href="http://debug.fangbei.org/" target="_blank" rel="external">token验证页面</a>，帮你调试，屡试不爽。</p>
+<h2 id="4-ngrok-amp-tunnel"><a href="#4-ngrok-amp-tunnel" class="headerlink" title="4.ngrok&amp;tunnel"></a>4.ngrok&amp;tunnel</h2><p>由于微信公众平台账号只支持80端口，我们需要使用一个反向代理将在树莓派上搭建的网站的80端口映射出去，从而使微信服务器也可以访问。ngrok是一个可以通过在公共的端点和本地运行的Web服务器之间建立一个安全的通道的反向代理。有关于它，可以参见<a href="http://wwj718.github.io/use-ngrok.html" target="_blank" rel="external">这里</a><br>在树莓派上安装好ngrok之后，在terminal中输入下面这样的命令:<br>ngrok http 80;<br>将得到的地址填入微信公众平台的配置服务器URL里。</p>
+<p>关于tunnel:是一个国内服务器，速度相对快一些，不过亲测时而能用时而崩溃，也是让人迷醉。<a href="http://www.tunnel.mobi/" target="_blank" rel="external">官网链接</a></p>
+<h2 id="4-程序运行"><a href="#4-程序运行" class="headerlink" title="4.程序运行"></a>4.程序运行</h2><p>写到这里的时候<br>我累了<br>源码参见<a href="https://github.com/spy19930412/Graduation-design" target="_blank" rel="external">my repo</a></p>
+<p>待改进的部分：<br>不能实现一个用户控制多个开关<br>不能实现多个用户控制一个开关</p>
+<p>如何解决？</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/毕业设计/">毕业设计</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/毕业设计/">毕业设计</a>
+  </div>
+
+        <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+    
+    <a href="/2015/05/22/nicearticle/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2015/04/26/nanjing/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+  <!-- 多说评论框 start -->
+    <div class="ds-thread" ></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'undefined'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>17</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript-ES6/">javascript+ES6</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>1</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>1</small></li>
+  
+    <li><a href="/categories/博客/">博客</a><small>1</small></li>
+  
+    <li><a href="/categories/毕业设计/">毕业设计</a><small>4</small></li>
+  
+    <li><a href="/categories/面试准备/">面试准备</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Sass/" style="font-size: 12px;">Sass</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/edx/" style="font-size: 10px;">edx</a> <a href="/tags/前端/" style="font-size: 18px;">前端</a> <a href="/tags/博客/" style="font-size: 12px;">博客</a> <a href="/tags/博客，文章/" style="font-size: 14px;">博客，文章</a> <a href="/tags/托业/" style="font-size: 10px;">托业</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/毕业设计/" style="font-size: 16px;">毕业设计</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试准备/" style="font-size: 14px;">面试准备</a>
+  </div>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="https://github.com/spy19930412 " title="spy19930412">my github</a></li>
+<li><a href="http://wwj718.github.io/ " title="友情互链">writing for time超级棒</a></li>
+<li><a href="http://xueyi1230.github.io/ " title="友情互链">削一个博客一直施工中</a></li>
+</ul>
+</div>
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2298271483&verifier=401a0bfd&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 spy19930412
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

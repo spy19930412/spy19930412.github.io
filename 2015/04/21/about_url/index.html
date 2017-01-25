@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于URL的杂谈 | spy&#39;s blog</title>
+  <meta name="author" content="spy19930412">
+  
+  <meta name="description" content="sometimes ever sometimes never">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="关于URL的杂谈"/>
+  <meta property="og:site_name" content="spy&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+ <!--  <link href="/favicon.png" rel="icon"> -->
+ <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="spy&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">spy&#39;s blog</a></h1>
+  <h2><a href="/">sometimes ever sometimes never</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">存档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+      <li><a href="/todolist">Todo</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-04-21T02:25:56.000Z"><a href="/2015/04/21/about_url/">2015-04-21</a></time>
+      
+      
+  
+    <h1 class="title">关于URL的杂谈</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>###打开网页时发生了什么</p>
+<pre><code>*[原文链接](http://www.cnblogs.com/wenanry/archive/2010/02/25/1673368.html)*
+</code></pre><a id="more"></a>
+<p>当输入一个url的时候会发生以下事情： </p>
+<p>####1.浏览器查找域名IP地址<br>1.DNS查找过程如下：<br>+浏览器缓存<br>+系统缓存<br>+路由器缓存<br>+ISP(Internet Service Provider,互联网服务提供商)缓存<br>+递归搜索 </p>
+<p>####2.浏览器给Web服务器发送Http请求<br>像facebook这样的动态页面，打开后在浏览器缓存中很快甚至马上到期，所以不能从中读取<br>所以，浏览器将向服务器发送一下请求给服务器：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">GET http://facebook.com/ HTTP/1.1</div><div class="line"> Accept: application/x-ms-application, image/jpeg, application/xaml+xml, [...]</div><div class="line"> User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; [...]</div><div class="line"> Accept-Encoding: gzip, deflate</div><div class="line"> Connection: Keep-Alive</div><div class="line"> Host: facebook.com</div><div class="line"> Cookie: datr=1265876274-[...]; locale=en_US; lsd=WW[...]; c_user=2101[...]</div></pre></td></tr></table></figure></p>
+<p> 分析一下这个get请求：<br> +URL:定义了url<br> +User-Agent：浏览器自身定义<br> +Accept and Accept-Encoding：浏览器希望接受什么类型的响应<br> +Connection:要求服务器为了后边的请求不要关闭tcp连接<br> +cookies:请求中包含浏览器存储的该域名cookies.在不同页面请求中，cookies是与跟踪一个网站状态相匹配的键值。这样cookies会存储登陆用户名，服务器分配的密码和一些用户设置。cookies会以文本文档形式存储在客户机中，每次请求是发送给服务器。<br> 除了获取请求，还有一种是发送请求，它常在提交表单用到。发送请求通过URL传递其参数。发送请求在请求正文头之后发送其参数。</p>
+<pre><code>*1. get是从服务器上获取数据，post是向服务器传送数据。
+ 2. get是把参数数据队列加到提交表单的ACTION属性所指的URL中，值和表单内各个字段一一对应，在URL中可以看到。post是通过HTTP post机制，将表单内各个字段与其内容放置在HTML HEADER内一起传送到ACTION属性所指的URL地址。用户看不到这个过程。
+ 3. 对于get方式，服务器端用Request.QueryString获取变量的值，对于post方式，服务器端用Request.Form获取提交的数据。
+ 4. get传送的数据量较小，不能大于2KB。post传送的数据量较大，一般被默认为不受限制。但理论上，IIS4中最大量为80KB，IIS5中为100KB。
+ 5. get安全性非常低，post安全性较高。但是执行效率却比Post方法好。*
+</code></pre><p>  建议：<br>  1、get方式的安全性较Post方式要差些，包含机密信息的话，建议用Post数据提交方式；<br>  2、在做数据查询时，建议用Get方式；而在做数据添加、修改或删除时，建议用Post方式；</p>
+<p>####3.facebook服务的永久重定向响应<br>facebook服务器发给浏览器的的响应: </p>
+<pre><code class="bash">HTTP/1.1 301 Moved Permanently
+ Cache-Control: private, no-store, no-cache, must-revalidate, post-check=0,
+ pre-check=0
+ Expires: Sat, 01 Jan 2000 00:00:00 GMT
+ Location: http://www.facebook.com/
+ P3P: CP=<span class="string">"DSP LAW"</span>
+ Pragma: no-cache
+ Set-Cookie: made_write_conn=deleted; expires=Thu, 12-Feb-2009 05:09:50 GMT;
+ path=/; domain=.facebook.com; httponly
+ Content-Type: text/html; charset=utf-8
+ X-Cnection: close
+ Date: Fri, 12 Feb 2010 05:09:51 GMT
+ Content-Length: 0
+</code></pre>
+<p> 服务器给浏览器响应一个301永久重定向响应，这样浏览器会访问”<a href="http://wwww.facebook.com/&quot;,而非&quot;http://facebook.com/" target="_blank" rel="external">http://wwww.facebook.com/&quot;,而非&quot;http://facebook.com/</a>“.</p>
+<p> 为什么服务器一定要重定向而不是直接发回用户想看的网页内容呢？<br> +搜索引擎排名<br>  如果一个页面有两个地址，比如<a href="http://www.igoro.com/" target="_blank" rel="external">http://www.igoro.com/</a> 和<a href="http://igoro.com/" target="_blank" rel="external">http://igoro.com/</a> , 搜索引擎会以为它们是两个网站，结果造成每一个的搜索链接都减少从而降低排名。而搜索引擎知道301永久重定向是什么意思，这样就会把访问带www的和不带www的地址归到同一个网站排名下。<br> +缓存友好性<br>  当一个页面有好几个名字时，它可能在缓存里出现好几次。</p>
+<p>  ####4.浏览器跟踪重定向地址<br>  现在，浏览器已知”<a href="http://www.facebook.com/" target="_blank" rel="external">http://www.facebook.com/</a> “才是要访问的正确地址，所以它会发送另一个获取请求：</p>
+<pre><code class="bash"> GET http://www.facebook.com/ HTTP/1.1
+Accept: application/x-ms-application, image/jpeg, application/xaml+xml, [...]
+Accept-Language: en-US
+User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; [...]
+Accept-Encoding: gzip, deflate
+Connection: Keep-Alive
+Cookie: lsd=XW[...]; c_user=21[...]; x-referer=[...]
+Host: www.facebook.com
+</code></pre>
+<p>  与之前请求的意义相同</p>
+<p>  ####5.服务器处理请求<br>  服务器接收到获取请求，然后处理并返回一个响应<br>  +web服务器软件<br>  web服务器软件(IIS或apache等)接收到http请求，然后确定执行什么请求处理来处理它。请求处理就是一个能够读懂请求并且能生成html来进行响应的程序(像asp.net,php,ruby…)</p>
+<p>  eg.需求处理可以以映射网站地址结构的文件层次存储，像<a href="http://example.com/folder1/page1.aspx" target="_blank" rel="external">http://example.com/folder1/page1.aspx</a> 这个地址会映射/httpdocs/folder1/page1.aspx 这个文件。web服务器软件可以设置成为地址人工的对应请求处理，这样page1.aspx的发布地址就可以是<a href="http://example.com/folder1/page1" target="_blank" rel="external">http://example.com/folder1/page1</a>.<br>  +请求处理<br>  请求处理阅读请求以及它的参数和cookies，它会读取也可能更新一些数据，并讲数据存储在服务器上。然后需求处理会生成一个html响应。</p>
+<p>  ####6.服务器发回一个html响应</p>
+<pre><code class="bash"> HTTP/1.1 200 OK
+Cache-Control: private, no-store, no-cache, must-revalidate, post-check=0,
+pre-check=0
+Expires: Sat, 01 Jan 2000 00:00:00 GMT
+P3P: CP=<span class="string">"DSP LAW"</span>
+Pragma: no-cache
+Content-Encoding: gzip
+Content-Type: text/html; charset=utf-8
+X-Cnection: close
+Transfer-Encoding: chunked
+Date: Fri, 12 Feb 2010 09:05:55 GMT
+
+2b3Tn@[...]
+</code></pre>
+<p> 内容编码头告诉浏览器整个响应体用gzip算法进行压缩。解压blob块后，你可以看到如下期望的HTML：</p>
+<pre><code class="bash">&lt;!DOCTYPE html PUBLIC <span class="string">"-//W3C//DTD XHTML 1.0 Strict//EN"</span>    
+ <span class="string">"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"</span>&gt;
+ &lt;html xmlns=<span class="string">"http://www.w3.org/1999/xhtml"</span> xml:lang=<span class="string">"en"</span>
+ lang=<span class="string">"en"</span> id=<span class="string">"facebook"</span> class=<span class="string">" no_js"</span>&gt;
+ &lt;head&gt;
+ &lt;meta http-equiv=<span class="string">"Content-type"</span> content=<span class="string">"text/html; charset=utf-8"</span> /&gt;
+ &lt;meta http-equiv=<span class="string">"Content-language"</span> content=<span class="string">"en"</span> /&gt;
+ ...
+</code></pre>
+<p>关于压缩，头信息说明了是否缓存这个页面，如果缓存的话如何去做，有什么cookies要去设置（前面这个响应里没有这点）和隐私信息等等。</p>
+<p>请注意报头中把Content-type设置为“text/html”。报头让浏览器将该响应内容以HTML形式呈现，而不是以文件形式下载它。浏览器会根据报头信息决定如何解释该响应，不过同时也会考虑像URL扩展内容等其他因素。</p>
+<p>####7.浏览器开始显示html<br>在浏览器没有完整接受全部html文档时，它就已经开始显示这个页面了</p>
+<p>####8.浏览器发送获取嵌入在HTML中的对象<br>在浏览器显示HTML时，它会注意到需要获取其他地址内容的标签。这时，浏览器会发送一个获取请求来重新获得这些文件。</p>
+<p>下面是几个我们访问facebook.com时需要重获取的几个URL：</p>
+<p>图片<br><a href="http://static.ak.fbcdn.net/rsrc.php/z12E0/hash/8q2anwu7.gif" target="_blank" rel="external">http://static.ak.fbcdn.net/rsrc.php/z12E0/hash/8q2anwu7.gif</a><br>…<br>CSS 式样表<br><a href="http://static.ak.fbcdn.net/rsrc.php/z448Z/hash/2plh8s4n.css" target="_blank" rel="external">http://static.ak.fbcdn.net/rsrc.php/z448Z/hash/2plh8s4n.css</a><br>…<br>JavaScript 文件<br><a href="http://static.ak.fbcdn.net/rsrc.php/zEMOA/hash/c8yzb6ub.js" target="_blank" rel="external">http://static.ak.fbcdn.net/rsrc.php/zEMOA/hash/c8yzb6ub.js</a><br>…<br>这些地址都要经历一个和HTML读取类似的过程。所以浏览器会在DNS中查找这些域名，发送请求，重定向等等…</p>
+<p>但 不像动态页面那样，静态文件会允许浏览器对其进行缓存。有的文件可能会不需要与服务器通讯，而从缓存中直接读取。服务器的响应中包含了静态文件保存的期限 信息，所以浏览器知道要把它们缓存多长时间。还有，每个响应都可能包含像版本号一样工作的ETag头（被请求变量的实体值），如果浏览器观察到文件的版本 ETag信息已经存在，就马上停止这个文件的传输。</p>
+<p>####9.浏览器发送异步（AJAX）请求<br>以 Facebook聊天功能为例，它会持续与服务器保持联系来及时更新你那些亮亮灰灰的好友状态。为了更新这些头像亮着的好友状态，在浏览器中执行的 JavaScript代码会给服务器发送异步请求。这个异步请求发送给特定的地址，它是一个按照程式构造的获取或发送请求。还是在Facebook这个例 子中，客户端发送给<a href="http://www.facebook.com/ajax/chat/buddy_list.php" target="_blank" rel="external">http://www.facebook.com/ajax/chat/buddy_list.php</a> 一个发布请求来获取你好友里哪个在线的状态信息。</p>
+<p>这些情况发生时长轮询是个减轻服务器负载挺有趣的技术。如果当被轮询时服务器没有新消息，它就不理这个客户端。而当尚未超时的情况下收到了该客户的新消息，服务器就会找到未完成的请求，把新消息做为响应返回给客户端。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/面试准备/">面试准备</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/面试准备/">面试准备</a>
+  </div>
+
+        <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+    
+    <a href="/2015/04/21/markdown/" class="alignleft prev" >上一页</a>
+    
+    
+    <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+  <!-- 多说评论框 start -->
+    <div class="ds-thread" ></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'undefined'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>17</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript-ES6/">javascript+ES6</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>1</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>1</small></li>
+  
+    <li><a href="/categories/博客/">博客</a><small>1</small></li>
+  
+    <li><a href="/categories/毕业设计/">毕业设计</a><small>4</small></li>
+  
+    <li><a href="/categories/面试准备/">面试准备</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Sass/" style="font-size: 12px;">Sass</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/edx/" style="font-size: 10px;">edx</a> <a href="/tags/前端/" style="font-size: 18px;">前端</a> <a href="/tags/博客/" style="font-size: 12px;">博客</a> <a href="/tags/博客，文章/" style="font-size: 14px;">博客，文章</a> <a href="/tags/托业/" style="font-size: 10px;">托业</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/毕业设计/" style="font-size: 16px;">毕业设计</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试准备/" style="font-size: 14px;">面试准备</a>
+  </div>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="https://github.com/spy19930412 " title="spy19930412">my github</a></li>
+<li><a href="http://wwj718.github.io/ " title="友情互链">writing for time超级棒</a></li>
+<li><a href="http://xueyi1230.github.io/ " title="友情互链">削一个博客一直施工中</a></li>
+</ul>
+</div>
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2298271483&verifier=401a0bfd&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 spy19930412
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

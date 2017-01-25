@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>部分译文摘录 | spy&#39;s blog</title>
+  <meta name="author" content="spy19930412">
+  
+  <meta name="description" content="sometimes ever sometimes never">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="部分译文摘录"/>
+  <meta property="og:site_name" content="spy&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+ <!--  <link href="/favicon.png" rel="icon"> -->
+ <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="spy&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">spy&#39;s blog</a></h1>
+  <h2><a href="/">sometimes ever sometimes never</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">存档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+      <li><a href="/todolist">Todo</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-02-29T11:46:37.000Z"><a href="/2016/02/29/edx_fe_translation01/">2016-02-29</a></time>
+      
+      
+  
+    <h1 class="title">部分译文摘录</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>部分译文摘录</p>
+<a id="more"></a>
+<p>本篇目录</p>
+<ul>
+<li>Comprehensive Theming</li>
+<li>Using source maps with Sass 3.3</li>
+<li>edX Pattern Library</li>
+</ul>
+<h1 id="Comprehensive-Theming"><a href="#Comprehensive-Theming" class="headerlink" title="Comprehensive Theming"></a>Comprehensive Theming</h1><h2 id="修改theme要用到命名规则——Comprehensive-Theming"><a href="#修改theme要用到命名规则——Comprehensive-Theming" class="headerlink" title="修改theme要用到命名规则——Comprehensive Theming"></a>修改theme要用到命名规则——<a href="https://github.com/edx/edx-platform/blob/named-release/dogwood.rc/themes/README.rst" target="_blank" rel="external">Comprehensive Theming</a></h2><p>Comprehensive Theming让你定制你的开放的EDX安装外观。你可以重写SASS和CSS设置，图像，或整个HTML模板。最后，综合主题将淘汰现有主题化的机制，但现在他们和平共处。本文档描述了如何使用Comprehensive Theming，也是改变你需要保持其他主题的工作机制。</p>
+<h3 id="创建一个theme"><a href="#创建一个theme" class="headerlink" title="创建一个theme"></a>创建一个theme</h3><p>Theme是一个文件目录，在你喜欢的地方创建，不一定要在edx-platform文件夹下。这个结构反应edx-platform repo本身。你在你的theme下创建的文件将在edx-platform里替换掉同名文件。例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">my-theme</div><div class="line">└── lms</div><div class="line">    ├── static</div><div class="line">    │   ├── images</div><div class="line">    │   │   └── logo.png</div><div class="line">    │   └── sass</div><div class="line">    │       ├── _overrides.scss</div><div class="line">    │       ├── lms-main-rtl.scss</div><div class="line">    │       └── lms-main.scss</div><div class="line">    └── templates</div><div class="line">        ├── footer.html</div><div class="line">        └── header.html</div></pre></td></tr></table></figure></p>
+<p>顶级目录随便命名，例子里用了”my-theme”.这个文件在这里提供了覆盖edx-platform的文件。在这个例子中，”my-theme/lms/static/sass/lms-main.scss”是用来代替<br>”edx-platform/lms/static/sass/lms-main.scss”</p>
+<h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p>图像可以简单地在主题目录中的正确位置的取代并展现，在上面的例子中，<br>lms/static/images/logo.png image被重新加载展现</p>
+<h3 id="Sass-CSS"><a href="#Sass-CSS" class="headerlink" title="Sass/CSS"></a>Sass/CSS</h3><p>大部分在Open edX里的CSS样式用Sass完成再被编译为CSS，你可以通过创建一个新Sass文件，使用现有的文件来覆盖个人设置，并覆盖成为你想要的设置。<br>例如，为了改变字体用于整个网站，你可以创建一个lms/static/sass/_overrides.scss文件用你想要的变化：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$sans</span>-serif: <span class="string">'Helvetica'</span>;</div></pre></td></tr></table></figure></p>
+<p>变量可以在lms/static/sass/_overrides.scss文件下被重写<br>注意：我们目前重新设计Sass变量，如果你有兴趣可以去<a href="http://ux.edx.org/" target="_blank" rel="external">edX Pattern Library</a>看看<br>p.s.后面我也翻译了这个<br>然后创建lms/static/sass/lms-main.scss来使用这些重写，以及其他来自原始文件的定义。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// Our overrides <span class="keyword">for</span> settings we want to change.</div><div class="line">@import <span class="string">'overrides'</span>;</div><div class="line"></div><div class="line">// Import the original styles from edx-platform.</div><div class="line">@import <span class="string">'lms/static/sass/lms-main'</span>;</div></pre></td></tr></table></figure></p>
+<h3 id="HTML模板"><a href="#HTML模板" class="headerlink" title="HTML模板"></a>HTML模板</h3><p>你可以改变HTML模板复制到你的主题目录中的适当位置，使你需要改变。记住，在未来如果你升级的开放EDX的代码，您可能也需要更新你的主题复制的模板。</p>
+<h3 id="模板名称"><a href="#模板名称" class="headerlink" title="模板名称"></a>模板名称</h3><p>这里是您在您的综合主题中使用的模板名称列表（到目前为止）：<br>header.html<br>footer.html<br>不可以：<br>Themable-footer.html<br>看看main.html文件，你会注意到它包括header.html和themable-footer.html，而不是footer.html。所以你可能会愿意重写themable-footer。千万不要这样做。Themable-footer.html间接避免破坏microsites的附加层，也指一个叫footer.html的文件.我们的目标是最终使comprehensive theming能做microsites现在做的一切，然后从代码库中删除microsites.从这个意义来讲，themable-footer.html会消失，因为间接的额外的层将不再是必要的。</p>
+<h4 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h4><p>为了使用你的主题，你需要添加一个配置值指向主题目录。有两种方式：<br>1.如果你喜欢编辑server-vars.yml:<br>i.编译（或创建）/edx/app/edx_ansible/server-vars.yml来添加<br><em>edxapp_comprehensive_theme_dir</em><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">edxapp_comprehensive_theme_dir: <span class="string">'/full/path/to/my-theme'</span></div></pre></td></tr></table></figure></p>
+<p>ii.运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo /edx/bin/update configuration master</div><div class="line">$ sudo /edx/bin/update edx-platform HEAD</div></pre></td></tr></table></figure></p>
+<p>2.编辑/edx/app/edxapp/lms.env.json以添加<br><em>COMPREHENSIVE_THEME_DIR</em><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"COMPREHENSIVE_THEME_DIR"</span>: <span class="string">"/full/path/to/my-theme"</span>,</div></pre></td></tr></table></figure></p>
+<p>重启你的网站可以看见变化</p>
+<h3 id="“Stanford”-theming"><a href="#“Stanford”-theming" class="headerlink" title="“Stanford” theming"></a>“Stanford” theming</h3><p>如果你想继续使用“斯坦福”主题，你需要做一些变化。<br>在你的主题里<em>sass</em>目录下创建以下新文件：</p>
+<ul>
+<li>lms-main.scss</li>
+<li>lms-main-rtl.scss</li>
+<li>lms-course.scss</li>
+<li>lms-course-rtl.scss</li>
+<li>lms-footer.scss</li>
+<li>lms-footer-rtl.scss<br>这些文件内容相似，这里是<em>lms-main.scss</em>可能会看起来的样子：<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$static</span>-path: <span class="string">'../../../..'</span>;</div><div class="line">@import <span class="string">'lms/static/sass/lms-main'</span>;</div><div class="line">@import <span class="string">'_default'</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>每个文件应该设置<em>$static-path</em>作为相对路径，对edx-platform目录下<em>lms/static</em>很重要。<br>例如lms/static/sass对应lms-footer.scss 会导入lms/static/sass/lms-footer<br>最后，这个文件应该导入<em>_default</em>名字，指的是<em>_default.scss.Sass</em>文件应该在Stanford theme已经存在<br>如果您的主题使用了不同的名称而不是“默认值”，你需要在@import line里使用那个名字。<br>运行<em>update_assets</em>命令来重编译<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ paver update_assets lms --settings=aws</div></pre></td></tr></table></figure></p>
+<h3 id="Microsites"><a href="#Microsites" class="headerlink" title="Microsites"></a>Microsites</h3><p>如果你想继续使用” Microsites”主题系统，这些是你用做的一些变动。几个模板改名了，或者包括在了其他模板里。</p>
+<ul>
+<li><em>header_extra.html</em>现在是<em>head-extra.html</em>。这个文件总是插入到页面的<head>元素中，而不是</head><body>元素，所以这个变动使得名字更准确。</body></li>
+<li><em>google_analytics.html</em>被移除，这个模板内容被加到<em>head-extra.html</em>模板里了</li>
+<li><em>google_tag_manager.html</em> 现在叫 <em>body-initial.html</em><br>除此以外，还有一些其他变动</li>
+</ul>
+<h1 id="如何使用map文件——Using-source-maps-with-Sass-3-3"><a href="#如何使用map文件——Using-source-maps-with-Sass-3-3" class="headerlink" title="如何使用map文件——Using source maps with Sass 3.3"></a>如何使用map文件——<a href="http://thesassway.com/intermediate/using-source-maps-with-sass" target="_blank" rel="external">Using source maps with Sass 3.3</a></h1><p>Sass3.3发布了令人兴奋的功能source maps.<br>CSS pre-processors, minifiers, and JavaScript transpilers已经成为主流，然而因为与原代码的差异在浏览器中调试代码越来越难。</p>
+<p>通过使用source map审查元素可以看到我们真正，我是说真正关心的内容——<em>the pre-compiled Sass</em></p>
+<ol>
+<li>生成<br>需要为每个源文件生成source map：<br>进入项目根目录，命令行下输入：<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sass sass/screen.scss:stylesheets/screen.css –sourcemap</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果你运行该命令后看看你的输出文件夹，你会发现一个标记已被添加到生成的CSS文件结尾：<br>/<em># sourceMappingURL=screen.css.map </em>/</p>
+<p>实现细节请参见<a href="http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/" target="_blank" rel="external">http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/</a></p>
+<p>到这一步，我们已经成功生成了sourcemap文件，可惜的是，在浏览器下查看，我们可能仍未看到相对应的scss文件。这时需要打开Chrome的sourcemap功能。<br><img src="/images/edx_translation_01/1.png" alt=""><br><img src="/images/edx_translation_01/2.png" alt=""></p>
+<p>重启你的chrome。<br><img src="/images/edx_translation_01/3.png" alt=""></p>
+<ol>
+<li><p>条件<br>Chrome, Firefox and Safari</p>
+</li>
+<li><p>参考阅读<br><a href="http://thesassway.com/intermediate/using-source-maps-with-sass" target="_blank" rel="external">http://thesassway.com/intermediate/using-source-maps-with-sass</a><br><a href="http://www.tuicool.com/articles/YjaUrq" target="_blank" rel="external">推荐阅读</a></p>
+</li>
+</ol>
+<h1 id="edX-Pattern-Library"><a href="#edX-Pattern-Library" class="headerlink" title="edX Pattern Library"></a><a href="https://github.com/edx/ux-pattern-library" target="_blank" rel="external">edX Pattern Library</a></h1><h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>此库包含以下：</p>
+<ul>
+<li>EDX应用的UI——PLDOC</li>
+<li>为general Front End, HTML, Sass/CSS, and Accessibility-minded提供标准和风格指南</li>
+<li>edX应用里使用的Sass/CSS和模块</li>
+</ul>
+<p>然而我觉得最后的Front End Development Standards才是有用的地方，于是我们去wiki</p>
+<h2 id="如何在模式库包中工作-开发"><a href="#如何在模式库包中工作-开发" class="headerlink" title="如何在模式库包中工作/开发"></a>如何在模式库包中工作/开发</h2><p>如果你想在该仓库(在 /pattern-library/)中添加或编辑任何模式，或者改变任何以包为中心的设置（比如<em>package.json</em>或是<em>bower.json</em>，请这样做：</p>
+<ol>
+<li>测试你做的改变会不会负面影响包管理(npm)或是其他应用程序和代码库的依赖</li>
+</ol>
+<p>p.s.未完待续<br>先去学一阵sass</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/edx/">edx</a>
+  </div>
+
+        <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+    
+    <a href="/2016/03/01/2016_02/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/02/19/toeic_prepare/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+  <!-- 多说评论框 start -->
+    <div class="ds-thread" ></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'undefined'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>17</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript-ES6/">javascript+ES6</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>1</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>1</small></li>
+  
+    <li><a href="/categories/博客/">博客</a><small>1</small></li>
+  
+    <li><a href="/categories/毕业设计/">毕业设计</a><small>4</small></li>
+  
+    <li><a href="/categories/面试准备/">面试准备</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Sass/" style="font-size: 12px;">Sass</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/edx/" style="font-size: 10px;">edx</a> <a href="/tags/前端/" style="font-size: 18px;">前端</a> <a href="/tags/博客/" style="font-size: 12px;">博客</a> <a href="/tags/博客，文章/" style="font-size: 14px;">博客，文章</a> <a href="/tags/托业/" style="font-size: 10px;">托业</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/毕业设计/" style="font-size: 16px;">毕业设计</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试准备/" style="font-size: 14px;">面试准备</a>
+  </div>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="https://github.com/spy19930412 " title="spy19930412">my github</a></li>
+<li><a href="http://wwj718.github.io/ " title="友情互链">writing for time超级棒</a></li>
+<li><a href="http://xueyi1230.github.io/ " title="友情互链">削一个博客一直施工中</a></li>
+</ul>
+</div>
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2298271483&verifier=401a0bfd&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 spy19930412
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

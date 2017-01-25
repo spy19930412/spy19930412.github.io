@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Ubuntu起步+Sass01 | spy&#39;s blog</title>
+  <meta name="author" content="spy19930412">
+  
+  <meta name="description" content="sometimes ever sometimes never">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Ubuntu起步+Sass01"/>
+  <meta property="og:site_name" content="spy&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+ <!--  <link href="/favicon.png" rel="icon"> -->
+ <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="spy&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">spy&#39;s blog</a></h1>
+  <h2><a href="/">sometimes ever sometimes never</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">存档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+      <li><a href="/todolist">Todo</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-29T11:46:37.000Z"><a href="/2016/01/29/ubuntu_sass_01/">2016-01-29</a></time>
+      
+      
+  
+    <h1 class="title">Ubuntu起步+Sass01</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Sass基础篇</p>
+<a id="more"></a>
+<ol>
+<li>安装Ubuntu<br><a href="http://www.cnblogs.com/zhcncn/p/3987301.html" target="_blank" rel="external">http://www.cnblogs.com/zhcncn/p/3987301.html</a><br>不知道为什么我的不能安装gdm，安完之后就就启动不起来了，有必要探究下了，书还没到，学会了这块补上</li>
+<li>安装sass<br>先安装ruby，已经自带了，可能要升级<br>之后安装sass<a href="http://www.w3cplus.com/sassguide/install.html" target="_blank" rel="external">http://www.w3cplus.com/sassguide/install.html</a><br>python已经到2.7了，哈哈，linux上跑这些奇怪的东西比windows下好多了</li>
+</ol>
+<h2 id="0-什么是Sass"><a href="#0-什么是Sass" class="headerlink" title="0.什么是Sass"></a>0.什么是Sass</h2><p>SASS是一种”CSS预处理器”（css preprocessor），提供了许多便利的写法，大大节省了设计者的时间，使得CSS的开发，变得简单和可维护。它的基本思想是，用一种专门的编程语言，进行网页样式设计，然后再编译成正常的CSS文件。</p>
+<h2 id="1-Sass命令编译"><a href="#1-Sass命令编译" class="headerlink" title="1.Sass命令编译"></a>1.Sass命令编译</h2><ul>
+<li>单文件编译<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sass &lt;要编译的Sass文件路径&gt;/style.scss:&lt;要输出的css文件路径&gt;/style.css</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果想对整个项目所有Sass文件编译成css文件，可以这样操作：</p>
+<ul>
+<li>多文件编译<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sass sass/:css/</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>该命令将项目中”sass”文件夹下所有”.scss”(“.sass”)文件编译成”.css”文件，并且将这些css文件都放在项目中”css”文件夹中。</p>
+<h2 id="2-开启watch功能"><a href="#2-开启watch功能" class="headerlink" title="2.开启watch功能"></a>2.开启watch功能</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// watch a file</div><div class="line">sass --watch input.scss:output.css</div><div class="line">// watch a directory</div><div class="line">sass --watch app/sass:public/stylesheets</div></pre></td></tr></table></figure>
+<h2 id="3-四种编译风格"><a href="#3-四种编译风格" class="headerlink" title="3.四种编译风格"></a>3.四种编译风格</h2><h3 id="3-1-嵌套输出方式nested"><a href="#3-1-嵌套输出方式nested" class="headerlink" title="3.1 嵌套输出方式nested"></a>3.1 嵌套输出方式nested</h3><p>嵌套缩进的css代码，它是默认值。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">nav &#123;</div><div class="line">  ul &#123;</div><div class="line">    margin: 0;</div><div class="line">    padding: 0;</div><div class="line">    list-style: none;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  li &#123; display: inline-block; &#125;</div><div class="line"></div><div class="line">  a &#123;</div><div class="line">    display: block;</div><div class="line">    padding: 6px 12px;</div><div class="line">    text-decoration: none;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编译：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sass --watch test.scss:test.css --style nested</div></pre></td></tr></table></figure></p>
+<p>编译结果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">nav ul &#123;</div><div class="line">  margin: 0;</div><div class="line">  padding: 0;</div><div class="line">  list-style: none; &#125;</div><div class="line">nav li &#123;</div><div class="line">  display: inline-block; &#125;</div><div class="line">nav a &#123;</div><div class="line">  display: block;</div><div class="line">  padding: 6px 12px;</div><div class="line">  text-decoration: none; &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="3-2-展开输出方式expanded"><a href="#3-2-展开输出方式expanded" class="headerlink" title="3.2 展开输出方式expanded"></a>3.2 展开输出方式expanded</h3><p>没有缩进的、扩展的css代码。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">nav &#123;</div><div class="line">  ul &#123;</div><div class="line">    margin: 0;</div><div class="line">    padding: 0;</div><div class="line">    list-style: none;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  li &#123; display: inline-block; &#125;</div><div class="line"></div><div class="line">  a &#123;</div><div class="line">    display: block;</div><div class="line">    padding: 6px 12px;</div><div class="line">    text-decoration: none;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编译：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sass --watch test.scss:test.css --style expanded</div></pre></td></tr></table></figure></p>
+<p>编译结果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">nav ul &#123;</div><div class="line">  margin: 0;</div><div class="line">  padding: 0;</div><div class="line">  list-style: none;</div><div class="line">&#125;</div><div class="line">nav li &#123;</div><div class="line">  display: inline-block;</div><div class="line">&#125;</div><div class="line">nav a &#123;</div><div class="line">  display: block;</div><div class="line">  padding: 6px 12px;</div><div class="line">  text-decoration: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个输出的 CSS 样式风格和 nested 类似，只是大括号在另起一行</p>
+<h3 id="3-3-紧凑输出方式compact"><a href="#3-3-紧凑输出方式compact" class="headerlink" title="3.3 紧凑输出方式compact"></a>3.3 紧凑输出方式compact</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">nav &#123;</div><div class="line">  ul &#123;</div><div class="line">    margin: 0;</div><div class="line">    padding: 0;</div><div class="line">    list-style: none;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  li &#123; display: inline-block; &#125;</div><div class="line"></div><div class="line">  a &#123;</div><div class="line">    display: block;</div><div class="line">    padding: 6px 12px;</div><div class="line">    text-decoration: none;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>编译：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sass --watch test.scss:test.css --style compact</div></pre></td></tr></table></figure></p>
+<p>编译结果:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">nav ul &#123; margin: 0; padding: 0; list-style: none; &#125;</div><div class="line">nav li &#123; display: inline-block; &#125;</div><div class="line">nav a &#123; display: block; padding: 6px 12px; text-decoration: none; &#125;</div></pre></td></tr></table></figure></p>
+<p>特点：单行显示</p>
+<h3 id="3-4-压缩输出方式compressed"><a href="#3-4-压缩输出方式compressed" class="headerlink" title="3.4 压缩输出方式compressed"></a>3.4 压缩输出方式compressed</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">nav &#123;</div><div class="line">  ul &#123;</div><div class="line">    margin: 0;</div><div class="line">    padding: 0;</div><div class="line">    list-style: none;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  li &#123; display: inline-block; &#125;</div><div class="line"></div><div class="line">  a &#123;</div><div class="line">    display: block;</div><div class="line">    padding: 6px 12px;</div><div class="line">    text-decoration: none;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>编译：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sass --watch test.scss:test.css --style compressed</div></pre></td></tr></table></figure></p>
+<p>编译结果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nav ul&#123;margin:0;padding:0;list-style:none&#125;nav li&#123;display:inline-block&#125;nav a&#123;display:block;padding:6px 12px;text-decoration:none&#125;</div></pre></td></tr></table></figure></p>
+<p>特点：压缩好的css代码，一般用于生产环境</p>
+<h2 id="4-Sass的调试"><a href="#4-Sass的调试" class="headerlink" title="4.Sass的调试"></a>4.Sass的调试</h2><p>Sass的调试需要浏览器支持”sourcemap”功能，早一点的版本，需要在编译的时候添加”–sourcemap”参数<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sass --watch --scss --sourcemap style.scss:style.css</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="5-Sass-变量"><a href="#5-Sass-变量" class="headerlink" title="5.Sass 变量"></a>5.Sass 变量</h2><p>SASS允许使用变量，所有变量以$开头。如果变量需要镶嵌在字符串之中，就必须需要写在#{}之中。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$side</span> : left;</div><div class="line">.rounded &#123;</div><div class="line">　border-<span class="comment">#&#123;$side&#125;-radius: 5px;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编译结果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.rounded&#123;</div><div class="line">   border-left-radius: 5px;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>sass 的默认变量一般是用来设置默认值，然后根据需求来覆盖的，覆盖的方式也很简单，只需要在默认变量之前重新声明下变量即可。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$baseLineHeight</span>: 2;</div><div class="line"><span class="variable">$baseLineHeight</span>: 1.5 !default;</div><div class="line">body&#123;</div><div class="line">    line-height: <span class="variable">$baseLineHeight</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编译后的css代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">body&#123;</div><div class="line">    line-height:2;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="5-1嵌套规则"><a href="#5-1嵌套规则" class="headerlink" title="5.1嵌套规则"></a>5.1嵌套规则</h3><h4 id="5-2-选择器嵌套"><a href="#5-2-选择器嵌套" class="headerlink" title="5.2 选择器嵌套"></a>5.2 选择器嵌套</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">nav &#123;</div><div class="line">  a &#123;</div><div class="line">    color: red;</div><div class="line"></div><div class="line">    header &amp; &#123;</div><div class="line">      color:green;</div><div class="line">    &#125;</div><div class="line">  &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>编译结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">nav a &#123;</div><div class="line">   color: red;</div><div class="line">&#125;</div><div class="line"></div><div class="line">header nav a &#123;</div><div class="line">   color: green;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="属性嵌套"><a href="#属性嵌套" class="headerlink" title="属性嵌套"></a>属性嵌套</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">p &#123;</div><div class="line">　　border: &#123;</div><div class="line">　　　color: red;</div><div class="line">　　&#125;</div><div class="line">　&#125;</div></pre></td></tr></table></figure>
+<p>注意这个”:”</p>
+<hr>
+<p>#代码重用</p>
+<h2 id="6-混合宏mixin"><a href="#6-混合宏mixin" class="headerlink" title="6.混合宏mixin"></a>6.混合宏mixin</h2><h3 id="6-1声明混合宏"><a href="#6-1声明混合宏" class="headerlink" title="6.1声明混合宏"></a>6.1声明混合宏</h3><ul>
+<li><p>不带参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@mixin border-radius&#123;</div><div class="line">    -webkit-border-radius: 5px;</div><div class="line">    border-radius: 5px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>带参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@mixin border-radius(<span class="variable">$radius</span>:5px)&#123;</div><div class="line">    -webkit-border-radius: <span class="variable">$radius</span>;</div><div class="line">    border-radius: <span class="variable">$radius</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="6-2-调用混合宏"><a href="#6-2-调用混合宏" class="headerlink" title="6.2 调用混合宏"></a>6.2 调用混合宏</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@mixin border-radius&#123;</div><div class="line">    -webkit-border-radius: 3px;</div><div class="line">    border-radius: 3px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>调用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">button &#123;</div><div class="line">    @include border-radius;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编译结果:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">button &#123;</div><div class="line">  -webkit-border-radius: 3px;</div><div class="line">  border-radius: 3px;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="7-继承"><a href="#7-继承" class="headerlink" title="7.继承"></a>7.继承</h2><p>SASS允许一个选择器，继承另一个选择器<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">.class1 &#123;</div><div class="line">　　   border: 1px solid <span class="comment">#ddd;</span></div><div class="line">　　&#125;</div><div class="line">.class2 &#123;</div><div class="line">　　　　@extend .class1;</div><div class="line">　　　　font-size:120%;</div><div class="line">　　&#125;</div></pre></td></tr></table></figure></p>
+<p>##8 占位符<br>Sass 中的占位符 %placeholder 功能是一个很强大，很实用的一个功能，这也是我非常喜欢的功能。他可以取代以前 CSS 中的基类造成的代码冗余的情形。因为 %placeholder 声明的代码，如果不被 @extend 调用的话，不会产生任何代码。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">%mt5 &#123;</div><div class="line">  margin-top: 5px;</div><div class="line">&#125;</div><div class="line">%pt5&#123;</div><div class="line">  padding-top: 5px;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这段代码没有被 @extend 调用，他并没有产生任何代码块，只是静静的躺在你的某个 SCSS 文件中。只有通过 @extend 调用才会产生代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//SCSS</div><div class="line">%mt5 &#123;</div><div class="line">  margin-top: 5px;</div><div class="line">&#125;</div><div class="line">%pt5&#123;</div><div class="line">  padding-top: 5px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.btn &#123;</div><div class="line">  @extend %mt5;</div><div class="line">  @extend %pt5;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.block &#123;</div><div class="line">  @extend %mt5;</div><div class="line"></div><div class="line">  span &#123;</div><div class="line">    @extend %pt5;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编译结果:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//CSS</div><div class="line">.btn, .block &#123;</div><div class="line">  margin-top: 5px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.btn, .block span &#123;</div><div class="line">  padding-top: 5px;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>！混合宏VS继承VS占位符<br><img src="/images/sass01/sass01.jpg" alt=""></p>
+<h2 id="9-插值-难"><a href="#9-插值-难" class="headerlink" title="9.插值(难)"></a>9.插值(难)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$properties</span>: (margin, padding);</div><div class="line">@mixin <span class="built_in">set</span>-value(<span class="variable">$side</span>, <span class="variable">$value</span>) &#123;</div><div class="line">    @each <span class="variable">$prop</span> <span class="keyword">in</span> <span class="variable">$properties</span> &#123;</div><div class="line">        <span class="comment">#&#123;$prop&#125;-#&#123;$side&#125;: $value;</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">.login-box &#123;</div><div class="line">    @include <span class="built_in">set</span>-value(top, 14px);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>编译结果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.login-box &#123;</div><div class="line">    margin-top: 14px;</div><div class="line">    padding-top: 14px;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当想设置属性值的时候你可以使用字符串插入进来。一个有用的用法是构建一个选择器，比如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@mixin generate-sizes(<span class="variable">$class</span>, <span class="variable">$small</span>, <span class="variable">$medium</span>, <span class="variable">$big</span>) &#123;</div><div class="line">    .<span class="comment">#&#123;$class&#125;-small &#123; font-size: $small; &#125;</span></div><div class="line">    .<span class="comment">#&#123;$class&#125;-medium &#123; font-size: $medium; &#125;</span></div><div class="line">    .<span class="comment">#&#123;$class&#125;-big &#123; font-size: $big; &#125;</span></div><div class="line">&#125;</div><div class="line">@include generate-sizes(<span class="string">"header-text"</span>, 12px, 20px, 40px);</div></pre></td></tr></table></figure></p>
+<p>编译结果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.header-text-small &#123; font-size: 12px; &#125;</div><div class="line">.header-text-medium &#123; font-size: 20px; &#125;</div><div class="line">.header-text-big &#123; font-size: 40px; &#125;</div></pre></td></tr></table></figure></p>
+<h2 id="10-变量计算"><a href="#10-变量计算" class="headerlink" title="10.变量计算"></a>10.变量计算</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$col</span>-width: 60px;</div><div class="line"><span class="variable">$col</span>-gap: 20px;</div><div class="line"></div><div class="line">@<span class="keyword">for</span> <span class="variable">$i</span> from 1 through 12 &#123;</div><div class="line">    .col-<span class="comment">#&#123;$i&#125;&#123;</span></div><div class="line">        width:<span class="variable">$col</span>-width+<span class="variable">$col</span>-gap;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>编译结果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">.col-1 &#123;</div><div class="line">  width: 80px; &#125;</div><div class="line">.col-2 &#123;</div><div class="line">  width: 80px; &#125;</div><div class="line">.col-3 &#123;</div><div class="line">  width: 80px; &#125;</div><div class="line">.col-4 &#123;</div><div class="line">  width: 80px; &#125;</div><div class="line">.col-5 &#123;</div><div class="line">  width: 80px; &#125;</div><div class="line">.col-6 &#123;</div><div class="line">  width: 80px; &#125;</div><div class="line">.col-7 &#123;</div><div class="line">  width: 80px; &#125;</div><div class="line">.col-8 &#123;</div><div class="line">  width: 80px; &#125;</div><div class="line">.col-9 &#123;</div><div class="line">  width: 80px; &#125;</div><div class="line">.col-10 &#123;</div><div class="line">  width: 80px; &#125;</div><div class="line">.col-11 &#123;</div><div class="line">  width: 80px; &#125;</div><div class="line">.col-12 &#123;</div><div class="line">  width: 80px; &#125;</div></pre></td></tr></table></figure></p>
+<h2 id="参考阅读"><a href="#参考阅读" class="headerlink" title="参考阅读"></a>参考阅读</h2><ul>
+<li><p><a href="http://www.ruanyifeng.com/blog/2012/06/sass.html" target="_blank" rel="external">SASS用法指南_阮一峰</a></p>
+</li>
+<li><p><a href="">SASS基础</a></p>
+</li>
+<li><p><a href="http://www.sassmeister.com/" target="_blank" rel="external">SASS在线测试</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Sass/">Sass</a>
+  </div>
+
+        <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+    
+    <a href="/2016/01/29/2016_01/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/01/09/blessing/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+  <!-- 多说评论框 start -->
+    <div class="ds-thread" ></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'undefined'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>17</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript-ES6/">javascript+ES6</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>1</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>1</small></li>
+  
+    <li><a href="/categories/博客/">博客</a><small>1</small></li>
+  
+    <li><a href="/categories/毕业设计/">毕业设计</a><small>4</small></li>
+  
+    <li><a href="/categories/面试准备/">面试准备</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Sass/" style="font-size: 12px;">Sass</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/edx/" style="font-size: 10px;">edx</a> <a href="/tags/前端/" style="font-size: 18px;">前端</a> <a href="/tags/博客/" style="font-size: 12px;">博客</a> <a href="/tags/博客，文章/" style="font-size: 14px;">博客，文章</a> <a href="/tags/托业/" style="font-size: 10px;">托业</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/毕业设计/" style="font-size: 16px;">毕业设计</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试准备/" style="font-size: 14px;">面试准备</a>
+  </div>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="https://github.com/spy19930412 " title="spy19930412">my github</a></li>
+<li><a href="http://wwj718.github.io/ " title="友情互链">writing for time超级棒</a></li>
+<li><a href="http://xueyi1230.github.io/ " title="友情互链">削一个博客一直施工中</a></li>
+</ul>
+</div>
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2298271483&verifier=401a0bfd&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 spy19930412
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

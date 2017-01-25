@@ -1,0 +1,314 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>javascript | spy&#39;s blog</title>
+  <meta name="author" content="spy19930412">
+  
+  <meta name="description" content="sometimes ever sometimes never">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="javascript"/>
+  <meta property="og:site_name" content="spy&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+ <!--  <link href="/favicon.png" rel="icon"> -->
+ <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="spy&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">spy&#39;s blog</a></h1>
+  <h2><a href="/">sometimes ever sometimes never</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">存档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+      <li><a href="/todolist">Todo</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-08-21T01:29:06.000Z"><a href="/2016/08/21/javascript+ES6/">2016-08-21</a></time>
+      
+      
+  
+    <h1 class="title">javascript</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>补充一下ES6的知识</p>
+<a id="more"></a>
+<ul>
+<li>[Array]请注意，如果通过索引赋值时，索引超过了范围，同样会引起Array大小的变化：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var arr = [1, 2, 3];</div><div class="line">arr[5] = <span class="string">'x'</span>;</div><div class="line">arr; // arr变为[1, 2, 3, undefined, undefined, <span class="string">'x'</span>]</div></pre></td></tr></table></figure>
+<p>大多数其他编程语言不允许直接改变数组的大小，越界访问索引会报错。然而，JavaScript的Array却不会有任何错误。在编写代码时，不建议直接修改Array的大小，访问索引时要确保索引不会越界。</p>
+<ul>
+<li>[String]要获取字符串某个指定位置的字符，使用类似Array的下标操作，索引号从0开始：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var s = <span class="string">'Hello, world!'</span>;</div><div class="line"></div><div class="line">s[0]; // <span class="string">'H'</span></div><div class="line">s[6]; // <span class="string">' '</span></div><div class="line">s[7]; // <span class="string">'w'</span></div><div class="line">s[12]; // <span class="string">'!'</span></div><div class="line">s[13]; // undefined 超出范围的索引不会报错，但一律返回undefined</div></pre></td></tr></table></figure>
+<p>需要特别注意的是，字符串是不可变的，如果对字符串的某个索引赋值，不会有任何错误，但是，也没有任何效果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var s = <span class="string">'Test'</span>;</div><div class="line">s[0] = <span class="string">'X'</span>;</div><div class="line">alert(s); // s仍然为<span class="string">'Test'</span></div></pre></td></tr></table></figure>
+<ul>
+<li><p>[Boolean]JavaScript把null、undefined、0、NaN和空字符串’’视为false，其他值一概视为true</p>
+</li>
+<li><p>Map</p>
+</li>
+</ul>
+<p>Map是一组键值对的结构，具有极快的查找速度。</p>
+<p>举个例子，假设要根据同学的名字查找对应的成绩，如果用Array实现，需要两个Array：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var names = [<span class="string">'Michael'</span>, <span class="string">'Bob'</span>, <span class="string">'Tracy'</span>];</div><div class="line">var scores = [95, 75, 85];</div></pre></td></tr></table></figure>
+<p>给定一个名字，要查找对应的成绩，就先要在names中找到对应的位置，再从scores取出对应的成绩，Array越长，耗时越长。</p>
+<p>如果用Map实现，只需要一个“名字”-“成绩”的对照表，直接根据名字查找成绩，无论这个表有多大，查找速度都不会变慢。用JavaScript写一个Map如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var m = new Map([[<span class="string">'Michael'</span>, 95], [<span class="string">'Bob'</span>, 75], [<span class="string">'Tracy'</span>, 85]]);</div><div class="line">m.get(<span class="string">'Michael'</span>); // 95</div></pre></td></tr></table></figure>
+<p>初始化Map需要一个二维数组，或者直接初始化一个空Map。Map具有以下方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var m = new Map(); // 空Map</div><div class="line">m.set(<span class="string">'Adam'</span>, 67); // 添加新的key-value</div><div class="line">m.set(<span class="string">'Bob'</span>, 59);</div><div class="line">m.has(<span class="string">'Adam'</span>); // 是否存在key <span class="string">'Adam'</span>: <span class="literal">true</span></div><div class="line">m.get(<span class="string">'Adam'</span>); // 67</div><div class="line">m.delete(<span class="string">'Adam'</span>); // 删除key <span class="string">'Adam'</span></div><div class="line">m.get(<span class="string">'Adam'</span>); // undefined</div></pre></td></tr></table></figure>
+<p>由于一个key只能对应一个value，所以，多次对一个key放入value，后面的值会把前面的值冲掉：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var m = new Map();</div><div class="line">m.set(<span class="string">'Adam'</span>, 67);</div><div class="line">m.set(<span class="string">'Adam'</span>, 88);</div><div class="line">m.get(<span class="string">'Adam'</span>); // 88</div></pre></td></tr></table></figure>
+<p>由于map()方法定义在JavaScript的Array中，我们调用Array的map()方法，传入我们自己的函数，就得到了一个新的Array作为结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> pow(x) &#123;</div><div class="line">    <span class="built_in">return</span> x * x;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];</div><div class="line">arr.map(pow); // [1, 4, 9, 16, 25, 36, 49, 64, 81]</div><div class="line">map()传入的参数是pow，即函数对象本身。</div></pre></td></tr></table></figure>
+<p>你可能会想，不需要map()，写一个循环，也可以计算出结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var f = <span class="keyword">function</span> (x) &#123;</div><div class="line">    <span class="built_in">return</span> x * x;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];</div><div class="line">var result = [];</div><div class="line"><span class="keyword">for</span> (var i=0; i&lt;arr.length; i++) &#123;</div><div class="line">    result.push(f(arr[i]));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>的确可以，但是，从上面的循环代码，我们无法一眼看明白“把f(x)作用在Array的每一个元素并把结果生成一个新的Array”。</p>
+<p>所以，map()作为高阶函数，事实上它把运算规则抽象了，因此，我们不但可以计算简单的f(x)=x2，还可以计算任意复杂的函数，比如，把Array的所有数字转为字符串：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];</div><div class="line">arr.map(String); // [<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>, <span class="string">'7'</span>, <span class="string">'8'</span>, <span class="string">'9'</span>]</div></pre></td></tr></table></figure>
+<p>只需要一行代码。</p>
+<ul>
+<li>[Set]</li>
+</ul>
+<p>Set和Map类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在Set中，没有重复的key。</p>
+<p>要创建一个Set，需要提供一个Array作为输入，或者直接创建一个空Set：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var s1 = new Set(); // 空Set</div><div class="line">var s2 = new Set([1, 2, 3]); // 含1, 2, 3</div></pre></td></tr></table></figure>
+<p>重复元素在Set中自动被过滤：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var s = new Set([1, 2, 3, 3, <span class="string">'3'</span>]);</div><div class="line">s; // Set &#123;1, 2, 3, <span class="string">"3"</span>&#125;</div></pre></td></tr></table></figure>
+<p>注意数字3和字符串’3’是不同的元素。</p>
+<p>通过add(key)方法可以添加元素到Set中，可以重复添加，但不会有效果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; s.add(4)</div><div class="line">&gt;&gt;&gt; s</div><div class="line">&#123;1, 2, 3, 4&#125;</div><div class="line">&gt;&gt;&gt; s.add(4)</div><div class="line">&gt;&gt;&gt; s</div><div class="line">&#123;1, 2, 3, 4&#125;</div></pre></td></tr></table></figure></p>
+<p>通过delete(key)方法可以删除元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var s = new Set([1, 2, 3]);</div><div class="line">s; // Set &#123;1, 2, 3&#125;</div><div class="line">s.delete(3);</div><div class="line">s; // Set &#123;1, 2&#125;</div></pre></td></tr></table></figure>
+<p>Map和Set是ES6标准新增的数据类型，请根据浏览器的支持情况决定是否要使用。</p>
+<ul>
+<li>[iterable]</li>
+</ul>
+<p>遍历Array可以采用下标循环，遍历Map和Set就无法使用下标。为了统一集合类型，ES6标准引入了新的iterable类型，Array、Map和Set都属于iterable类型。</p>
+<p>具有iterable类型的集合可以通过新的for … of循环来遍历。</p>
+<p>for … of循环是ES6引入的新的语法，用for … of循环遍历集合，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var a = [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>];</div><div class="line">var s = new Set([<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>]);</div><div class="line">var m = new Map([[1, <span class="string">'x'</span>], [2, <span class="string">'y'</span>], [3, <span class="string">'z'</span>]]);</div><div class="line"><span class="keyword">for</span> (var x of a) &#123; // 遍历Array</div><div class="line">    alert(x);</div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span> (var x of s) &#123; // 遍历Set</div><div class="line">    alert(x);</div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span> (var x of m) &#123; // 遍历Map</div><div class="line">    alert(x[0] + <span class="string">'='</span> + x[1]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>你可能会有疑问，for … of循环和for … in循环有何区别？</p>
+<p>for … in循环由于历史遗留问题，它遍历的实际上是对象的属性名称。一个Array数组实际上也是一个对象，它的每个元素的索引被视为一个属性。</p>
+<p>当我们手动给Array对象添加了额外的属性后，for … in循环将带来意想不到的意外效果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var a = [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>];</div><div class="line">a.name = <span class="string">'Hello'</span>;</div><div class="line"><span class="keyword">for</span> (var x <span class="keyword">in</span> a) &#123;</div><div class="line">    alert(x); // <span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'name'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>for … in循环将把name包括在内，但Array的length属性却不包括在内。</p>
+<p>for … of循环则完全修复了这些问题，它只循环集合本身的元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var a = [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>];</div><div class="line">a.name = <span class="string">'Hello'</span>;</div><div class="line"><span class="keyword">for</span> (var x of a) &#123;</div><div class="line">    alert(x); <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这就是为什么要引入新的for … of循环。</p>
+<p>然而，更好的方式是直接使用iterable内置的forEach方法，它接收一个函数，每次迭代就自动回调该函数。以Array为例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var a = [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>];</div><div class="line">a.forEach(<span class="keyword">function</span> (element, index, array) &#123;</div><div class="line">    // element: 指向当前元素的值</div><div class="line">    // index: 指向当前索引</div><div class="line">    // array: 指向Array对象本身</div><div class="line">    alert(element);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>注意，forEach()方法是ES5.1标准引入的，你需要测试浏览器是否支持。</p>
+<p>Set与Array类似，但Set没有索引，因此回调函数的前两个参数都是元素本身：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var s = new Set([<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>]);</div><div class="line">s.forEach(<span class="keyword">function</span> (element, sameElement, <span class="built_in">set</span>) &#123;</div><div class="line">    alert(element);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>Map的回调函数参数依次为value、key和map本身：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var m = new Map([[1, <span class="string">'x'</span>], [2, <span class="string">'y'</span>], [3, <span class="string">'z'</span>]]);</div><div class="line">m.forEach(<span class="keyword">function</span> (value, key, map) &#123;</div><div class="line">    alert(value);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>如果对某些参数不感兴趣，由于JavaScript的函数调用不要求参数必须一致，因此可以忽略它们。例如，只需要获得Array的element：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var a = [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>];</div><div class="line">a.forEach(<span class="keyword">function</span> (element) &#123;</div><div class="line">    alert(element);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>[常量]</li>
+</ul>
+<p>由于var和let申明的是变量，如果要申明一个常量，在ES6之前是不行的，我们通常用全部大写的变量来表示“这是一个常量，不要修改它的值”：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var PI = 3.14;</div></pre></td></tr></table></figure>
+<p>ES6标准引入了新的关键字const来定义常量，const与let都具有块级作用域：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="string">'use strict'</span>;</div><div class="line"></div><div class="line">const PI = 3.14;</div><div class="line">PI = 3; // 某些浏览器不报错，但是无效果！</div><div class="line">PI; // 3.14</div></pre></td></tr></table></figure>
+<ul>
+<li>[装饰器]<br>p.s.这段没怎么看懂<br>利用apply()，我们还可以动态改变函数的行为。</li>
+</ul>
+<p>JavaScript的所有对象都是动态的，即使内置的函数，我们也可以重新指向新的函数。</p>
+<p>现在假定我们想统计一下代码一共调用了多少次parseInt()，可以把所有的调用都找出来，然后手动加上count += 1，不过这样做太傻了。最佳方案是用我们自己的函数替换掉默认的parseInt()：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var count = 0;</div><div class="line">var oldParseInt = parseInt; // 保存原函数</div><div class="line"></div><div class="line">window.parseInt = <span class="function"><span class="title">function</span></span> () &#123;</div><div class="line">    count += 1;</div><div class="line">    <span class="built_in">return</span> oldParseInt.apply(null, arguments); // 调用原函数</div><div class="line">&#125;;</div><div class="line"></div><div class="line">// 测试:</div><div class="line">parseInt(<span class="string">'10'</span>);</div><div class="line">parseInt(<span class="string">'20'</span>);</div><div class="line">parseInt(<span class="string">'30'</span>);</div><div class="line">count; // 3</div></pre></td></tr></table></figure>
+<ul>
+<li>[reduce]</li>
+</ul>
+<p>再看reduce的用法。Array的reduce()把一个函数作用在这个Array的[x1, x2, x3…]上，这个函数必须接收两个参数，reduce()把结果继续和序列的下一个元素做累积计算，其效果就是：</p>
+<p>[x1, x2, x3, x4].reduce(f) = f(f(f(x1, x2), x3), x4)<br>比方说对一个Array求和，就可以用reduce实现：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr = [1, 3, 5, 7, 9];</div><div class="line">arr.reduce(<span class="keyword">function</span> (x, y) &#123;</div><div class="line">    <span class="built_in">return</span> x + y;</div><div class="line">&#125;); // 25</div></pre></td></tr></table></figure>
+<ul>
+<li>[filter]<br>filter也是一个常用的操作，它用于把Array的某些元素过滤掉，然后返回剩下的元素。</li>
+</ul>
+<p>和map()类似，Array的filter()也接收一个函数。和map()不同的是，filter()把传入的函数依次作用于每个元素，然后根据返回值是true还是false决定保留还是丢弃该元素。</p>
+<p>例如，在一个Array中，删掉偶数，只保留奇数，可以这么写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var arr = [1, 2, 4, 5, 6, 9, 10, 15];</div><div class="line">var r = arr.filter(<span class="keyword">function</span> (x) &#123;</div><div class="line">    <span class="built_in">return</span> x % 2 !== 0;</div><div class="line">&#125;);</div><div class="line">r; // [1, 5, 9, 15]</div></pre></td></tr></table></figure>
+<p>把一个Array中的空字符串删掉，可以这么写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var arr = [<span class="string">'A'</span>, <span class="string">''</span>, <span class="string">'B'</span>, null, undefined, <span class="string">'C'</span>, <span class="string">'  '</span>];</div><div class="line">var r = arr.filter(<span class="keyword">function</span> (s) &#123;</div><div class="line">    <span class="built_in">return</span> s &amp;&amp; s.trim(); // 注意：IE9以下的版本没有trim()方法</div><div class="line">&#125;);</div><div class="line">r; // [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>]</div></pre></td></tr></table></figure>
+<p>可见用filter()这个高阶函数，关键在于正确实现一个“筛选”函数。</p>
+<p>+[闭包]<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> lazy_sum(arr) &#123;</div><div class="line">    var sum = <span class="function"><span class="title">function</span></span> () &#123;</div><div class="line">        <span class="built_in">return</span> arr.reduce(<span class="keyword">function</span> (x, y) &#123;</div><div class="line">            <span class="built_in">return</span> x + y;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">return</span> sum;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当我们调用lazy_sum()时，返回的并不是求和结果，而是求和函数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var f = lazy_sum([1, 2, 3, 4, 5]); // <span class="keyword">function</span> sum()</div></pre></td></tr></table></figure>
+<p>调用函数f时，才真正计算求和的结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">f(); // 15</div></pre></td></tr></table></figure>
+<p>在这个例子中，我们在函数lazy_sum中又定义了函数sum，并且，内部函数sum可以引用外部函数lazy_sum的参数和局部变量，当lazy_sum返回函数sum时，相关参数和变量都保存在返回的函数中，这种称为“闭包（Closure）”的程序结构拥有极大的威力。</p>
+<p>请再注意一点，当我们调用lazy_sum()时，每次调用都会返回一个新的函数，即使传入相同的参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var f1 = lazy_sum([1, 2, 3, 4, 5]);</div><div class="line">var f2 = lazy_sum([1, 2, 3, 4, 5]);</div><div class="line">f1 === f2; // <span class="literal">false</span></div></pre></td></tr></table></figure>
+<p>f1()和f2()的调用结果互不影响。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/javascript-ES6/">javascript+ES6</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/前端/">前端</a>
+  </div>
+
+        <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+    
+    <a href="/2016/09/10/2016_08/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/08/21/python/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+  <!-- 多说评论框 start -->
+    <div class="ds-thread" ></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'undefined'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>17</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript-ES6/">javascript+ES6</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>1</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>1</small></li>
+  
+    <li><a href="/categories/博客/">博客</a><small>1</small></li>
+  
+    <li><a href="/categories/毕业设计/">毕业设计</a><small>4</small></li>
+  
+    <li><a href="/categories/面试准备/">面试准备</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Sass/" style="font-size: 12px;">Sass</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/edx/" style="font-size: 10px;">edx</a> <a href="/tags/前端/" style="font-size: 18px;">前端</a> <a href="/tags/博客/" style="font-size: 12px;">博客</a> <a href="/tags/博客，文章/" style="font-size: 14px;">博客，文章</a> <a href="/tags/托业/" style="font-size: 10px;">托业</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/毕业设计/" style="font-size: 16px;">毕业设计</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试准备/" style="font-size: 14px;">面试准备</a>
+  </div>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="https://github.com/spy19930412 " title="spy19930412">my github</a></li>
+<li><a href="http://wwj718.github.io/ " title="友情互链">writing for time超级棒</a></li>
+<li><a href="http://xueyi1230.github.io/ " title="友情互链">削一个博客一直施工中</a></li>
+</ul>
+</div>
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2298271483&verifier=401a0bfd&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 spy19930412
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
