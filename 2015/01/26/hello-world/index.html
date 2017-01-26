@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>pi-switch(1)——起步 | jane&#39;s blog</title>
+  <title>Hello World | jane&#39;s blog</title>
   <meta name="author" content="spy19930412">
   
   <meta name="description" content="sometimes ever sometimes never">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="pi-switch(1)——起步"/>
+  <meta property="og:title" content="Hello World"/>
   <meta property="og:site_name" content="jane&#39;s blog"/>
 
   
@@ -55,50 +55,33 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-04-21T07:29:43.000Z"><a href="/2015/04/21/bishe-1/">2015-04-21</a></time>
+        <time datetime="2015-01-26T05:42:07.000Z"><a href="/2015/01/26/hello-world/">2015-01-26</a></time>
       
       
   
-    <h1 class="title">pi-switch(1)——起步</h1>
+    <h1 class="title">Hello World</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>本篇介绍： </p>
-<ul>
-<li>做什么 </li>
-<li>材料 </li>
-<li>参考文献 </li>
-<li>技术平台 </li>
-</ul>
+        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
 <a id="more"></a>
-<h2 id="做什么"><a href="#做什么" class="headerlink" title="做什么"></a>做什么</h2><p>用微信远程控制家居开关</p>
-<h2 id="购物清单"><a href="#购物清单" class="headerlink" title="购物清单"></a>购物清单</h2><ul>
-<li>树莓派、无线网卡、SD卡、充电线 </li>
-<li>12V单路学习型无线遥控开关</li>
-<li>无线遥控器</li>
-</ul>
-<h2 id="市面上的成品"><a href="#市面上的成品" class="headerlink" title="市面上的成品"></a>市面上的成品</h2><p><a href="http://item.jd.com/1189393.html" target="_blank" rel="external">微插座（atsmart） M5 智能插座</a> </p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="http://www.cnki.net/KCMS/detail/detail.aspx?QueryID=30&amp;CurRec=1&amp;recid=&amp;filename=1014193525.nh&amp;dbname=CMFD201402&amp;dbcode=CMFD&amp;pr=&amp;urlid=&amp;yx=&amp;uid=WEEvREcwSlJHSldTTGJhYkg4SUdxT3Rhamt0ZDJseEdlMHZrUDdHbndWUTYyYmVtTEFSY2hBZ3BsenhnRjJ2SEZTUT0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!&amp;v=MDg3MjNMdXhZUzdEaDFUM3FUcldNMUZyQ1VSTCtmWStSdUZ5emhWYi9PVkYyNkdyS3hIZFRPcXBFYlBJUjhlWDE=" target="_blank" rel="external">基于Android手机的智能插座设计 浙江大学硕士毕业论文 张新星</a></p>
-<h2 id="主要思路"><a href="#主要思路" class="headerlink" title="主要思路"></a>主要思路</h2><p>树莓派是整个系统的核心<br>首先，树莓派通过控制GPIO引脚的高低电平控制无线开关的开启与闭合<br>然后，在树莓派上搭建php网站，后台去控制cpp的执行<br>最后，ngrok将其端口映射至外网，注册微信公众平台，将该网站作为微信公众平台网站</p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
       
     </div>
     <footer>
       
         
-  
-  <div class="categories">
-    <a href="/categories/毕业设计/">毕业设计</a>
-  </div>
-
         
-  
-  <div class="tags">
-    <a href="/tags/毕业设计/">毕业设计</a>
-  </div>
-
         <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
       
@@ -111,10 +94,8 @@
 
 <nav id="pagination" >
     
-    <a href="/2015/04/21/bishe-2/" class="alignleft prev" >上一页</a>
+    <a href="/2015/04/21/about_url/" class="alignleft prev" >上一页</a>
     
-    
-    <a href="/2015/04/21/markdown/" class="alignright next" >下一页</a>
     
     <div class="clearfix"></div>
 </nav>
