@@ -67,7 +67,7 @@
 <a id="more"></a>
 <p><a href="https://www.gitbook.com/book/wizardforcel/the-art-of-programming-by-july/details" target="_blank" rel="external">《编程之法：面试和算法心得》</a></p>
 <h2 id="第一部分-数据结构"><a href="#第一部分-数据结构" class="headerlink" title="第一部分 数据结构"></a>第一部分 数据结构</h2><h3 id="第一章-字符串"><a href="#第一章-字符串" class="headerlink" title="第一章 字符串"></a>第一章 字符串</h3><h4 id="1-1-旋转字符串"><a href="#1-1-旋转字符串" class="headerlink" title="1.1 旋转字符串"></a>1.1 旋转字符串</h4><p>核心：分两半<br>例如，字符串 abcdef ，若要让 def 翻转到 abc 的前头，只要按照下述 3 个步骤操作即可：<br>首先将原字符串分为两个部分，即 X:abc，Y:def；<br>将 X 反转，X-&gt;X^T，即得：abc-&gt;cba；将 Y 反转，Y-&gt;Y^T，即得：def-&gt;fed。<br>反转上述步骤得到的结果字符串 X^TY^T，即反转字符串 cbafed 的两部分（cba 和 fed）给予反转，cbafed 得到 defabc，形式化表示为 (X^TY^T)^T=YX，这就实现了整个反转。</p>
-<p>####1、链表翻转。给出一个链表和一个数 k，比如，链表为 1→2→3→4→5→6，k=2，则翻转后 2→1→6→5→4→3，若 k=3，翻转后 3→2→1→6→5→4，若 k=4，翻转后 4→3→2→1→6→5，用程序实现。</p>
+<p>####1、 链表翻转。给出一个链表和一个数 k，比如，链表为 1→2→3→4→5→6，k=2，则翻转后 2→1→6→5→4→3，若 k=3，翻转后 3→2→1→6→5→4，若 k=4，翻转后 4→3→2→1→6→5，用程序实现。</p>
 <p>首先我们来看一下<strong><em>单链表反转</em></strong></p>
 <p>单链表反转有递归和非递归两种算法。<br>先定义一下节点</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> ListNode&#123;  </div><div class="line">    <span class="keyword">int</span> value;  </div><div class="line">    ListNode* next;  </div><div class="line">&#125;ListNode;</div></pre></td></tr></table></figure>
