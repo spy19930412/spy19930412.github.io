@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>pi-switch(2)——硬件连接 | jane&#39;s blog</title>
+  <title>编程之法读书笔记第一章——数据结构——数组 | jane&#39;s blog</title>
   <meta name="author" content="spy19930412">
   
   <meta name="description" content="sometimes ever sometimes never">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="pi-switch(2)——硬件连接"/>
+  <meta property="og:title" content="编程之法读书笔记第一章——数据结构——数组"/>
   <meta property="og:site_name" content="jane&#39;s blog"/>
 
   
@@ -53,44 +53,29 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-04-21T08:55:22.000Z"><a href="/2015/04/21/bishe-2/">2015-04-21</a></time>
+        <time datetime="2017-01-30T02:07:46.000Z"><a href="/2017/01/30/Programming0102/">2017-01-30</a></time>
       
       
   
-    <h1 class="title">pi-switch(2)——硬件连接</h1>
+    <h1 class="title">编程之法读书笔记第一章——数据结构——数组</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>本篇介绍： </p>
-<ul>
-<li>12V单路学习型无线遥控开关与无线遥控器学习对码 </li>
-<li>315M无线发射与树莓派引脚连接 </li>
-<li>参考文献  </li>
-</ul>
+        <p>笔试和面试中，除了字符串，另一类出现频率极高的问题便是与数组相关的问题。在阅读完第 1 章和本第二章后，读者会慢慢了解到解决面试编程题的有几种常用思路。首先一般考虑 “万能的” 暴力穷举（递归、回溯），如求 n 个数的全排列或八皇后（N 皇后问题）。但因为穷举时间复杂度通常过高，所以需要考虑更好的方法，如分治法（通过分而治之，然后归并），以及空间换时间（如活用哈希表）。<br>此外，选择合适的数据结构可以显著提升效率，如寻找最小的 k 个数中，用堆代替数组。<br>再有，如果题目允许排序，则可以考虑排序。比如，寻找和为定值的两个数中，先排序，然后用前后两个指针往中间扫。而如果如果已经排好序了（如杨氏矩阵查找中），则想想有无必要二分。但是，如果题目不允许排序呢？这个时候，我们可以考虑不改变数列顺序的贪心算法（如最小生成树 Prim、Kruskal 及最短路 dijkstra），或动态规划（如 01 背包问题，每一步都在决策）。<br>最后，注意细节处理，不要忽略边界条件，如字符串转换成整数。</p>
 <a id="more"></a>
-<h2 id="1-12V单路学习型无线遥控开关与无线遥控器学习对码"><a href="#1-12V单路学习型无线遥控开关与无线遥控器学习对码" class="headerlink" title="1.12V单路学习型无线遥控开关与无线遥控器学习对码"></a>1.12V单路学习型无线遥控开关与无线遥控器学习对码</h2><p><a href="http://item.taobao.com/item.htm?spm=a1z09.2.9.11.if74pG&amp;id=9490765868&amp;_u=mmshbv00c9e" target="_blank" rel="external">12V单路学习型无线遥控开关</a><br><a href="http://item.taobao.com/item.htm?spm=a1z09.2.9.22.if74pG&amp;id=13747477962&amp;_u=mmshbv05177" target="_blank" rel="external">无线遥控器</a><br>先来连接设备，电路图如下：<br><img src="http://i2.tietuku.com/82037a1f4bab7084.png" alt=""><br>其实这时我发现工作电压在9V-16V，那就买6节电池串联即可工作，不必苦恼220V-12V变压器<br>之后尝试使用，说明书如下:<br><img src="http://i1.tietuku.com/9df763b91b24a029.png" alt=""><br>在这里，我们选择输出方式为C：信号互锁<br>首先清除编码：按住接收器侧面的学习键(S1)不要放，知道见到LED灯闪烁时就OK<br>然后设置互锁学习对码：按一下S1，LED灯点亮时(实际操作中这个很拼人品)进入学习状态，紧接着，按下遥控器上A，见到LED闪烁2下转为常亮按B，见到LED亮3下熄灭为学习完毕。<br>如果连接无误，那现在按A，灯(我的负载)亮，按B，灯灭。可以听见继电器开启和断开的咔咔的声响。</p>
-<h2 id="2-315M无线发射模块与树莓派引脚连接"><a href="#2-315M无线发射模块与树莓派引脚连接" class="headerlink" title="2.315M无线发射模块与树莓派引脚连接"></a>2.315M无线发射模块与树莓派引脚连接</h2><blockquote>
-<p>原理：树莓派运行linux系统，有GPIO扩展，可控制其它设备。通过控制树莓派上的GPIO输出高电平和低电平，来控制继电器开关，继电器与其它设备相连，这样就能达到控制设备开关的目的了 </p>
-</blockquote>
-<p><a href="http://item.taobao.com/item.htm?spm=a1z09.2.9.39.YxDNp4&amp;id=18431673466&amp;_u=m284jt03a861" target="_blank" rel="external">315M无线发射模块</a><br>我的树莓派板子型号是MODEL B+ 40个GRIO引脚模式，然而原po主是B板26引脚模式，原文中的电路图是这样子的：<br><img src="http://i2.tietuku.com/234b6664b418329b.jpg" alt=""><br>经过查阅多篇博文，26脚的分布图是这样的<br><img src="http://i2.tietuku.com/ec1df06fe63d21f6.png" alt=""><br>40脚的分布图是这样的<br><img src="http://i2.tietuku.com/1bab40fba79dd45c.jpg" alt=""><br>最后，将我画好的电路图献上<br><img src="http://i1.tietuku.com/bf978c7307c41bfc.png" alt=""><br> 啊，原谅我如此爱偷懒（逃<br> 这部分的参考博文很多，但是这部分并不是我要记录的重点，不赘述，贴出几篇好文章<br><a href="http://blog.csdn.net/xukai871105/article/details/12684617" target="_blank" rel="external">GPIO功能学习</a><br><a href="https://www.zybuluo.com/hzl201/note/38736" target="_blank" rel="external">树莓派通过GPIO控制继电器开关</a></p>
-<h2 id="3-参考文献"><a href="#3-参考文献" class="headerlink" title="3.参考文献"></a>3.参考文献</h2><p><a href="http://www.shumeipai.net/thread-7315-1-1.html" target="_blank" rel="external">树莓派无线控制开关，开启智能家居的第一步</a></p>
-
+<p><a href="https://www.gitbook.com/book/wizardforcel/the-art-of-programming-by-july/details" target="_blank" rel="external">《编程之法：面试和算法心得》</a></p>
+<h2 id="第一部分-数据结构"><a href="#第一部分-数据结构" class="headerlink" title="第一部分 数据结构"></a>第一部分 数据结构</h2><h3 id="第一章-字符串"><a href="#第一章-字符串" class="headerlink" title="第一章 字符串"></a>第一章 字符串</h3><h3 id="1-1-旋转字符串"><a href="#1-1-旋转字符串" class="headerlink" title="1.1 旋转字符串"></a>1.1 旋转字符串</h3>
       
     </div>
     <footer>
       
         
-  
-  <div class="categories">
-    <a href="/categories/毕业设计/">毕业设计</a>
-  </div>
-
         
   
   <div class="tags">
-    <a href="/tags/毕业设计/">毕业设计</a>
+    <a href="/tags/leetcode/">leetcode</a>
   </div>
 
         <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
@@ -105,10 +90,8 @@
 
 <nav id="pagination" >
     
-    <a href="/2015/04/25/bishe-3/" class="alignleft prev" >上一页</a>
     
-    
-    <a href="/2015/04/21/bishe-1/" class="alignright next" >下一页</a>
+    <a href="/2017/01/26/dpProblems/" class="alignright next" >下一页</a>
     
     <div class="clearfix"></div>
 </nav>
