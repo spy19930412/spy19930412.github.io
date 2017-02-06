@@ -65,17 +65,20 @@
       
         <p>学习python的知识<br>写这种读书笔记从来都是写的一塌糊涂（因为我懒</p>
 <a id="more"></a>
-<h3 id="1-数据类型和变量"><a href="#1-数据类型和变量" class="headerlink" title="1.数据类型和变量"></a>1.数据类型和变量</h3><h4 id="1-1-数据类型"><a href="#1-1-数据类型" class="headerlink" title="1.1 数据类型"></a>1.1 数据类型</h4><ol>
+<h3 id="1-数据类型和变量"><a href="#1-数据类型和变量" class="headerlink" title="1.数据类型和变量"></a>1.数据类型和变量</h3><h4 id="1-1-数据类型"><a href="#1-1-数据类型" class="headerlink" title="1.1 数据类型"></a>1.1 数据类型</h4><ul>
 <li>整数（普通整数：-2 147 483 648 ～ 2 147 483 647 长整数和普通整数可以混用）</li>
+</ul>
+<ol>
 <li>浮点数</li>
 <li>字符串：在最新的 Python 3 版本中，字符串是以 Unicode 编码的，不可变对象</li>
 <li>布尔值</li>
-<li><p>空值：空值是 Python 里一个特殊的值，用None表示。None不能理解为0，因为0是有意义的，而None     是一个特殊的空值。</p>
-</li>
-<li><p>列表：list 是一种有序的集合，可以随时添加和删除其中的元素，元素的数据类型也可以不同，也可以是另一个 list。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">classmates = [<span class="string">'Michael'</span>, <span class="string">'Bob'</span>, <span class="string">'Tracy'</span>]</div></pre></td></tr></table></figure>
-</li>
+<li>空值：空值是 Python 里一个特殊的值，用None表示。None不能理解为0，因为0是有意义的，而None     是一个特殊的空值。</li>
 </ol>
+<ul>
+<li><p>列表：list 是一种有序的集合，可以随时添加和删除其中的元素，元素的数据类型也可以不同，也可以是另一个 list。</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">classmates = [<span class="string">'Michael'</span>, <span class="string">'Bob'</span>, <span class="string">'Tracy'</span>]</div></pre></td></tr></table></figure>
+</li>
+</ul>
 <p>   直接获取最后一个元素：</p>
 <pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">classmates[<span class="number">-1</span>]</div></pre></td></tr></table></figure>
 </code></pre><p>   追加元素到末尾：</p>
@@ -86,12 +89,12 @@
    <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">classmates.pop()</div></pre></td></tr></table></figure>
 <p>   要删除指定位置的元素，用pop(i)方法，其中i是索引位置：</p>
    <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">classmates.pop(<span class="number">1</span>)</div></pre></td></tr></table></figure>
-<ol>
+<ul>
 <li>tuple：元祖</li>
-<li><p>字典:<br>dict 全称 dictionary，在其他语言中也称为 map，使用键 - 值（key-value）存储，具有极快的查找速度。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>d = &#123;<span class="string">'Michael'</span>: <span class="number">95</span>, <span class="string">'Bob'</span>: <span class="number">75</span>, <span class="string">'Tracy'</span>: <span class="number">85</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>d[<span class="string">'Michael'</span>]</div><div class="line"><span class="number">95</span></div></pre></td></tr></table></figure>
+<li><p>字典:<br> dict 全称 dictionary，在其他语言中也称为 map，使用键 - 值（key-value）存储，具有极快的查找速度。</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>d = &#123;<span class="string">'Michael'</span>: <span class="number">95</span>, <span class="string">'Bob'</span>: <span class="number">75</span>, <span class="string">'Tracy'</span>: <span class="number">85</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>d[<span class="string">'Michael'</span>]</div><div class="line"><span class="number">95</span></div></pre></td></tr></table></figure>
 </li>
-</ol>
+</ul>
 <p>   由于一个 key 只能对应一个 value，所以，多次对一个 key 放入 value，后面的值会把前面的值冲掉。</p>
 <p>   要避免 key 不存在的错误，有两种办法，一是通过in判断 key 是否存在：</p>
    <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'Thomas'</span> <span class="keyword">in</span> d</div></pre></td></tr></table></figure>
@@ -99,18 +102,18 @@
    <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">d.get(<span class="string">'Thomas'</span>)</div><div class="line">d.get(<span class="string">'Thomas'</span>, <span class="number">-1</span>)</div><div class="line"><span class="number">-1</span></div></pre></td></tr></table></figure>
 <p>   要删除一个 key，用pop(key)方法，对应的 value 也会从 dict 中删除</p>
 <p>   dict 可以用在需要高速查找的很多地方，在 Python 代码中几乎无处不在，正确使用 dict 非常重要，需要牢记的第一条就是 dict 的 key 必须是不可变对象。</p>
-<ol>
+<ul>
 <li><p>set</p>
-<p>set 和 dict 类似，也是一组 key 的集合，但不存储 value。由于 key 不能重复，所以，在 set 中，没有重复的 key。</p>
-<p>通过add(key)方法可以添加元素到 set 中，可以重复添加，但不会有效果</p>
-<p>通过remove(key)方法可以删除元素</p>
-<p>set 可以看成数学意义上的无序和无重复元素的集合，因此，两个 set 可以做数学意义上的交集、并集等操作：</p>
+<p> set 和 dict 类似，也是一组 key 的集合，但不存储 value。由于 key 不能重复，所以，在 set 中，没有重复的 key。</p>
+<p> 通过add(key)方法可以添加元素到 set 中，可以重复添加，但不会有效果</p>
+<p> 通过remove(key)方法可以删除元素</p>
+<p> set 可以看成数学意义上的无序和无重复元素的集合，因此，两个 set 可以做数学意义上的交集、并集等操作：</p>
 </li>
-</ol>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>s1 = set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>s2 = set([<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>s1 &amp; s2</div><div class="line">&#123;<span class="number">2</span>, <span class="number">3</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>s1 | s2</div><div class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;</div></pre></td></tr></table></figure>
-<ol>
+<ul>
 <li>自定义数据类型</li>
-</ol>
+</ul>
 <h4 id="1-2-变量"><a href="#1-2-变量" class="headerlink" title="1.2 变量"></a>1.2 变量</h4><p>没什么可说的</p>
 <h4 id="1-3-常量"><a href="#1-3-常量" class="headerlink" title="1.3 常量"></a>1.3 常量</h4><p>所谓常量就是不能变的变量，比如常用的数学常数π就是一个常量。在 Python 中，通常用全部大写的变量名表示常量：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PI = <span class="number">3.14159265359</span></div></pre></td></tr></table></figure>
