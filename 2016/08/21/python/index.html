@@ -143,7 +143,12 @@
 <h3 id="3-2-加"><a href="#3-2-加" class="headerlink" title="3.2 加"></a>3.2 加</h3><p>相同类型序列可以相加</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>] + [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</div><div class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</div></pre></td></tr></table></figure>
 <h3 id="3-3-乘"><a href="#3-3-乘" class="headerlink" title="3.3 乘"></a>3.3 乘</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;[<span class="number">42</span>] * <span class="number">3</span></div><div class="line">[<span class="number">42</span>，<span class="number">42</span>，<span class="number">42</span>]</div><div class="line">&gt;&gt;&gt;‘python’ * <span class="number">3</span></div><div class="line">‘pythonpythonpython’</div></pre></td></tr></table></figure>
-<h3 id="3-4-索引／检查成员资格／计算长度／最大／最小"><a href="#3-4-索引／检查成员资格／计算长度／最大／最小" class="headerlink" title="3.4 索引／检查成员资格／计算长度／最大／最小"></a>3.4 索引／检查成员资格／计算长度／最大／最小</h3><p>成员资格 in<br>计算长度 len()<br>最大 max()<br>最小 min(）</p>
+<h3 id="3-4-索引／检查成员资格／计算长度／最大／最小"><a href="#3-4-索引／检查成员资格／计算长度／最大／最小" class="headerlink" title="3.4 索引／检查成员资格／计算长度／最大／最小"></a>3.4 索引／检查成员资格／计算长度／最大／最小</h3><ul>
+<li>成员资格 in：检查一个值是否在序列（或其他容器）中，对字符串是特例，可以查找子字符串。</li>
+<li>计算长度 len()</li>
+<li>最大 max()</li>
+<li>最小 min(）</li>
+</ul>
 <hr>
 <p>什么是数据结构，什么是数据类型</p>
 <p>int char float double 这些是 数据类型 ，类比作原子，他们间的不同就是元素种类的不同，只涉及自身的不同，比如两种原子内的质子中子数不同，是一种内在属性。</p>
@@ -166,7 +171,38 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;numbers = [<span class="number">1</span>,<span class="number">5</span>]</div><div class="line">&gt;&gt;&gt;numbers[<span class="number">1</span>:<span class="number">1</span>] = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line">&gt;&gt;&gt;numbers</div><div class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h4 id="3-5-3-列表方法"><a href="#3-5-3-列表方法" class="headerlink" title="3.5.3 列表方法"></a>3.5.3 列表方法</h4><h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ol>
+<h4 id="3-5-3-列表方法"><a href="#3-5-3-列表方法" class="headerlink" title="3.5.3 列表方法"></a>3.5.3 列表方法</h4><ul>
+<li>append() 在末尾追加</li>
+<li>count() 统计某个元素在列表中出现的次数</li>
+<li><p>extend() 在末尾追加另一个序列中的多个值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div><div class="line">&gt;&gt;&gt;b = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</div><div class="line">&gt;&gt;&gt;a.extend(b)</div><div class="line">&gt;&gt;&gt;a</div><div class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div><div class="line">&gt;&gt;&gt;b = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</div><div class="line">&gt;&gt;&gt;a + b</div><div class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</div><div class="line">&gt;&gt;&gt;a</div><div class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>index()</li>
+<li>insert(位置，插入内容)</li>
+<li><p>pop() 移除列表中的最后一个元素并返回该元素的值</p>
+<p>pop方法是唯一一个既能修改列表又返回元素值(除了None)的列表方法<br>入栈，使用append<br>出栈，使用pop</p>
+</li>
+<li><p>remove() 移除列表中某个值的第一个匹配项，修改了列表但没有返回值</p>
+</li>
+<li>reverse() 反向，改变了列表但不返回值</li>
+<li>sort() 排序[高级排序]</li>
+</ul>
+<h2 id="3-字符串"><a href="#3-字符串" class="headerlink" title="3. 字符串"></a>3. 字符串</h2><h3 id="字符串方法"><a href="#字符串方法" class="headerlink" title="字符串方法"></a>字符串方法</h3><ul>
+<li>find() 查找子串，返回子串所在位置的最左端索引</li>
+<li>join() </li>
+<li>lower()</li>
+<li>replace()</li>
+<li>split()</li>
+<li>translate</li>
+</ul>
+<h2 id="杂七杂八"><a href="#杂七杂八" class="headerlink" title="杂七杂八"></a>杂七杂八</h2><h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><p>对不同类的对象使用相同的操作，让用户对于不知道什么类（对象类型）的对象进行方法调用。</p>
+<p>+</p>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>封装是可以不用关心对象是如何构建的而直接进行使用，对外部世界隐藏工作细节</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>以通用的类为基础建立专门的类对象</p>
+<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ol>
 <li><a href="http://www.liaoxuefeng.com/" target="_blank" rel="external">廖雪峰的官方网站</a></li>
 <li><a href="https://www.zhihu.com/question/21165020/answer/19456139" target="_blank" rel="external">知乎——数据结构与数据类型</a></li>
 <li></li>
