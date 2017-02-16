@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>编程之法读书笔记第一章——数据结构——数组 | Jane&#39;s blog</title>
+  <title>leetcode第三部分 | Jane&#39;s blog</title>
   <meta name="author" content="spy19930412">
   
   <meta name="description" content="sometimes ever sometimes never">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="编程之法读书笔记第一章——数据结构——数组"/>
+  <meta property="og:title" content="leetcode第三部分"/>
   <meta property="og:site_name" content="Jane&#39;s blog"/>
 
   
@@ -53,36 +53,51 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-02-02T02:07:46.000Z"><a href="/2017/02/02/Programming0102/">2017-02-02</a></time>
+        <time datetime="2017-02-14T13:29:06.000Z"><a href="/2017/02/14/leetcode3/">2017-02-14</a></time>
       
       
   
-    <h1 class="title">编程之法读书笔记第一章——数据结构——数组</h1>
+    <h1 class="title">leetcode第三部分</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>导读写得比正文正经多了</p>
+        <p>今天我的心情非常不爽</p>
 <a id="more"></a>
-<p><a href="https://www.gitbook.com/book/wizardforcel/the-art-of-programming-by-july/details" target="_blank" rel="external">《编程之法：面试和算法心得》</a></p>
-<h2 id="第一部分-数据结构"><a href="#第一部分-数据结构" class="headerlink" title="第一部分 数据结构"></a>第一部分 数据结构</h2><h3 id="第二章-数组"><a href="#第二章-数组" class="headerlink" title="第二章 数组"></a>第二章 数组</h3><p>笔试和面试中，除了字符串，另一类出现频率极高的问题便是与数组相关的问题。在阅读完第 1 章和本第二章后，读者会慢慢了解到解决面试编程题的有几种常用思路。首先一般考虑 “万能的” 暴力穷举（递归、回溯），如求 n 个数的全排列或八皇后（N 皇后问题）。但因为穷举时间复杂度通常过高，所以需要考虑更好的方法，如分治法（通过分而治之，然后归并），以及空间换时间（如活用哈希表）。<br>此外，选择合适的数据结构可以显著提升效率，如寻找最小的 k 个数中，用堆代替数组。<br>再有，如果题目允许排序，则可以考虑排序。比如，寻找和为定值的两个数中，先排序，然后用前后两个指针往中间扫。而如果如果已经排好序了（如杨氏矩阵查找中），则想想有无必要二分。但是，如果题目不允许排序呢？这个时候，我们可以考虑不改变数列顺序的贪心算法（如最小生成树 Prim、Kruskal 及最短路 dijkstra），或动态规划（如 01 背包问题，每一步都在决策）。<br>最后，注意细节处理，不要忽略边界条件，如字符串转换成整数。</p>
-<h3 id="2-1-寻找最小的-k-个数"><a href="#2-1-寻找最小的-k-个数" class="headerlink" title="2.1 寻找最小的 k 个数"></a>2.1 寻找最小的 k 个数</h3><h4 id="排序-然后遍历"><a href="#排序-然后遍历" class="headerlink" title="排序,然后遍历"></a>排序,然后遍历</h4><p>O（n <em> log n)+O(k)=O（n </em> log n）</p>
-<h4 id="选择或交换排序"><a href="#选择或交换排序" class="headerlink" title="选择或交换排序"></a>选择或交换排序</h4><p>1、遍历 n 个数，把最先遍历到的 k 个数存入到大小为 k 的数组中，假设它们即是最小的 k 个数； </p>
-<p>2、对这 k 个数，利用选择或交换排序找到这 k 个元素中的最大值 kmax（找最大值需要遍历这 k 个数，时间复杂度为  O（k））；</p>
-<p>3、继续遍历剩余 n-k 个数。假设每一次遍历到的新的元素的值为 x，把 x 与 kmax 比较：如果  x &lt; kmax  ，用 x 替换 kmax，并回到第二步重新找出 k 个元素的数组中最大元素 kmax‘；如果  x &gt;= kmax  ，则继续遍历不更新数组。</p>
-<p>每次遍历，更新或不更新数组的所用的时间为  O（k）  或  O（0）  。故整趟下来，时间复杂度为  n <em> O（k）=O（n</em>k）</p>
-<p><strong><em>我其实没懂</em></strong></p>
-<h3 id="2-2-寻找和为定值的两个数"><a href="#2-2-寻找和为定值的两个数" class="headerlink" title="2.2 寻找和为定值的两个数"></a>2.2 寻找和为定值的两个数</h3><h4 id="穷举-O-N-2"><a href="#穷举-O-N-2" class="headerlink" title="穷举 O(N^2)"></a>穷举 O(N^2)</h4><h4 id="解法总结"><a href="#解法总结" class="headerlink" title="解法总结"></a>解法总结</h4><p>1、二分（若无序，先排序后二分），时间复杂度总为 O(N log N)，空间复杂度为 O（1）；<br>2、扫描一遍 X-S[i] 映射到一个数组或构造 hash 表，时间复杂度为 O(N)，空间复杂度为 O(N)；<br>3、两个指针两端扫描（若无序，先排序后扫描），时间复杂度最后为：有序 O(N)，无序 O(N log N + N)=O(N log N)，空间复杂度都为 O(1)。</p>
-<h3 id="2-4-最大连续子数组和"><a href="#2-4-最大连续子数组和" class="headerlink" title="2.4 最大连续子数组和"></a>2.4 最大连续子数组和</h3><h4 id="暴力解法"><a href="#暴力解法" class="headerlink" title="暴力解法"></a>暴力解法</h4><p><strong>我其实连三层循环都没看懂</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">int MaxSubArray(int* A, int n)</div><div class="line">&#123;</div><div class="line">    int maxSum = a[0];  //全负情况，返回最大负数</div><div class="line">    int currSum = 0;</div><div class="line">    for (int i = 0; i &lt; n; i++)</div><div class="line">    &#123;</div><div class="line">        for (int j = i; j &lt; n; j++)</div><div class="line">        &#123;</div><div class="line">            for (int k = i; k &lt;= j; k++)</div><div class="line">            &#123;</div><div class="line">                currSum += A[k];</div><div class="line">            &#125;</div><div class="line">            if (currSum &gt; maxSum)</div><div class="line">                maxSum = currSum;</div><div class="line"></div><div class="line">            currSum = 0; //这里要记得清零，否则的话sum最终存放的是所有子数组的和。</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return maxSum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>太tm难了我受不了了…</p>
-
+<p>不是因为今天过节，而是因为我拒绝了谷歌的现场笔试。</p>
+<p>我知道这个机会非常来之不易，本来可以去瞻仰一下谷歌的工作氛围的，作为一个程序员，我是多么渴望进谷歌看看。但是500道的leetcode，我才做了不到一百道，这简直是在扯犊子，所以被迫临时取消了。</p>
+<p>唉，机会总是留给有准备的人，像我这种，一开始就在劣势的弱势群体，好期待一个offer啊。</p>
+<p>找工作真的好难。</p>
+<p>总结一下这几天看的东西</p>
+<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><p>读到研二递归还没弄明白其实挺难过的</p>
+<p><a href="http://chenqx.github.io/2014/09/29/Algorithm-Recursive-Programming/" target="_blank" rel="external">递归算法详解</a></p>
+<p>汉诺塔问题里的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Hanoi</span> <span class="params">(<span class="keyword">int</span> n, <span class="keyword">char</span> A, <span class="keyword">char</span> B, <span class="keyword">char</span> C)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span> (n==<span class="number">1</span>)&#123; <span class="comment">//end condition</span></div><div class="line">        move(A,B);<span class="comment">//‘move’ can be defined to be a print function</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        Hanoi(n-<span class="number">1</span>,A,C,B);<span class="comment">//move sub [n-1] pans from A to B</span></div><div class="line">        move(A,C);<span class="comment">//move the bottom(max) pan to C</span></div><div class="line">        Hanoi(n-<span class="number">1</span>,B,A,C);<span class="comment">//move sub [n-1] pans from B to C</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>为什么种子值只有move(A,B)呢</p>
+<p>因为A，B是两个变量不是盘子A和盘子B呀大傻子</p>
+<p>递归的核心是从父节点向子节点迁移</p>
+<ul>
+<li>定义函数功能</li>
+<li>结束条环 </li>
+<li>结束过程</li>
+</ul>
+<h2 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h2><h2 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h2><h2 id="一些杂七杂八的题"><a href="#一些杂七杂八的题" class="headerlink" title="一些杂七杂八的题"></a>一些杂七杂八的题</h2><h4 id="53-Maximum-Subarray"><a href="#53-Maximum-Subarray" class="headerlink" title="53. Maximum Subarray"></a><a href="https://leetcode.com/problems/maximum-subarray/" target="_blank" rel="external">53. Maximum Subarray</a></h4><p>Find the contiguous subarray within an array (containing at least one number) which has the largest sum.</p>
+<p>For example, given the array [-2,1,-3,4,-1,2,1,-5,4],<br>the contiguous subarray [4,-1,2,1] has the largest sum = 6.</p>
+<p>求和最大的连续子数组</p>
+<p>滑动窗口</p>
+<p>属于一种 DP 问题。已知了前 k 个元素的最大子序列和为 maxSub（已经被记录下来了），以及一个临时和 sum，如果添加了第 k+1 这个元素，由于是连续子序列这个限制，所以如果 k+1 这个元素之前的和是小于 0 的，那么对于增大 k+1 这个元素从而去组成最大子序列是没有贡献的，所以可以把 sum 置 0。举个例子，-1， -2 ，4， -5， 7 这里假定 7 为第 k+1 个元素，那么很明显可以看出，之前的 sum = -5 + 4 =-1，那么这样对于 7 来说只会减少它，所以直接置 sum = 0， 0 + 7 才能得到正确的答案。再拓展这个数组， -1， -2， 4， -5， 7， 1 这里 1 之前的 sum = 7 &gt; 0，对于后面的 1 来组成最大子序列是有贡献的，所以 sum = 7 + 1 =8。再注意一点，只要 sum 不减到负数，中间出现小于 0 的元素是没关系的，sum 仍然可以继续累加。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSubArray</span><span class="params">(self, nums)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type nums: List[int]</div><div class="line">        :rtype: int</div><div class="line">        """</div><div class="line">        <span class="keyword">if</span> len(nums) == <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span></div><div class="line">        cursum = <span class="number">0</span></div><div class="line">        maxSum = nums[<span class="number">0</span>]</div><div class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums:</div><div class="line">            <span class="keyword">if</span> cursum &lt; <span class="number">0</span>:</div><div class="line">                cursum = <span class="number">0</span></div><div class="line">            cursum = cursum + num</div><div class="line">            maxSum = max(cursum,maxSum)</div><div class="line">        <span class="keyword">return</span> maxSum</div></pre></td></tr></table></figure>
       
     </div>
     <footer>
       
         
+  
+  <div class="categories">
+    <a href="/categories/leetcode/">leetcode</a>
+  </div>
+
         
   
   <div class="tags">
@@ -101,10 +116,8 @@
 
 <nav id="pagination" >
     
-    <a href="/2017/02/02/N_sum/" class="alignleft prev" >上一页</a>
     
-    
-    <a href="/2017/01/26/dpProblems/" class="alignright next" >下一页</a>
+    <a href="/2017/02/10/Programming0601/" class="alignright next" >下一页</a>
     
     <div class="clearfix"></div>
 </nav>
