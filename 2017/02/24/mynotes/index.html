@@ -63,8 +63,17 @@
     </header>
     <div class="entry">
       
-        <p>N_sum问题</p>
+        <p>一个小小的错题本</p>
 <a id="more"></a>
+<h4 id="关于闭包"><a href="#关于闭包" class="headerlink" title="关于闭包"></a>关于闭包</h4><p>1.在浏览器控制台执行以下代码，输入的结果是（）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">test</span></span>()&#123;</div><div class="line">	var n = 4399;</div><div class="line">	<span class="keyword">function</span> <span class="function"><span class="title">add</span></span>()&#123;</div><div class="line">	n++;</div><div class="line">	console.log(n);</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">return</span> &#123;n:n,add:add&#125;</div><div class="line">&#125;</div><div class="line">var result = <span class="built_in">test</span>();</div><div class="line">var result2 = <span class="built_in">test</span>();</div><div class="line">result.add();</div><div class="line">result.add();</div><div class="line">console.log(result.n)</div><div class="line">result2.add();</div></pre></td></tr></table></figure>
+<p>4400 4401 4399 4400</p>
+<p><a href="https://www.nowcoder.com/test/question/done?tid=6699891&amp;qid=56240#summary" target="_blank" rel="external">牛客网</a></p>
+<p>test 构成了一个闭包，result 跟 result2 各自有自己的 test 作用域，所以最后 result2.add() 结果是 4400<br>前两个没啥好说的，懵逼点在第三个，这里 {n：n} 是对变量 n 里的值进行缓存，而不是本身 n 这个指针变量，这样生成 add 的时候 n 指向的值是多少 {n：n} 里的值就是多少</p>
+<p>2.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">console.log(&apos;one&apos;);</div><div class="line">setTimeout(function()&#123;</div><div class="line">console.log(&apos;two&apos;);</div><div class="line">&#125;,0);</div><div class="line">console.log(&apos;three&apos;);</div></pre></td></tr></table></figure>
+<p>‘one’’three’’two’</p>
+
       
     </div>
     <footer>
