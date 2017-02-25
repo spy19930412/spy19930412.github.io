@@ -63,20 +63,29 @@
     </header>
     <div class="entry">
       
-        <p>###打开网页时发生了什么</p>
-<pre><code>*[原文链接](http://www.cnblogs.com/wenanry/archive/2010/02/25/1673368.html)*
+        <h3 id="打开网页时发生了什么"><a href="#打开网页时发生了什么" class="headerlink" title="打开网页时发生了什么"></a>打开网页时发生了什么</h3><pre><code>*[原文链接](http://www.cnblogs.com/wenanry/archive/2010/02/25/1673368.html)*
 </code></pre><a id="more"></a>
 <p>当输入一个url的时候会发生以下事情： </p>
-<p>####1.浏览器查找域名IP地址<br>1.DNS查找过程如下：<br>+浏览器缓存<br>+系统缓存<br>+路由器缓存<br>+ISP(Internet Service Provider,互联网服务提供商)缓存<br>+递归搜索 </p>
-<p>####2.浏览器给Web服务器发送Http请求<br>像facebook这样的动态页面，打开后在浏览器缓存中很快甚至马上到期，所以不能从中读取<br>所以，浏览器将向服务器发送一下请求给服务器：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">GET http://facebook.com/ HTTP/1.1</div><div class="line"> Accept: application/x-ms-application, image/jpeg, application/xaml+xml, [...]</div><div class="line"> User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; [...]</div><div class="line"> Accept-Encoding: gzip, deflate</div><div class="line"> Connection: Keep-Alive</div><div class="line"> Host: facebook.com</div><div class="line"> Cookie: datr=1265876274-[...]; locale=en_US; lsd=WW[...]; c_user=2101[...]</div></pre></td></tr></table></figure></p>
+<h4 id="1-浏览器查找域名IP地址"><a href="#1-浏览器查找域名IP地址" class="headerlink" title="1.浏览器查找域名IP地址"></a>1.浏览器查找域名IP地址</h4><ol>
+<li>DNS查找过程如下： </li>
+</ol>
+<ul>
+<li>浏览器缓存 </li>
+<li>系统缓存 </li>
+<li>路由器缓存 </li>
+<li>ISP(Internet Service Provider,互联网服务提供商)缓存 </li>
+<li>递归搜索 </li>
+</ul>
+<h4 id="2-浏览器给Web服务器发送Http请求"><a href="#2-浏览器给Web服务器发送Http请求" class="headerlink" title="2.浏览器给Web服务器发送Http请求"></a>2.浏览器给Web服务器发送Http请求</h4><p>像facebook这样的动态页面，打开后在浏览器缓存中很快甚至马上到期，所以不能从中读取<br>所以，浏览器将向服务器发送一下请求给服务器：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">GET http://facebook.com/ HTTP/1.1</div><div class="line"> Accept: application/x-ms-application, image/jpeg, application/xaml+xml, [...]</div><div class="line"> User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; [...]</div><div class="line"> Accept-Encoding: gzip, deflate</div><div class="line"> Connection: Keep-Alive</div><div class="line"> Host: facebook.com</div><div class="line"> Cookie: datr=1265876274-[...]; locale=en_US; lsd=WW[...]; c_user=2101[...]</div></pre></td></tr></table></figure></p>
 <p> 分析一下这个get请求：<br> +URL:定义了url<br> +User-Agent：浏览器自身定义<br> +Accept and Accept-Encoding：浏览器希望接受什么类型的响应<br> +Connection:要求服务器为了后边的请求不要关闭tcp连接<br> +cookies:请求中包含浏览器存储的该域名cookies.在不同页面请求中，cookies是与跟踪一个网站状态相匹配的键值。这样cookies会存储登陆用户名，服务器分配的密码和一些用户设置。cookies会以文本文档形式存储在客户机中，每次请求是发送给服务器。<br> 除了获取请求，还有一种是发送请求，它常在提交表单用到。发送请求通过URL传递其参数。发送请求在请求正文头之后发送其参数。</p>
-<pre><code>*1. get是从服务器上获取数据，post是向服务器传送数据。
- 2. get是把参数数据队列加到提交表单的ACTION属性所指的URL中，值和表单内各个字段一一对应，在URL中可以看到。post是通过HTTP post机制，将表单内各个字段与其内容放置在HTML HEADER内一起传送到ACTION属性所指的URL地址。用户看不到这个过程。
- 3. 对于get方式，服务器端用Request.QueryString获取变量的值，对于post方式，服务器端用Request.Form获取提交的数据。
- 4. get传送的数据量较小，不能大于2KB。post传送的数据量较大，一般被默认为不受限制。但理论上，IIS4中最大量为80KB，IIS5中为100KB。
- 5. get安全性非常低，post安全性较高。但是执行效率却比Post方法好。*
-</code></pre><p>  建议：<br>  1、get方式的安全性较Post方式要差些，包含机密信息的话，建议用Post数据提交方式；<br>  2、在做数据查询时，建议用Get方式；而在做数据添加、修改或删除时，建议用Post方式；</p>
-<p>####3.facebook服务的永久重定向响应<br>facebook服务器发给浏览器的的响应: </p>
+<pre><code>1. get是从服务器上获取数据，post是向服务器传送数据。
+2. get是把参数数据队列加到提交表单的ACTION属性所指的URL中，值和表单内各个字段一一对应，在URL中可以看到。post是通过HTTP post机制，将表单内各个字段与其内容放置在HTML HEADER内一起传送到ACTION属性所指的URL地址。用户看不到这个过程。
+3. 对于get方式，服务器端用Request.QueryString获取变量的值，对于post方式，服务器端用Request.Form获取提交的数据。
+4. get传送的数据量较小，不能大于2KB。post传送的数据量较大，一般被默认为不受限制。但理论上，IIS4中最大量为80KB，IIS5中为100KB。
+5. get安全性非常低，post安全性较高。但是执行效率却比Post方法好。*
+</code></pre><p>  建议：</p>
+<p>  1、get方式的安全性较Post方式要差些，包含机密信息的话，建议用Post数据提交方式；<br>  2、在做数据查询时，建议用Get方式；而在做数据添加、修改或删除时，建议用Post方式；</p>
+<p>####3. facebook服务的永久重定向响应<br>facebook服务器发给浏览器的的响应: </p>
 <pre><code class="bash">HTTP/1.1 301 Moved Permanently
  Cache-Control: private, no-store, no-cache, must-revalidate, post-check=0,
  pre-check=0
@@ -92,8 +101,14 @@
  Content-Length: 0
 </code></pre>
 <p> 服务器给浏览器响应一个301永久重定向响应，这样浏览器会访问”<a href="http://wwww.facebook.com/&quot;,而非&quot;http://facebook.com/" target="_blank" rel="external">http://wwww.facebook.com/&quot;,而非&quot;http://facebook.com/</a>“.</p>
-<p> 为什么服务器一定要重定向而不是直接发回用户想看的网页内容呢？<br> +搜索引擎排名<br>  如果一个页面有两个地址，比如<a href="http://www.igoro.com/" target="_blank" rel="external">http://www.igoro.com/</a> 和<a href="http://igoro.com/" target="_blank" rel="external">http://igoro.com/</a> , 搜索引擎会以为它们是两个网站，结果造成每一个的搜索链接都减少从而降低排名。而搜索引擎知道301永久重定向是什么意思，这样就会把访问带www的和不带www的地址归到同一个网站排名下。<br> +缓存友好性<br>  当一个页面有好几个名字时，它可能在缓存里出现好几次。</p>
-<p>  ####4.浏览器跟踪重定向地址<br>  现在，浏览器已知”<a href="http://www.facebook.com/" target="_blank" rel="external">http://www.facebook.com/</a> “才是要访问的正确地址，所以它会发送另一个获取请求：</p>
+<p> 为什么服务器一定要重定向而不是直接发回用户想看的网页内容呢？</p>
+<ul>
+<li><p>搜索引擎排名<br>如果一个页面有两个地址，比如<a href="http://www.igoro.com/" target="_blank" rel="external">http://www.igoro.com/</a> 和<a href="http://igoro.com/" target="_blank" rel="external">http://igoro.com/</a> , 搜索引擎会以为它们是两个网站，结果造成每一个的搜索链接都减少从而降低排名。而搜索引擎知道301永久重定向是什么意思，这样就会把访问带www的和不带www的地址归到同一个网站排名下。</p>
+</li>
+<li><p>缓存友好性<br>当一个页面有好几个名字时，它可能在缓存里出现好几次。</p>
+</li>
+</ul>
+<h4 id="4-浏览器跟踪重定向地址"><a href="#4-浏览器跟踪重定向地址" class="headerlink" title="4.浏览器跟踪重定向地址"></a>4.浏览器跟踪重定向地址</h4><p>  现在，浏览器已知”<a href="http://www.facebook.com/" target="_blank" rel="external">http://www.facebook.com/</a> “才是要访问的正确地址，所以它会发送另一个获取请求：</p>
 <pre><code class="bash"> GET http://www.facebook.com/ HTTP/1.1
 Accept: application/x-ms-application, image/jpeg, application/xaml+xml, [...]
 Accept-Language: en-US
@@ -104,10 +119,16 @@ Cookie: lsd=XW[...]; c_user=21[...]; x-referer=[...]
 Host: www.facebook.com
 </code></pre>
 <p>  与之前请求的意义相同</p>
-<p>  ####5.服务器处理请求<br>  服务器接收到获取请求，然后处理并返回一个响应<br>  +web服务器软件<br>  web服务器软件(IIS或apache等)接收到http请求，然后确定执行什么请求处理来处理它。请求处理就是一个能够读懂请求并且能生成html来进行响应的程序(像asp.net,php,ruby…)</p>
-<p>  eg.需求处理可以以映射网站地址结构的文件层次存储，像<a href="http://example.com/folder1/page1.aspx" target="_blank" rel="external">http://example.com/folder1/page1.aspx</a> 这个地址会映射/httpdocs/folder1/page1.aspx 这个文件。web服务器软件可以设置成为地址人工的对应请求处理，这样page1.aspx的发布地址就可以是<a href="http://example.com/folder1/page1" target="_blank" rel="external">http://example.com/folder1/page1</a>.<br>  +请求处理<br>  请求处理阅读请求以及它的参数和cookies，它会读取也可能更新一些数据，并讲数据存储在服务器上。然后需求处理会生成一个html响应。</p>
-<p>  ####6.服务器发回一个html响应</p>
-<pre><code class="bash"> HTTP/1.1 200 OK
+<h4 id="5-服务器处理请求"><a href="#5-服务器处理请求" class="headerlink" title="5.服务器处理请求"></a>5.服务器处理请求</h4><p>  服务器接收到获取请求，然后处理并返回一个响应 </p>
+<ul>
+<li>web服务器软件</li>
+</ul>
+<p>  web服务器软件(IIS或apache等)接收到http请求，然后确定执行什么请求处理来处理它。请求处理就是一个能够读懂请求并且能生成html来进行响应的程序(像asp.net,php,ruby…)</p>
+<p>  eg.需求处理可以以映射网站地址结构的文件层次存储，像<a href="http://example.com/folder1/page1.aspx" target="_blank" rel="external">http://example.com/folder1/page1.aspx</a> 这个地址会映射/httpdocs/folder1/page1.aspx 这个文件。web服务器软件可以设置成为地址人工的对应请求处理，这样page1.aspx的发布地址就可以是<a href="http://example.com/folder1/page1" target="_blank" rel="external">http://example.com/folder1/page1</a>.</p>
+<ul>
+<li>请求处理<br>请求处理阅读请求以及它的参数和cookies，它会读取也可能更新一些数据，并讲数据存储在服务器上。然后需求处理会生成一个html响应。</li>
+</ul>
+<h4 id="6-服务器发回一个html响应"><a href="#6-服务器发回一个html响应" class="headerlink" title="6.服务器发回一个html响应"></a>6.服务器发回一个html响应</h4><pre><code class="bash">HTTP/1.1 200 OK
 Cache-Control: private, no-store, no-cache, must-revalidate, post-check=0,
 pre-check=0
 Expires: Sat, 01 Jan 2000 00:00:00 GMT
@@ -133,12 +154,12 @@ Date: Fri, 12 Feb 2010 09:05:55 GMT
 </code></pre>
 <p>关于压缩，头信息说明了是否缓存这个页面，如果缓存的话如何去做，有什么cookies要去设置（前面这个响应里没有这点）和隐私信息等等。</p>
 <p>请注意报头中把Content-type设置为“text/html”。报头让浏览器将该响应内容以HTML形式呈现，而不是以文件形式下载它。浏览器会根据报头信息决定如何解释该响应，不过同时也会考虑像URL扩展内容等其他因素。</p>
-<p>####7.浏览器开始显示html<br>在浏览器没有完整接受全部html文档时，它就已经开始显示这个页面了</p>
-<p>####8.浏览器发送获取嵌入在HTML中的对象<br>在浏览器显示HTML时，它会注意到需要获取其他地址内容的标签。这时，浏览器会发送一个获取请求来重新获得这些文件。</p>
+<h4 id="7-浏览器开始显示html"><a href="#7-浏览器开始显示html" class="headerlink" title="7.浏览器开始显示html"></a>7.浏览器开始显示html</h4><p>在浏览器没有完整接受全部html文档时，它就已经开始显示这个页面了</p>
+<h4 id="8-浏览器发送获取嵌入在HTML中的对象"><a href="#8-浏览器发送获取嵌入在HTML中的对象" class="headerlink" title="8.浏览器发送获取嵌入在HTML中的对象"></a>8.浏览器发送获取嵌入在HTML中的对象</h4><p>在浏览器显示HTML时，它会注意到需要获取其他地址内容的标签。这时，浏览器会发送一个获取请求来重新获得这些文件。</p>
 <p>下面是几个我们访问facebook.com时需要重获取的几个URL：</p>
 <p>图片<br><a href="http://static.ak.fbcdn.net/rsrc.php/z12E0/hash/8q2anwu7.gif" target="_blank" rel="external">http://static.ak.fbcdn.net/rsrc.php/z12E0/hash/8q2anwu7.gif</a><br>…<br>CSS 式样表<br><a href="http://static.ak.fbcdn.net/rsrc.php/z448Z/hash/2plh8s4n.css" target="_blank" rel="external">http://static.ak.fbcdn.net/rsrc.php/z448Z/hash/2plh8s4n.css</a><br>…<br>JavaScript 文件<br><a href="http://static.ak.fbcdn.net/rsrc.php/zEMOA/hash/c8yzb6ub.js" target="_blank" rel="external">http://static.ak.fbcdn.net/rsrc.php/zEMOA/hash/c8yzb6ub.js</a><br>…<br>这些地址都要经历一个和HTML读取类似的过程。所以浏览器会在DNS中查找这些域名，发送请求，重定向等等…</p>
 <p>但 不像动态页面那样，静态文件会允许浏览器对其进行缓存。有的文件可能会不需要与服务器通讯，而从缓存中直接读取。服务器的响应中包含了静态文件保存的期限 信息，所以浏览器知道要把它们缓存多长时间。还有，每个响应都可能包含像版本号一样工作的ETag头（被请求变量的实体值），如果浏览器观察到文件的版本 ETag信息已经存在，就马上停止这个文件的传输。</p>
-<p>####9.浏览器发送异步（AJAX）请求<br>以 Facebook聊天功能为例，它会持续与服务器保持联系来及时更新你那些亮亮灰灰的好友状态。为了更新这些头像亮着的好友状态，在浏览器中执行的 JavaScript代码会给服务器发送异步请求。这个异步请求发送给特定的地址，它是一个按照程式构造的获取或发送请求。还是在Facebook这个例 子中，客户端发送给<a href="http://www.facebook.com/ajax/chat/buddy_list.php" target="_blank" rel="external">http://www.facebook.com/ajax/chat/buddy_list.php</a> 一个发布请求来获取你好友里哪个在线的状态信息。</p>
+<h4 id="9-浏览器发送异步（AJAX）请求"><a href="#9-浏览器发送异步（AJAX）请求" class="headerlink" title="9.浏览器发送异步（AJAX）请求"></a>9.浏览器发送异步（AJAX）请求</h4><p>以 Facebook聊天功能为例，它会持续与服务器保持联系来及时更新你那些亮亮灰灰的好友状态。为了更新这些头像亮着的好友状态，在浏览器中执行的 JavaScript代码会给服务器发送异步请求。这个异步请求发送给特定的地址，它是一个按照程式构造的获取或发送请求。还是在Facebook这个例 子中，客户端发送给<a href="http://www.facebook.com/ajax/chat/buddy_list.php" target="_blank" rel="external">http://www.facebook.com/ajax/chat/buddy_list.php</a> 一个发布请求来获取你好友里哪个在线的状态信息。</p>
 <p>这些情况发生时长轮询是个减轻服务器负载挺有趣的技术。如果当被轮询时服务器没有新消息，它就不理这个客户端。而当尚未超时的情况下收到了该客户的新消息，服务器就会找到未完成的请求，把新消息做为响应返回给客户端。</p>
 
       
