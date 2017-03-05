@@ -73,6 +73,9 @@
 <p>2.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">console.log(&apos;one&apos;);</div><div class="line">setTimeout(function()&#123;</div><div class="line">console.log(&apos;two&apos;);</div><div class="line">&#125;,0);</div><div class="line">console.log(&apos;three&apos;);</div></pre></td></tr></table></figure>
 <p>‘one’’three’’two’</p>
+<p>3.</p>
+<p>执行say667()后,say667()闭包内部变量会存在,而闭包内部函数的内部变量不会存在.使得Javascript的垃圾回收机制GC不会收回say667()所占用的资源，因为say667()的内部函数的执行需要依赖say667()中的变量。这是对闭包作用的非常直白的描述.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">  function say667() &#123;</div><div class="line">    // Local variable that ends up within closure</div><div class="line">    var num = 666;</div><div class="line">    var sayAlert = function() &#123; alert(num); &#125;</div><div class="line">    num++;</div><div class="line">    return sayAlert;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> var sayAlert = say667();</div><div class="line"> sayAlert()//执行结果应该弹出的667</div></pre></td></tr></table></figure>
 <h3 id="css布局题"><a href="#css布局题" class="headerlink" title="css布局题"></a>css布局题</h3><h4 id="双飞翼和圣杯"><a href="#双飞翼和圣杯" class="headerlink" title="双飞翼和圣杯"></a>双飞翼和圣杯</h4><p><img src="/images/css/shuangfeiyiandshengbei.png" alt=""></p>
 <p>圣杯布局和双飞翼布局基本上是一致的，都是两边固定宽度，中间自适应的三栏布局，其中，中间栏放到文档流前面，保证先行渲染。解决方案大体相同，都是三栏全部 float:left 浮动，区别在于解决中间栏 div 的内容不被遮挡上，圣杯布局是中间栏在添加相对定位，并配合 left 和 right 属性，效果上表现为三栏是单独分开的（如果可以看到空隙的话），而双飞翼布局是在中间栏的 div 中嵌套一个 div，内容写在嵌套的 div 里，然后对嵌套的 div 设置 margin-left 和 margin-right，效果上表现为左右两栏在中间栏的上面，中间栏还是 100% 宽度，只不过中间栏的内容通过 margin 的值显示在中间。</p>
 <ol>
@@ -98,6 +101,51 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;meta charset=&quot;utf-8&quot;&gt;</div><div class="line">&lt;title&gt;JS Bin&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;div class=&quot;wrap&quot;&gt;</div><div class="line">&lt;div class=&quot;left&quot;&gt;我是一个自适应宽度的左边输入框,我支持自动换行不会被右边导航栏所覆盖内容。&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;div class=&quot;right&quot;&gt;我是固定右边导航栏&lt;/div&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
 <p>css</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">body&#123;</div><div class="line">    width:500px;</div><div class="line">    margin:10px;</div><div class="line">    border:dashed 1px orange;</div><div class="line">    overflow:hidden;  </div><div class="line">&#125;</div><div class="line">.wrap&#123;</div><div class="line">  width: 100%;</div><div class="line">  float: left;</div><div class="line">&#125;</div><div class="line">  .left&#123;</div><div class="line">  background: #FCD975;</div><div class="line">  height: 400px;</div><div class="line">  margin-right: 100px;</div><div class="line">&#125;</div><div class="line">  .right&#123;</div><div class="line">  background: #591804;</div><div class="line">  color: white;</div><div class="line">  width: 100px;</div><div class="line">  height: 400px;</div><div class="line">  float: left;</div><div class="line">  margin-left: -100px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="品字布局"><a href="#品字布局" class="headerlink" title="品字布局"></a>品字布局</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">&lt;!doctype html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</div><div class="line">    &lt;title&gt;品字布局&lt;/title&gt;</div><div class="line">    &lt;style&gt;</div><div class="line">    * &#123;</div><div class="line">        margin: 0;</div><div class="line">        padding: 0;</div><div class="line">    &#125;</div><div class="line">    div &#123;</div><div class="line">        width: 100px;</div><div class="line">        height: 100px;</div><div class="line">        background: red;</div><div class="line">        font-size: 40px;</div><div class="line">        line-height: 100px;</div><div class="line">        color: #fff;</div><div class="line">        text-align: center;</div><div class="line">    &#125;</div><div class="line">    .div1 &#123;</div><div class="line">        margin: 50px auto 0;</div><div class="line">    &#125;</div><div class="line">    .div2 &#123;</div><div class="line">        background: green;</div><div class="line">        float: left;</div><div class="line">        margin-left: 50%;</div><div class="line">        position: relative;</div><div class="line">        left: -100px;</div><div class="line">    &#125;</div><div class="line">    .div3 &#123;</div><div class="line">        background: blue;</div><div class="line">        float: left;</div><div class="line">        position: relative;</div><div class="line">        left: -100px;</div><div class="line">    &#125;</div><div class="line">    &lt;/style&gt;</div><div class="line">&lt;/head&gt;</div><div class="line"></div><div class="line">&lt;body&gt;</div><div class="line">    &lt;div class=&quot;div1&quot;&gt;1&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;div2&quot;&gt;2&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;div3&quot;&gt;3&lt;/div&gt;</div><div class="line">&lt;/body&gt;</div><div class="line"></div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p><img src="/images/css/pinzijieguo.png" alt=""></p>
+<ul>
+<li>reference</li>
+</ul>
+<ol>
+<li><a href="http://js.jirengu.com/nom/2/edit?html,css,output" target="_blank" rel="external">三栏布局，两侧固定宽度，中间自适应</a></li>
+</ol>
+<ol>
+<li><a href="http://www.jianshu.com/p/04918672b8b0" target="_blank" rel="external">左边能够自适应宽度，右边固定</a></li>
+</ol>
+<ol>
+<li><a href="http://www.mamicode.com/info-detail-1080768.html" target="_blank" rel="external">圣杯布局和双飞翼布局的理解和区别</a></li>
+</ol>
+<p>这个讲的比较好</p>
+<ol>
+<li><a href="http://www.jianshu.com/p/28d0833426ad" target="_blank" rel="external">布局常用属性</a></li>
+</ol>
+<p>这个讲的非常好</p>
+<ol>
+<li><a href="https://github.com/AngusFu/blog/blob/5d63e76bd4a07514b8e641d7500de77c4dccc1b5/source/_posts/xease-campus-2014-note.md" target="_blank" rel="external">首尾高度固定、中间高度自适应的 DIV 布局</a></li>
+</ol>
+<h4 id="一些面经"><a href="#一些面经" class="headerlink" title="一些面经"></a>一些面经</h4><ul>
+<li><a href="http://blog.csdn.net/xiaowanzi0713/article/details/52325691" target="_blank" rel="external">css,html,js 区分大小写么</a></li>
+</ul>
+<p>html 不区分</p>
+<p>css</p>
+<ul>
+<li>id 名和 class 名是区分大小写的 </li>
+<li>选择器中，只有标签选择器不区分大小写 </li>
+<li>属性名和属性值是不区分大小写的</li>
+</ul>
+<p>js 区分</p>
+<ul>
+<li><p>iframe 有那些缺点？</p>
+<p> *iframe会阻塞主页面的Onload事件；</p>
+<p> *iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。<br> 使用iframe之前需要考虑这两个缺点。如果需要使用iframe，最好是通过javascript<br> 动态给iframe添加src属性值，这样可以可以绕开以上两个问题。</p>
+</li>
+<li><p>new 操作符具体干了什么</p>
+</li>
+</ul>
+<p>1、创建一个空对象，并且 this 变量引用该对象，同时还继承了该函数的原型</p>
+<p>2、属性和方法被加入到 this 引用的对象中</p>
+<p>3、新创建的对象由 this 所引用，并且最后隐式的返回 this</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var obj  = &#123;&#125;;</div><div class="line">obj.__proto__ = Base.prototype;</div><div class="line">Base.call(obj);</div></pre></td></tr></table></figure>
 
       
     </div>
