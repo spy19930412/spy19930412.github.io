@@ -114,7 +114,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">generateParenthesis</span><span class="params">(self, n)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type n: int</div><div class="line">        :rtype: List[str]</div><div class="line">        """</div><div class="line">        <span class="keyword">if</span> n == <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> []</div><div class="line">        res = []</div><div class="line">        self.helper(n, n, <span class="string">''</span>, res)</div><div class="line">        <span class="keyword">return</span> res</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper</span><span class="params">(self,l,r,item,res)</span>:</span></div><div class="line">        <span class="comment"># 只有在右括号比左括号少的时候才有必要继续</span></div><div class="line">        <span class="keyword">if</span> r &lt; l:</div><div class="line">            <span class="keyword">return</span></div><div class="line">        <span class="comment"># 左右括号都已用完,加入解集，返回</span></div><div class="line">        <span class="keyword">if</span> l == <span class="number">0</span> <span class="keyword">and</span> r == <span class="number">0</span>:</div><div class="line">            res.append(item)</div><div class="line">        <span class="comment"># 还有左括号可以用</span></div><div class="line">        <span class="keyword">if</span> l &gt; <span class="number">0</span>:</div><div class="line">            self.helper(l - <span class="number">1</span>,r,item+<span class="string">'('</span>,res)</div><div class="line">        <span class="comment"># 还有右括号可以用</span></div><div class="line">        <span class="keyword">if</span> r &gt; <span class="number">0</span>:</div><div class="line">            self.helper(l,r - <span class="number">1</span>,item+<span class="string">')'</span>,res)</div></pre></td></tr></table></figure>
 <p>这其实是一个卡特兰数</p>
 <p>我们可以来看一下<a href="http://www.tuicool.com/articles/IvyQry" target="_blank" rel="external">卡特兰数</a></p>
-<h2 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h2><h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><h4 id="477-Total-Hamming-Distance"><a href="#477-Total-Hamming-Distance" class="headerlink" title="477. Total Hamming Distance"></a><a href="https://leetcode.com/problems/total-hamming-distance/" target="_blank" rel="external">477. Total Hamming Distance</a></h4><p>The Hamming distance between two integers is the number of positions at which the corresponding bits are different.</p>
+<h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><h4 id="477-Total-Hamming-Distance"><a href="#477-Total-Hamming-Distance" class="headerlink" title="477. Total Hamming Distance"></a><a href="https://leetcode.com/problems/total-hamming-distance/" target="_blank" rel="external">477. Total Hamming Distance</a></h4><p>The Hamming distance between two integers is the number of positions at which the corresponding bits are different.</p>
 <p>Given two integers x and y, calculate the Hamming distance.</p>
 <p>Note:<br>0 ≤ x, y &lt; 231.</p>
 <p>Example:</p>
@@ -181,6 +181,17 @@
 </ol>
 <p>然后我们进一步分析，如果得到上面的第一第二种情况，我们在二进制下来看，不考虑进位的加，0+0=0， 0+1=1, 1+0=1， 1+1=0，这就是异或的运算规则，如果只考虑进位的加 0+0=0, 0+1=0, 1+0=0, 1+1=1，而这其实这就是与的运算，而第三步在将两者相加时，我们再递归调用这个算法，终止条件是当进位为 0 时，我们直接返回第一步的结果，参见代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">int add(int a, int b) &#123;</div><div class="line">    if (b == 0) return a;</div><div class="line">    int sum = a ^ b;</div><div class="line">    int carry = (a &amp; b) &lt;&lt; 1;</div><div class="line">    return add(sum, carry);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="http://blog.csdn.net/qq508618087/article/details/51789576" target="_blank" rel="external">参考链接</a></p>
+<p>举个例子: 11+5, 其二进制形式为 11: 1011, 5: 0101</p>
+<ol>
+<li><p>那么两个位置都为 1 的地方就需要进位, 所以进位值就为 0001. 原位置两个数相加的结果为那个位置值的异或即 1110, 即两个位置值如果不一样就为 1, 一样的话要么两个位置原来值都为 0 结果也为 0, 要么进位, 那么结果依然是 0. </p>
+</li>
+<li><p>接下来就要把进位位和下一位相加, 所以进位值左移一位, 即 0001 变为 0010, 重复上面操作可得新的进位值为 0010, 原位置异或 (即相加) 结果为 1100.</p>
+</li>
+<li><p>继续重复上面操作直到进位为 0, 可得到最终结果 10000, 即 16</p>
+</li>
+</ol>
+<p>进位：与运算<br>相加：异或</p>
 <p>python版本非常崩溃反正我没看懂</p>
 <p>一个不成熟的小问题</p>
 <h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h4 id="53-Maximum-Subarray"><a href="#53-Maximum-Subarray" class="headerlink" title="53. Maximum Subarray"></a><a href="https://leetcode.com/problems/maximum-subarray/" target="_blank" rel="external">53. Maximum Subarray</a></h4><p>Find the contiguous subarray within an array (containing at least one number) which has the largest sum.</p>
@@ -277,7 +288,7 @@
   
     <li><a href="/categories/毕业设计/">毕业设计</a><small>4</small></li>
   
-    <li><a href="/categories/算法/">算法</a><small>5</small></li>
+    <li><a href="/categories/算法/">算法</a><small>7</small></li>
   
   </ul>
 </div>
@@ -287,7 +298,7 @@
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/Sass/" style="font-size: 12px;">Sass</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/edx/" style="font-size: 10px;">edx</a> <a href="/tags/javascript/" style="font-size: 12px;">javascript</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/前端/" style="font-size: 16px;">前端</a> <a href="/tags/博客/" style="font-size: 12px;">博客</a> <a href="/tags/博客，文章/" style="font-size: 10px;">博客，文章</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/托业/" style="font-size: 10px;">托业</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/毕业设计/" style="font-size: 14px;">毕业设计</a> <a href="/tags/算法/" style="font-size: 18px;">算法</a> <a href="/tags/计算机网络/" style="font-size: 10px;">计算机网络</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试心得/" style="font-size: 10px;">面试心得</a>
+    <a href="/tags/Sass/" style="font-size: 12px;">Sass</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/edx/" style="font-size: 10px;">edx</a> <a href="/tags/javascript/" style="font-size: 12px;">javascript</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/前端/" style="font-size: 16px;">前端</a> <a href="/tags/博客/" style="font-size: 12px;">博客</a> <a href="/tags/博客，文章/" style="font-size: 10px;">博客，文章</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/托业/" style="font-size: 10px;">托业</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/毕业设计/" style="font-size: 14px;">毕业设计</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a> <a href="/tags/计算机网络/" style="font-size: 10px;">计算机网络</a> <a href="/tags/读书笔记/" style="font-size: 18px;">读书笔记</a> <a href="/tags/面试心得/" style="font-size: 10px;">面试心得</a>
   </div>
 </div>
 

@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>leetcode第五部分 | Jane&#39;s blog</title>
+  <meta name="author" content="spy19930412">
+  
+  <meta name="description" content="sometimes ever sometimes never">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="leetcode第五部分"/>
+  <meta property="og:site_name" content="Jane&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+ <!--  <link href="/favicon.png" rel="icon"> -->
+ <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="Jane&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Jane&#39;s blog</a></h1>
+  <h2><a href="/">sometimes ever sometimes never</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">存档</a></li>
+    
+      <li><a href="/about">关于我</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-03-14T13:29:06.000Z"><a href="/2017/03/14/leetcode5/">2017-03-14</a></time>
+      
+      
+  
+    <h1 class="title">leetcode第五部分</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>关于二叉树<br>tag:tree</p>
+<a id="more"></a>
+<h3 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h3><h4 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h4><p>Given a binary tree, return the inorder traversal of its nodes’ values.</p>
+<p>For example:<br>Given binary tree [1,null,2,3],<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1</div><div class="line"> \</div><div class="line">  2</div><div class="line"> /</div><div class="line">3</div></pre></td></tr></table></figure></p>
+<p>return [1,3,2].</p>
+<p>递归recursively</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Definition for a binary tree node.</span></div><div class="line"><span class="comment"># class TreeNode(object):</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.left = None</span></div><div class="line"><span class="comment">#         self.right = None</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inorderTraversal</span><span class="params">(self, root)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type root: TreeNode</div><div class="line">        :rtype: List[int]</div><div class="line">        """</div><div class="line">        res = []</div><div class="line">        <span class="keyword">if</span> root == <span class="keyword">None</span>:</div><div class="line">            <span class="keyword">return</span> res</div><div class="line">        self.helper(root, res)</div><div class="line">        <span class="keyword">return</span> res</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper</span><span class="params">(self, root, res)</span>:</span></div><div class="line">        <span class="keyword">if</span> root:</div><div class="line">            self.helper(root.left, res)</div><div class="line">            res.append(root.val)</div><div class="line">            self.helper(root.right, res)</div></pre></td></tr></table></figure>
+<p>迭代iteratively </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">def inorderTraversal(self, root):</div><div class="line">    res, stack = [], []</div><div class="line">    while True:</div><div class="line">        while root:</div><div class="line">            stack.append(root)</div><div class="line">            root = root.left</div><div class="line">        if not stack:</div><div class="line">            return res</div><div class="line">        node = stack.pop()</div><div class="line">        res.append(node.val)</div><div class="line">        root = node.right</div></pre></td></tr></table></figure>
+<h4 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h4><p><a href="https://leetcode.com/problems/binary-tree-preorder-traversal/#/description" target="_blank" rel="external">144. Binary Tree Preorder Traversal</a></p>
+<p>Given a binary tree, return the preorder traversal of its nodes’ values.</p>
+<p>For example:<br>Given binary tree {1,#,2,3},</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1</div><div class="line"> \</div><div class="line">  2</div><div class="line"> /</div><div class="line">3</div></pre></td></tr></table></figure>
+<p>return [1,2,3].</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<h4 id="层序遍历"><a href="#层序遍历" class="headerlink" title="层序遍历"></a>层序遍历</h4><p>Given a binary tree, return the level order traversal of its nodes’ values. (ie, from left to right, level by level).</p>
+<p>For example:<br>Given binary tree [3,9,20,null,null,15,7],</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  3</div><div class="line"> / \</div><div class="line">9  20</div><div class="line">  /  \</div><div class="line"> 15   7</div></pre></td></tr></table></figure>
+<p>return its level order traversal as:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">  [3],</div><div class="line">  [9,20],</div><div class="line">  [15,7]</div><div class="line">]</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Definition for a binary tree node.</span></div><div class="line"><span class="comment"># class TreeNode(object):</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.left = None</span></div><div class="line"><span class="comment">#         self.right = None</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">levelOrder</span><span class="params">(self, root)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type root: TreeNode</div><div class="line">        :rtype: List[List[int]]</div><div class="line">        """</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</div><div class="line">            <span class="keyword">return</span> []</div><div class="line">        ans, level = [], [root]</div><div class="line">        <span class="keyword">while</span> level:</div><div class="line">            ans.append([node.val <span class="keyword">for</span> node <span class="keyword">in</span> level])</div><div class="line">            temp = []</div><div class="line">            <span class="keyword">for</span> node <span class="keyword">in</span> level:</div><div class="line">                temp.extend([node.left, node.right])</div><div class="line">            <span class="keyword">print</span> temp</div><div class="line">            level = [leaf <span class="keyword">for</span> leaf <span class="keyword">in</span> temp <span class="keyword">if</span> leaf]</div><div class="line">        <span class="keyword">return</span> ans</div></pre></td></tr></table></figure>
+<h3 id="Path-Sum系列"><a href="#Path-Sum系列" class="headerlink" title="Path Sum系列"></a>Path Sum系列</h3><h4 id="112-Path-Sum"><a href="#112-Path-Sum" class="headerlink" title="112. Path Sum"></a><a href="https://leetcode.com/problems/path-sum/#/submissions" target="_blank" rel="external">112. Path Sum</a></h4><p>Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.</p>
+<p>For example:<br>Given the below binary tree and sum = 22,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">      5</div><div class="line">     / \</div><div class="line">    4   8</div><div class="line">   /   / \</div><div class="line">  11  13  4</div><div class="line"> /  \      \</div><div class="line">7    2      1</div></pre></td></tr></table></figure>
+<p>return true, as there exist a root-to-leaf path 5-&gt;4-&gt;11-&gt;2 which sum is 22.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"># Definition for a binary tree node.</div><div class="line"># class TreeNode(object):</div><div class="line">#     def __init__(self, x):</div><div class="line">#         self.val = x</div><div class="line">#         self.left = None</div><div class="line">#         self.right = None</div><div class="line"></div><div class="line">class Solution(object):</div><div class="line">    def hasPathSum(self, root, sum):</div><div class="line">        &quot;&quot;&quot;</div><div class="line">        :type root: TreeNode</div><div class="line">        :type sum: int</div><div class="line">        :rtype: bool</div><div class="line">        &quot;&quot;&quot;</div><div class="line">        if root == None:</div><div class="line">            return False</div><div class="line">        if root.val == sum and root.left == None and root.right == None:</div><div class="line">            return True</div><div class="line">        sum = sum - root.val</div><div class="line">        return self.hasPathSum(root.left, sum) or self.hasPathSum(root.right, sum)</div></pre></td></tr></table></figure>
+<h4 id="113-Path-Sum-II"><a href="#113-Path-Sum-II" class="headerlink" title="113. Path Sum II"></a><a href="https://leetcode.com/problems/path-sum-ii/#/description" target="_blank" rel="external">113. Path Sum II</a></h4><p>Given a binary tree and a sum, find all root-to-leaf paths where each path’s sum equals the given sum.</p>
+<p>For example:<br>Given the below binary tree and sum = 22,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">      5</div><div class="line">     / \</div><div class="line">    4   8</div><div class="line">   /   / \</div><div class="line">  11  13  4</div><div class="line"> /  \    / \</div><div class="line">7    2  5   1</div></pre></td></tr></table></figure>
+<p>return<br>[<br>   [5,4,11,2],<br>   [5,8,4,5]<br>]</p>
+<p><mark>tag: dfs </mark></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Definition for a binary tree node.</span></div><div class="line"><span class="comment"># class TreeNode(object):</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.left = None</span></div><div class="line"><span class="comment">#         self.right = None</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pathSum</span><span class="params">(self, root, sum)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type root: TreeNode</div><div class="line">        :type sum: int</div><div class="line">        :rtype: List[List[int]]</div><div class="line">        """</div><div class="line">        res = []</div><div class="line">        <span class="keyword">if</span> root == <span class="keyword">None</span>:</div><div class="line">            <span class="keyword">return</span> res</div><div class="line">        self.helper(root, sum, [], res)</div><div class="line">        <span class="keyword">return</span> res</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper</span><span class="params">(self, root, sum, path, res)</span>:</span></div><div class="line">        <span class="keyword">if</span> root.val == sum <span class="keyword">and</span> root.left == <span class="keyword">None</span> <span class="keyword">and</span> root.right == <span class="keyword">None</span>:</div><div class="line">            path.append(root.val)</div><div class="line">            res.append(path)</div><div class="line">        <span class="keyword">if</span> root.left:</div><div class="line">            self.helper(root.left, sum - root.val, path+[root.val], res)</div><div class="line">        <span class="keyword">if</span> root.right:</div><div class="line">            self.helper(root.right, sum - root.val, path+[root.val], res)</div></pre></td></tr></table></figure>
+<h4 id="437-Path-Sum-III"><a href="#437-Path-Sum-III" class="headerlink" title="437. Path Sum III"></a><a href="https://leetcode.com/problems/path-sum-iii/#/description" target="_blank" rel="external">437. Path Sum III</a></h4><p>You are given a binary tree in which each node contains an integer value.</p>
+<p>Find the number of paths that sum to a given value.</p>
+<p>The path does not need to start or end at the root or a leaf, but it must go downwards (traveling only from parent nodes to child nodes).</p>
+<p>The tree has no more than 1,000 nodes and the values are in the range -1,000,000 to 1,000,000.</p>
+<p>Example:</p>
+<p>root = [10,5,-3,3,2,null,11,3,-2,null,1], sum = 8</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">      10</div><div class="line">     /  \</div><div class="line">    5   -3</div><div class="line">   / \    \</div><div class="line">  3   2   11</div><div class="line"> / \   \</div><div class="line">3  -2   1</div></pre></td></tr></table></figure>
+<p>Return 3. The paths that sum to 8 are:</p>
+<ol>
+<li>5 -&gt; 3</li>
+<li>5 -&gt; 2 -&gt; 1</li>
+<li>-3 -&gt; 11</li>
+</ol>
+<p>这道题让我们求二叉树的路径的和等于一个给定值，说明了这条路径不必要从根节点开始，可以是中间的任意一段，而且二叉树的节点值也是有正有负。</p>
+<p>利用前序遍历，对于每个遍历到的节点进行处理，维护一个变量pre记录之前的路径和，然后用cur为pre加上当前节点值，如果cur等于sum，那么返回结果时要加一，然后对当前节点的左右节点调用递归函数求解</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Definition for a binary tree node.</span></div><div class="line"><span class="comment"># class TreeNode(object):</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.left = None</span></div><div class="line"><span class="comment">#         self.right = None</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pathSum</span><span class="params">(self, root, sum)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type root: TreeNode</div><div class="line">        :type sum: int</div><div class="line">        :rtype: int</div><div class="line">        """</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span></div><div class="line">        <span class="keyword">return</span> self.helper(root, <span class="number">0</span>, sum) + self.pathSum(root.left, sum) + self.pathSum(root.right, sum)</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper</span><span class="params">(self, node, pre, sum)</span>:</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> node:</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span></div><div class="line">        cur = pre + node.val</div><div class="line">        <span class="keyword">return</span> (cur == sum) + self.helper(node.left, cur, sum) + self.helper(node.right, cur, sum)</div></pre></td></tr></table></figure>
+<h3 id="卡特兰数"><a href="#卡特兰数" class="headerlink" title="卡特兰数"></a>卡特兰数</h3><h4 id="96-Unique-Binary-Search-Trees"><a href="#96-Unique-Binary-Search-Trees" class="headerlink" title="96. Unique Binary Search Trees"></a><a href="https://leetcode.com/submissions/detail/96752646/" target="_blank" rel="external">96. Unique Binary Search Trees</a></h4><p>这道题要求可行的二叉查找树的数量，其实二叉查找树可以任意取根，只要满足中序遍历有序的要求就可以。从处理子问题的角度来看，选取一个结点为根，就把结点切成左右子树，以这个结点为根的可行二叉树数量就是左右子树可行二叉树数量的乘积，所以总的数量是将以所有结点为根的可行结果累加起来。写成表达式如下： </p>
+<p><img src="/images/leetcode/catalan.png" alt=""></p>
+<p>这是 卡特兰数 的一种定义方式，是一个典型的动态规划的定义方式（根据其实条件和递推式求解结果）。所以思路也很明确了，维护量 res[i] 表示含有 i 个结点的二叉查找树的数量。根据上述递推式依次求出 1 到 n 的的结果即可。 </p>
+<p>时间上每次求解 i 个结点的二叉查找树数量的需要一个 i 步的循环，总体要求 n 次，所以总时间复杂度是 O(1+2+…+n)=O(n^2)。空间上需要一个数组来维护，并且需要前 i 个的所有信息，所以是 O(n)。代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">numTrees</span><span class="params">(self, n)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type n: int</div><div class="line">        :rtype: int</div><div class="line">        """</div><div class="line">        <span class="keyword">if</span> n &lt;= <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span></div><div class="line">        res = [<span class="number">0</span>] * (n+<span class="number">1</span>)</div><div class="line">        res[<span class="number">0</span>] = <span class="number">1</span></div><div class="line">        res[<span class="number">1</span>] = <span class="number">1</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, n+<span class="number">1</span>):</div><div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i):</div><div class="line">                res[i] += res[j] * res[i - j - <span class="number">1</span>]</div><div class="line">        <span class="keyword">return</span> res[n]</div></pre></td></tr></table></figure>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%8D%A1%E5%A1%94%E5%85%B0%E6%95%B0" target="_blank" rel="external">卡特兰数——维基百科</a></p>
+<p>下面这道题不是卡特兰数</p>
+<h4 id="95-Unique-Binary-Search-Trees-II"><a href="#95-Unique-Binary-Search-Trees-II" class="headerlink" title="95. Unique Binary Search Trees II"></a><a href="https://leetcode.com/problems/unique-binary-search-trees-ii/#/description" target="_blank" rel="external">95. Unique Binary Search Trees II</a></h4><p>Given an integer n, generate all structurally unique BST’s (binary search trees) that store values 1…n.</p>
+<p>For example,<br>Given n = 3, your program should return all 5 unique BST’s shown below.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">1         3     3      2      1</div><div class="line"> \       /     /      / \      \</div><div class="line">  3     2     1      1   3      2</div><div class="line"> /     /       \                 \</div><div class="line">2     1         2                 3</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Definition for a binary tree node.</span></div><div class="line"><span class="comment"># class TreeNode(object):</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.left = None</span></div><div class="line"><span class="comment">#         self.right = None</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">generateTrees</span><span class="params">(self, n)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type n: int</div><div class="line">        :rtype: List[TreeNode]</div><div class="line">        """</div><div class="line">        <span class="keyword">if</span> n == <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> []</div><div class="line">        <span class="keyword">return</span> self.helper(<span class="number">1</span>, n + <span class="number">1</span>)</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper</span><span class="params">(self, start, end)</span>:</span></div><div class="line">        res = []</div><div class="line">        <span class="keyword">if</span> start == end:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">for</span> tmp <span class="keyword">in</span> range(start, end):</div><div class="line">            left = self.helper(start, tmp)</div><div class="line">            right = self.helper(tmp + <span class="number">1</span>, end)</div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> left <span class="keyword">or</span> [<span class="keyword">None</span>]:</div><div class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> right <span class="keyword">or</span> [<span class="keyword">None</span>]:</div><div class="line">                    node = TreeNode(tmp)</div><div class="line">                    node.left = i</div><div class="line">                    node.right = j</div><div class="line">                    res.append(node)</div><div class="line">        <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/算法/">算法</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/算法/">算法</a>
+  </div>
+
+        <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+    
+    <a href="/2017/03/15/leetcode6/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2017/03/05/internet/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+  <!-- 多说评论框 start -->
+    <div class="ds-thread" ></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'undefined'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>18</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript-ES6/">javascript+ES6</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>1</small></li>
+  
+    <li><a href="/categories/weixin/">weixin</a><small>1</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>3</small></li>
+  
+    <li><a href="/categories/博客/">博客</a><small>1</small></li>
+  
+    <li><a href="/categories/性能优化/">性能优化</a><small>1</small></li>
+  
+    <li><a href="/categories/毕业设计/">毕业设计</a><small>4</small></li>
+  
+    <li><a href="/categories/算法/">算法</a><small>7</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Sass/" style="font-size: 12px;">Sass</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/edx/" style="font-size: 10px;">edx</a> <a href="/tags/javascript/" style="font-size: 12px;">javascript</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/前端/" style="font-size: 16px;">前端</a> <a href="/tags/博客/" style="font-size: 12px;">博客</a> <a href="/tags/博客，文章/" style="font-size: 10px;">博客，文章</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/托业/" style="font-size: 10px;">托业</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/毕业设计/" style="font-size: 14px;">毕业设计</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a> <a href="/tags/计算机网络/" style="font-size: 10px;">计算机网络</a> <a href="/tags/读书笔记/" style="font-size: 18px;">读书笔记</a> <a href="/tags/面试心得/" style="font-size: 10px;">面试心得</a>
+  </div>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="https://github.com/spy19930412 " title="spy19930412">my github</a></li>
+<li><a href="http://wwj718.github.io/ " title="友情互链">writing for time超级棒</a></li>
+<li><a href="http://xueyi1230.github.io/ " title="友情互链">削一个博客一直施工中</a></li>
+</ul>
+</div>
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2298271483&verifier=401a0bfd&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 spy19930412
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
