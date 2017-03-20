@@ -202,6 +202,20 @@
 <p>+</p>
 <h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>封装是可以不用关心对象是如何构建的而直接进行使用，对外部世界隐藏工作细节</p>
 <h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>以通用的类为基础建立专门的类对象</p>
+<h2 id="一个有趣的-python-排序模块：bisect"><a href="#一个有趣的-python-排序模块：bisect" class="headerlink" title="一个有趣的 python 排序模块：bisect"></a>一个有趣的 python 排序模块：bisect</h2><p>先看看模块的结构：</p>
+<p><img src="/images/python/1.jpg" alt=""></p>
+<p>先说明的是，使用这个模块的函数前先确保操作的列表是已排序的。</p>
+<p><img src="/images/python/2.jpg" alt=""></p>
+<p>先看看 insort  函数</p>
+<p><img src="/images/python/3.jpg" alt=""></p>
+<p>其插入的结果是不会影响原有的排序。</p>
+<p>再看看 bisect  函数：</p>
+<p><img src="/images/python/4.jpg" alt=""></p>
+<p>其目的在于查找该数值将会插入的位置并返回，而不会插入。</p>
+<p>接着看 bisect_left 和 bisect_right 函数，该函数用入处理将会插入重复数值的情况，返回将会插入的位置：</p>
+<p><img src="/images/python/5.jpg" alt=""></p>
+<p>其对应的插入函数是 insort_left  和 insort_right ：</p>
+<p><img src="/images/python/6.jpg" alt=""></p>
 <h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ol>
 <li><a href="http://www.liaoxuefeng.com/" target="_blank" rel="external">廖雪峰的官方网站</a></li>
 <li><a href="https://www.zhihu.com/question/21165020/answer/19456139" target="_blank" rel="external">知乎——数据结构与数据类型</a></li>
