@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>易错题小合集 | Jane&#39;s blog</title>
+  <title>易混淆概念小合集 | Jane&#39;s blog</title>
   <meta name="author" content="spy19930412">
   
   <meta name="description" content="sometimes ever sometimes never">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="易错题小合集"/>
+  <meta property="og:title" content="易混淆概念小合集"/>
   <meta property="og:site_name" content="Jane&#39;s blog"/>
 
   
@@ -57,7 +57,7 @@
       
       
   
-    <h1 class="title">易错题小合集</h1>
+    <h1 class="title">易混淆概念小合集</h1>
   
 
     </header>
@@ -65,7 +65,13 @@
       
         <p>一个小小的错题本</p>
 <a id="more"></a>
-<h3 id="关于闭包"><a href="#关于闭包" class="headerlink" title="关于闭包"></a>关于闭包</h3><p>1.在浏览器控制台执行以下代码，输入的结果是（）</p>
+<h3 id="关于闭包"><a href="#关于闭包" class="headerlink" title="关于闭包"></a>关于闭包</h3><p>使用闭包主要是为了设计私有的方法和变量。闭包的优点是可以避免全局变量的污染，缺点是闭包会常驻内存，会增大内存使用量，使用不当很容易造成内存泄露。</p>
+<p>注意是容易不是一定造成内存泄漏啊</p>
+<p>闭包有三个特性：</p>
+<blockquote>
+<p>1.函数嵌套函数<br>2.函数内部可以引用外部的参数和变量<br>3.参数和变量不会被垃圾回收机制回收</p>
+</blockquote>
+<p>1.在浏览器控制台执行以下代码，输入的结果是（）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">test</span></span>()&#123;</div><div class="line">	var n = 4399;</div><div class="line">	<span class="keyword">function</span> <span class="function"><span class="title">add</span></span>()&#123;</div><div class="line">	n++;</div><div class="line">	console.log(n);</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">return</span> &#123;n:n,add:add&#125;</div><div class="line">&#125;</div><div class="line">var result = <span class="built_in">test</span>();</div><div class="line">var result2 = <span class="built_in">test</span>();</div><div class="line">result.add();</div><div class="line">result.add();</div><div class="line">console.log(result.n)</div><div class="line">result2.add();</div></pre></td></tr></table></figure>
 <p>4400 4401 4399 4400</p>
 <p><a href="https://www.nowcoder.com/test/question/done?tid=6699891&amp;qid=56240#summary" target="_blank" rel="external">牛客网</a></p>
@@ -128,7 +134,29 @@
 <ol>
 <li><a href="https://github.com/AngusFu/blog/blob/5d63e76bd4a07514b8e641d7500de77c4dccc1b5/source/_posts/xease-campus-2014-note.md" target="_blank" rel="external">首尾高度固定、中间高度自适应的 DIV 布局</a></li>
 </ol>
-<h4 id="一些面经"><a href="#一些面经" class="headerlink" title="一些面经"></a>一些面经</h4><ul>
+<h4 id="cookie-amp-session"><a href="#cookie-amp-session" class="headerlink" title="cookie &amp; session"></a>cookie &amp; session</h4><h4 id="优点：极高的扩展性和可用性"><a href="#优点：极高的扩展性和可用性" class="headerlink" title="优点：极高的扩展性和可用性"></a>优点：极高的扩展性和可用性</h4><pre><code>1.通过良好的编程，控制保存在cookie中的session对象的大小。
+2.通过加密和安全传输技术（SSL），减少cookie被破解的可能性。
+3.只在cookie中存放不敏感数据，即使被盗也不会有重大损失。
+4.控制cookie的生命期，使之不会永远有效。偷盗者很可能拿到一个过期的cookie。
+</code></pre><h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h4><pre><code>1.`Cookie`数量和长度的限制。每个domain最多只能有20条cookie，每个cookie长度不能超过4KB，否则会被截掉。
+
+2.安全性问题。如果cookie被人拦截了，那人就可以取得所有的session信息。即使加密也与事无补，因为拦截者并不需要知道cookie的意义，他只要原样转发cookie就可以达到目的了。
+3.有些状态不可能保存在客户端。例如，为了防止重复提交表单，我们需要在服务器端保存一个计数器。如果我们把这个计数器保存在客户端，那么它起不到任何作用。
+</code></pre><p>html5中的Web Storage包括了两种存储方式：sessionStorage和localStorage。</p>
+<h4 id="web-storage-和-cookie-的区别"><a href="#web-storage-和-cookie-的区别" class="headerlink" title="web storage 和 cookie 的区别"></a>web storage 和 cookie 的区别</h4><p>Web Storage的概念和cookie相似，区别是它是为了更大容量存储设计的。Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。</p>
+<p>除此之外，Web Storage拥有setItem,getItem,removeItem,clear等方法，不像cookie需要前端开发者自己封装setCookie，getCookie。</p>
+<p>但是cookie也是不可以或缺的：cookie的作用是与服务器进行交互，作为HTTP规范的一部分而存在 ，而Web Storage仅仅是为了在本地 “存储” 数据而生</p>
+<p>###cookie 和session 的区别：</p>
+<pre><code>1、cookie数据存放在客户的浏览器上，session数据放在服务器上。
+2、cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗
+   考虑到安全应当使用session。
+3、session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能
+    考虑到减轻服务器性能方面，应当使用COOKIE。
+4、单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。
+5、所以建议：
+   将登陆信息等重要信息存放为SESSION
+   其他信息如果需要保留，可以放在COOKIE中
+</code></pre><h4 id="一些面经"><a href="#一些面经" class="headerlink" title="一些面经"></a>一些面经</h4><ul>
 <li><a href="http://blog.csdn.net/xiaowanzi0713/article/details/52325691" target="_blank" rel="external">css,html,js 区分大小写么</a></li>
 </ul>
 <p>html 不区分</p>
@@ -151,6 +179,51 @@
 <p>2、属性和方法被加入到 this 引用的对象中</p>
 <p>3、新创建的对象由 this 所引用，并且最后隐式的返回 this</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var obj  = &#123;&#125;;</div><div class="line">obj.__proto__ = Base.prototype;</div><div class="line">Base.call(obj);</div></pre></td></tr></table></figure>
+<h2 id="前端安全问题？"><a href="#前端安全问题？" class="headerlink" title="前端安全问题？"></a>前端安全问题？</h2><p>###sql注入原理</p>
+<p>就是通过把<code>SQL</code>命令插入到<code>Web</code>表单递交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。</p>
+<p>总的来说有以下几点：</p>
+<pre><code>1.永远不要信任用户的输入，要对用户的输入进行校验，可以通过正则表达式，或限制长度，对单引号和双&quot;-&quot;进行转换等。
+2.永远不要使用动态拼装SQL，可以使用参数化的SQL或者直接使用存储过程进行数据查询存取。
+3.永远不要使用管理员权限的数据库连接，为每个应用使用单独的权限有限的数据库连接。
+4.不要把机密信息明文存放，请加密或者hash掉密码和敏感的信息。
+</code></pre><p>###XSS原理及防范</p>
+<p><code>Xss(cross-site scripting)</code>攻击指的是攻击者往Web页面里插入恶意<code>html</code>标签或者<code>javascript</code>代码。比如：攻击者在论坛中放一个<br>看似安全的链接，骗取用户点击后，窃取cookie中的用户私密信息；或者攻击者在论坛中加一个恶意表单，<br>当用户提交表单的时候，却把信息传送到攻击者的服务器中，而不是用户原本以为的信任站点。</p>
+<p>###XSS防范方法</p>
+<p>1.代码里对用户输入的地方和变量都需要仔细检查长度和对<code>”&lt;”,”&gt;”,”;”,”’”</code>等字符做过滤；其次任何内容写到页面之前都必须加以<code>encode</code>，避免不小心把<code>html tag</code> 弄出来。这一个层面做好，至少可以堵住超过一半的<code>XSS</code> 攻击。<br><br><br>2.避免直接在<code>cookie</code> 中泄露用户隐私，例如<code>email</code>、密码等等。<br><br><br>3.通过使cookie 和系统ip 绑定来降低<code>cookie</code> 泄露后的危险。这样攻击者得到的cookie 没有实际价值，不可能拿来重放。<br><br><br>4.尽量采用POST 而非GET 提交表单</p>
+<p>###XSS与CSRF有什么区别吗？</p>
+<p><code>XSS</code>是获取信息，不需要提前知道其他用户页面的代码和数据包。<code>CSRF</code>是代替用户完成指定的动作，需要知道其他用户页面的代码和数据包。</p>
+<p>要完成一次CSRF攻击，受害者必须依次完成两个步骤：</p>
+<p>　　1.登录受信任网站A，并在本地生成Cookie。</p>
+<p>　　2.在不登出A的情况下，访问危险网站B。
+　　</p>
+<p>###CSRF的防御</p>
+<p>1.服务端的CSRF方式方法很多样，但总的思想都是一致的，就是在客户端页面增加伪随机数。</p>
+<p>2.使用验证码</p>
+<h2 id="js对象的深度克隆"><a href="#js对象的深度克隆" class="headerlink" title="js对象的深度克隆"></a>js对象的深度克隆</h2><pre><code>function clone(Obj) {   
+      var buf;   
+      if (Obj instanceof Array) {   
+          buf = [];  //创建一个空的数组 
+          var i = Obj.length;   
+          while (i--) {   
+              buf[i] = clone(Obj[i]);   
+          }   
+          return buf;   
+      }else if (Obj instanceof Object){   
+          buf = {};  //创建一个空对象 
+          for (var k in Obj) {  //为这个对象添加新的属性 
+              buf[k] = clone(Obj[k]);   
+          }   
+          return buf;   
+      }else{   
+          return Obj;   
+      }   
+  }  
+</code></pre><h3 id="关于-Http-2-0-？"><a href="#关于-Http-2-0-？" class="headerlink" title="关于 Http 2.0 ？"></a>关于 Http 2.0 ？</h3><p>HTTP/2引入了 “服务端推（serverpush）” 的概念，它允许服务端在客户端需要数据之前就主动地将数据发送到客户端缓存中，从而提高性能。 HTTP/2提供更多的加密支持 HTTP/2使用多路技术，允许多个消息在一个连接上同时交差。 它增加了头压缩（header compression），因此即使非常小的请求，其请求和响应的header都只会占用很小比例的带宽。</p>
+<p>参考链接</p>
+<ul>
+<li><a href="https://segmentfault.com/a/1190000000652891" target="_blank" rel="external">详解 js 闭包</a></li>
+</ul>
+<p>一系列都挺好的</p>
 
       
     </div>
