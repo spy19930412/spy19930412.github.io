@@ -146,8 +146,7 @@
 <h4 id="web-storage-和-cookie-的区别"><a href="#web-storage-和-cookie-的区别" class="headerlink" title="web storage 和 cookie 的区别"></a>web storage 和 cookie 的区别</h4><p>Web Storage的概念和cookie相似，区别是它是为了更大容量存储设计的。Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。</p>
 <p>除此之外，Web Storage拥有setItem,getItem,removeItem,clear等方法，不像cookie需要前端开发者自己封装setCookie，getCookie。</p>
 <p>但是cookie也是不可以或缺的：cookie的作用是与服务器进行交互，作为HTTP规范的一部分而存在 ，而Web Storage仅仅是为了在本地 “存储” 数据而生</p>
-<p>###cookie 和session 的区别：</p>
-<pre><code>1、cookie数据存放在客户的浏览器上，session数据放在服务器上。
+<h3 id="cookie-和session-的区别："><a href="#cookie-和session-的区别：" class="headerlink" title="cookie 和session 的区别："></a>cookie 和session 的区别：</h3><pre><code>1、cookie数据存放在客户的浏览器上，session数据放在服务器上。
 2、cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗
    考虑到安全应当使用session。
 3、session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能
@@ -179,25 +178,20 @@
 <p>2、属性和方法被加入到 this 引用的对象中</p>
 <p>3、新创建的对象由 this 所引用，并且最后隐式的返回 this</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var obj  = &#123;&#125;;</div><div class="line">obj.__proto__ = Base.prototype;</div><div class="line">Base.call(obj);</div></pre></td></tr></table></figure>
-<h2 id="前端安全问题？"><a href="#前端安全问题？" class="headerlink" title="前端安全问题？"></a>前端安全问题？</h2><p>###sql注入原理</p>
-<p>就是通过把<code>SQL</code>命令插入到<code>Web</code>表单递交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。</p>
+<h2 id="前端安全问题？"><a href="#前端安全问题？" class="headerlink" title="前端安全问题？"></a>前端安全问题？</h2><h3 id="sql注入原理"><a href="#sql注入原理" class="headerlink" title="sql注入原理"></a>sql注入原理</h3><p>就是通过把<code>SQL</code>命令插入到<code>Web</code>表单递交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。</p>
 <p>总的来说有以下几点：</p>
 <pre><code>1.永远不要信任用户的输入，要对用户的输入进行校验，可以通过正则表达式，或限制长度，对单引号和双&quot;-&quot;进行转换等。
 2.永远不要使用动态拼装SQL，可以使用参数化的SQL或者直接使用存储过程进行数据查询存取。
 3.永远不要使用管理员权限的数据库连接，为每个应用使用单独的权限有限的数据库连接。
 4.不要把机密信息明文存放，请加密或者hash掉密码和敏感的信息。
-</code></pre><p>###XSS原理及防范</p>
-<p><code>Xss(cross-site scripting)</code>攻击指的是攻击者往Web页面里插入恶意<code>html</code>标签或者<code>javascript</code>代码。比如：攻击者在论坛中放一个<br>看似安全的链接，骗取用户点击后，窃取cookie中的用户私密信息；或者攻击者在论坛中加一个恶意表单，<br>当用户提交表单的时候，却把信息传送到攻击者的服务器中，而不是用户原本以为的信任站点。</p>
-<p>###XSS防范方法</p>
-<p>1.代码里对用户输入的地方和变量都需要仔细检查长度和对<code>”&lt;”,”&gt;”,”;”,”’”</code>等字符做过滤；其次任何内容写到页面之前都必须加以<code>encode</code>，避免不小心把<code>html tag</code> 弄出来。这一个层面做好，至少可以堵住超过一半的<code>XSS</code> 攻击。<br><br><br>2.避免直接在<code>cookie</code> 中泄露用户隐私，例如<code>email</code>、密码等等。<br><br><br>3.通过使cookie 和系统ip 绑定来降低<code>cookie</code> 泄露后的危险。这样攻击者得到的cookie 没有实际价值，不可能拿来重放。<br><br><br>4.尽量采用POST 而非GET 提交表单</p>
-<p>###XSS与CSRF有什么区别吗？</p>
-<p><code>XSS</code>是获取信息，不需要提前知道其他用户页面的代码和数据包。<code>CSRF</code>是代替用户完成指定的动作，需要知道其他用户页面的代码和数据包。</p>
+</code></pre><h3 id="XSS原理及防范"><a href="#XSS原理及防范" class="headerlink" title="XSS原理及防范"></a>XSS原理及防范</h3><p><code>Xss(cross-site scripting)</code>攻击指的是攻击者往Web页面里插入恶意<code>html</code>标签或者<code>javascript</code>代码。比如：攻击者在论坛中放一个<br>看似安全的链接，骗取用户点击后，窃取cookie中的用户私密信息；或者攻击者在论坛中加一个恶意表单，<br>当用户提交表单的时候，却把信息传送到攻击者的服务器中，而不是用户原本以为的信任站点。</p>
+<h3 id="XSS防范方法"><a href="#XSS防范方法" class="headerlink" title="XSS防范方法"></a>XSS防范方法</h3><p>1.代码里对用户输入的地方和变量都需要仔细检查长度和对<code>”&lt;”,”&gt;”,”;”,”’”</code>等字符做过滤；其次任何内容写到页面之前都必须加以<code>encode</code>，避免不小心把<code>html tag</code> 弄出来。这一个层面做好，至少可以堵住超过一半的<code>XSS</code> 攻击。<br><br><br>2.避免直接在<code>cookie</code> 中泄露用户隐私，例如<code>email</code>、密码等等。<br><br><br>3.通过使cookie 和系统ip 绑定来降低<code>cookie</code> 泄露后的危险。这样攻击者得到的cookie 没有实际价值，不可能拿来重放。<br><br><br>4.尽量采用POST 而非GET 提交表单</p>
+<h3 id="XSS与CSRF有什么区别吗？"><a href="#XSS与CSRF有什么区别吗？" class="headerlink" title="XSS与CSRF有什么区别吗？"></a>XSS与CSRF有什么区别吗？</h3><p><code>XSS</code>是获取信息，不需要提前知道其他用户页面的代码和数据包。<code>CSRF</code>是代替用户完成指定的动作，需要知道其他用户页面的代码和数据包。</p>
 <p>要完成一次CSRF攻击，受害者必须依次完成两个步骤：</p>
 <p>　　1.登录受信任网站A，并在本地生成Cookie。</p>
 <p>　　2.在不登出A的情况下，访问危险网站B。
 　　</p>
-<p>###CSRF的防御</p>
-<p>1.服务端的CSRF方式方法很多样，但总的思想都是一致的，就是在客户端页面增加伪随机数。</p>
+<h3 id="CSRF的防御"><a href="#CSRF的防御" class="headerlink" title="CSRF的防御"></a>CSRF的防御</h3><p>1.服务端的CSRF方式方法很多样，但总的思想都是一致的，就是在客户端页面增加伪随机数。</p>
 <p>2.使用验证码</p>
 <h2 id="js对象的深度克隆"><a href="#js对象的深度克隆" class="headerlink" title="js对象的深度克隆"></a>js对象的深度克隆</h2><pre><code>function clone(Obj) {   
       var buf;   
