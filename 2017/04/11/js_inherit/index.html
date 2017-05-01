@@ -1,0 +1,245 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>javascript | Jane&#39;s blog</title>
+  <meta name="author" content="spy19930412">
+  
+  <meta name="description" content="sometimes ever sometimes never">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="javascript"/>
+  <meta property="og:site_name" content="Jane&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+ <!--  <link href="/favicon.png" rel="icon"> -->
+ <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="Jane&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Jane&#39;s blog</a></h1>
+  <h2><a href="/">sometimes ever sometimes never</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">存档</a></li>
+    
+      <li><a href="/about">关于我</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-04-11T11:29:06.000Z"><a href="/2017/04/11/js_inherit/">2017-04-11</a></time>
+      
+      
+  
+    <h1 class="title">javascript</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>js的继承／函数式编程／编程范式</p>
+<p>继承</p>
+<ol>
+<li>接口继承：继承方法签名</li>
+<li>实现继承：继承实际的方法</li>
+</ol>
+<p>js只支持实现继承</p>
+<p>继承主要依靠原型链</p>
+<p>基本思想：利用原型让一个引用类型的继承另一个引用类型的属性和方法。</p>
+<p>构造函数、原型、实例的关系：每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个指向原型对象的内部指针。</p>
+<ol>
+<li><p>原型链</p>
+<p> 原型链：原型对象等于另一个类型的实例</p>
+<p> 继承是通过创建父类实例，将该实例赋给子类.prototype实现的</p>
+<p> 实现的本质是重写原型对象，代之以一个新类型的实例</p>
+<p> 要注意的地方：通过原型链实现继承的时候，不能使用对象字面量创建原型方法，因为这样做会重写原型        链P135</p>
+<p> 原型链的问题：</p>
+<ul>
+<li>最主要的问题来自包含引用类型值的原型，在通过原型来实现继承的时候，原型实际上会变成另一个类型的实例。于是，原先的实例属性也就顺理成章的变成了现在的原型属性了。P135</li>
+<li>在创建子类型的实例的时候，不能向超类型的构造函数中传递参数。实际上，应该说是没有办法在不影响所有对象实例的情况下，给超类型的构造函数传递参数</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">function Parent()&#123;</div><div class="line">        this.name = &apos;mike&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function Child()&#123;</div><div class="line">        this.age = 12;</div><div class="line">    &#125;</div><div class="line">    Child.prototype = new Parent();//Child继承Parent，通过原型，形成链条</div><div class="line"></div><div class="line">    var test = new Child();</div><div class="line">    alert(test.age);</div><div class="line">    alert(test.name);//得到被继承的属性</div><div class="line">    //继续原型链继承</div><div class="line">    function Brother()&#123;   //brother构造</div><div class="line">        this.weight = 60;</div><div class="line">    &#125;</div><div class="line">    Brother.prototype = new Child();//继续原型链继承</div><div class="line">    var brother = new Brother();</div><div class="line">    alert(brother.name);//继承了Parent和Child,弹出mike</div><div class="line">    alert(brother.age);//弹出12</div></pre></td></tr></table></figure>
+<ol>
+<li><p>借用构造函数（类式继承）</p>
+<p> 基本思想：在子类型构造函数的内部调用超类型的构造函数</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">function Parent(age)&#123;</div><div class="line">        this.name = [&apos;mike&apos;,&apos;jack&apos;,&apos;smith&apos;];</div><div class="line">        this.age = age;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function Child(age)&#123;</div><div class="line">        Parent.call(this,age);</div><div class="line">    &#125;</div><div class="line">    var test = new Child(21);</div><div class="line">    alert(test.age);//21</div><div class="line">    alert(test.name);//mike,jack,smith</div><div class="line">    test.name.push(&apos;bill&apos;);</div><div class="line">    alert(test.name);//mike,jack,smith,bill</div></pre></td></tr></table></figure>
+<pre><code>借用构造函数虽然解决了刚才两种问题，但没有原型，则复用无从谈起，这种继承方式是非常少见的。
+
+所以我们需要原型链+借用构造函数的模式，这种模式称为组合继承
+</code></pre><ol>
+<li>组合继承</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">    function Parent(age)&#123;</div><div class="line">        this.name = [&apos;mike&apos;,&apos;jack&apos;,&apos;smith&apos;];</div><div class="line">        this.age = age;</div><div class="line">    &#125;</div><div class="line">    Parent.prototype.run = function () &#123;</div><div class="line">        return this.name  + &apos; are both&apos; + this.age;</div><div class="line">    &#125;;</div><div class="line">    function Child(age)&#123;</div><div class="line">        Parent.call(this,age);//对象冒充，给超类型传参</div><div class="line">    &#125;</div><div class="line">    Child.prototype = new Parent();//原型链继承</div><div class="line">    var test = new Child(21);//写new Parent(21)也行</div><div class="line">    alert(test.run());//mike,jack,smith are both21</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>组合式继承是比较常用的一种继承方法，其背后的思路是 使用原型链实现对原型属性和方法的继承，而通过借用构造函数来实现对实例属性的继承。这样，既通过在原型上定义方法实现了函数复用，又保证每个实例都有它自己的属性。</p>
+<p>call()的用法：调用一个对象的一个方法，以另一个对象替换当前对象。</p>
+<p>call([thisObj[,arg1[, arg2[, [,.argN]]]]]) </p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/javascript/">javascript</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/前端/">前端</a>
+  </div>
+
+        <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+    
+    <a href="/2017/05/01/2017_05/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2017/03/15/leetcode6/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+  <!-- 多说评论框 start -->
+    <div class="ds-thread" ></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'undefined'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>19</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>2</small></li>
+  
+    <li><a href="/categories/javascript-ES6/">javascript+ES6</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>1</small></li>
+  
+    <li><a href="/categories/weixin/">weixin</a><small>1</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>3</small></li>
+  
+    <li><a href="/categories/博客/">博客</a><small>1</small></li>
+  
+    <li><a href="/categories/性能优化/">性能优化</a><small>1</small></li>
+  
+    <li><a href="/categories/毕业设计/">毕业设计</a><small>4</small></li>
+  
+    <li><a href="/categories/算法/">算法</a><small>7</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Sass/" style="font-size: 12.5px;">Sass</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/edx/" style="font-size: 10px;">edx</a> <a href="/tags/javascript/" style="font-size: 12.5px;">javascript</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/前端/" style="font-size: 17.5px;">前端</a> <a href="/tags/博客/" style="font-size: 12.5px;">博客</a> <a href="/tags/博客，文章/" style="font-size: 10px;">博客，文章</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/托业/" style="font-size: 10px;">托业</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/毕业设计/" style="font-size: 15px;">毕业设计</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a> <a href="/tags/计算机网络/" style="font-size: 10px;">计算机网络</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试心得/" style="font-size: 10px;">面试心得</a>
+  </div>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="https://github.com/spy19930412 " title="spy19930412">my github</a></li>
+<li><a href="http://wwj718.github.io/ " title="友情互链">writing for time超级棒</a></li>
+<li><a href="http://xueyi1230.github.io/ " title="友情互链">削一个博客一直施工中</a></li>
+</ul>
+</div>
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2298271483&verifier=401a0bfd&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 spy19930412
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
