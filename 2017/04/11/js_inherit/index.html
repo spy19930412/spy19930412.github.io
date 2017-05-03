@@ -136,9 +136,9 @@ alert(instance.getSuperValue());//error!
 <li>另一次是在子类型构造函数内部</li>
 </ul>
 <p>解决：开发人员普遍认为寄生组合式继承是引用类型最理想的继承范式</p>
-<h3 id="确定原型和实例的关系"><a href="#确定原型和实例的关系" class="headerlink" title="确定原型和实例的关系"></a>确定原型和实例的关系</h3><p>可以通过两种方式来确定原型和实例之间的关系。操作符instanceof和isPrototypeof()方法.</p>
+<h2 id="确定原型和实例的关系"><a href="#确定原型和实例的关系" class="headerlink" title="确定原型和实例的关系"></a>确定原型和实例的关系</h2><p>可以通过两种方式来确定原型和实例之间的关系。操作符instanceof和isPrototypeof()方法.</p>
 <p>只要是原型链中出现过的原型，都可以说是该原型链派生的实例的原型，因此，isPrototypeof()方法也会返回true</p>
-<h3 id="call-apply-bind"><a href="#call-apply-bind" class="headerlink" title="call()/apply()/bind()"></a>call()/apply()/bind()</h3><p>在 JS 中，这三者都是用来改变函数的 this 对象的指向的。</p>
+<h2 id="call-apply-bind"><a href="#call-apply-bind" class="headerlink" title="call()/apply()/bind()"></a>call()/apply()/bind()</h2><p>在 JS 中，这三者都是用来改变函数的 this 对象的指向的。</p>
 <p>相似之处：</p>
 <ol>
 <li>都是用来改变函数的 this 对象的指向的。</li>
@@ -165,7 +165,7 @@ alert(instance.getSuperValue());//error!
 <pre><code>xw.say.bind(xh,&quot;实验小学&quot;,&quot;六年级&quot;)();
 </code></pre><p>但是由于 bind 返回的仍然是一个函数，所以我们还可以在调用的时候再进行传参。</p>
 <pre><code>xw.say.bind(xh)(&quot;实验小学&quot;,&quot;六年级&quot;);
-</code></pre><h3 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h3><ul>
+</code></pre><h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ul>
 <li><a href="http://www.jb51.net/article/81963.htm" target="_blank" rel="external">javascript 中 apply、call 和 bind 的使用区别</a></li>
 <li><a href="https://segmentfault.com/a/1190000002440502" target="_blank" rel="external">JavaScript 继承方式详解</a></li>
 </ul>
