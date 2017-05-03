@@ -65,7 +65,7 @@
       
         <p>js的继承／函数式编程／编程范式</p>
 <a id="more"></a>
-<p>OO语言的继承</p>
+<h2 id="js的继承"><a href="#js的继承" class="headerlink" title="js的继承"></a>js的继承</h2><p>OO语言的继承</p>
 <ol>
 <li>接口继承：继承方法签名</li>
 <li>实现继承：继承实际的方法</li>
@@ -79,39 +79,55 @@
 </li>
 </ul>
 <p>那么，假如我们让原型对象等于另一个类型的实例，此时的原型对象将包含一个指向另一个原型的指针，相应的，另一个原型中也包含着一个指向另一个构造函数的指针。假如另一个原型又是另一个类型的实例，那么上述关系依然成立，如此层层递进，就构成了实例和原型的链条。这就是原型链。</p>
-<ol>
-<li><p>原型链</p>
-<p> <mark>原型链：原型链的构建是通过将一个类型的实例赋值给另一个构造函数的原型实现的。</mark></p>
-<p> 继承是通过创建父类实例，将该实例赋给子类.prototype实现的</p>
-<p> 实现的本质是重写原型对象，代之以一个新类型的实例</p>
-<p> 要注意的地方：通过原型链实现继承的时候，不能使用对象字面量创建原型方法，因为这样做会重写原型链P135</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">function SuperType()&#123;</div><div class="line">	this.property = true;</div><div class="line">&#125;</div><div class="line"></div><div class="line">SuperType.prototype.getSuperValue = function()&#123;</div><div class="line">	return this.property;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function SubType()&#123;</div><div class="line">	this.subproperty = false;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//继承了SuperType</div><div class="line">SubType.prototype = new SuperType();</div><div class="line"></div><div class="line">//attention!</div><div class="line">//使用字面量添加新方法，会导致上一行代码无效！</div><div class="line">Subtype.prototype = &#123;</div><div class="line">	getSubValue : function ()&#123;</div><div class="line">		return this.subproperty;</div><div class="line">	&#125;,</div><div class="line">	someOtherMethod : function()&#123;</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line">var instance = new SubType();</div><div class="line">alert(instance.getSuperValue());//error!</div></pre></td></tr></table></figure>
+<h3 id="1-原型链"><a href="#1-原型链" class="headerlink" title="1. 原型链"></a>1. 原型链</h3><p><mark>原型链：原型链的构建是通过将一个类型的实例赋值给另一个构造函数的原型实现的。</mark></p>
+<p>继承是通过创建父类实例，将该实例赋给子类.prototype实现的</p>
+<p>实现的本质是重写原型对象，代之以一个新类型的实例</p>
+<p>要注意的地方：通过原型链实现继承的时候，不能使用对象字面量创建原型方法，因为这样做会重写原型链P135</p>
+<pre><code>function SuperType(){
+    this.property = true;
+}
+
+SuperType.prototype.getSuperValue = function(){
+    return this.property;
+}
+
+function SubType(){
+    this.subproperty = false;
+}
+
+//继承了SuperType
+SubType.prototype = new SuperType();
+
+//attention!
+//使用字面量添加新方法，会导致上一行代码无效！
+Subtype.prototype = {
+    getSubValue : function (){
+        return this.subproperty;
+    },
+    someOtherMethod : function(){
+        return false;
+    }
+};
+var instance = new SubType();
+alert(instance.getSuperValue());//error!
+</code></pre><p>把SuperType的实例赋值给原型，紧接着又将原型替换成了一个对象字面量而导致了问题。由于现在的原型包含的是一个Object的实例，而非SuperType的实例，因此我们设想中的原型链已经被切断，SuperType和SubType之间已经没有关系了。</p>
+<p>原型链的问题：</p>
+<ul>
+<li><p>最主要的问题来自包含引用类型值的原型，（<mark>包含引用类型值的原型属性会被所有实例共享——这也是为什么要在构造函数中而不是在原型对象中定义属性的原因）</mark>。在通过原型来实现继承的时候，原型实际上会变成另一个类型的实例。于是，原先的实例属性也就顺理成章的变成了现在的原型属性了。P135</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function SuperType()&#123;</div><div class="line">	this.colors = [&quot;red&quot;, &quot;blue&quot;, &quot;green&quot;];</div><div class="line">&#125;</div><div class="line">function SubType()&#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//继承了SuperType</div><div class="line">Subtype.prototype = new SuperType();</div><div class="line">var instance1 = new SubType();</div><div class="line">instance1.colors.push(&quot;black&quot;);</div><div class="line">alert(instance1.colors);//&quot;red,blue,green,black&quot;</div><div class="line"></div><div class="line">var instance2 = new SubType();</div><div class="line">alert(instance1.colors);//&quot;red,blue,green,black&quot;</div></pre></td></tr></table></figure>
 </li>
-</ol>
-<pre><code>把SuperType的实例赋值给原型，紧接着又将原型替换成了一个对象字面量而导致了问题。由于现在的原型包含的是一个Object的实例，而非SuperType的实例，因此我们设想中的原型链已经被切断，SuperType和SubType之间已经没有关系了。
-
-原型链的问题：
-
-* 最主要的问题来自包含引用类型值的原型，（&lt;mark&gt;包含引用类型值的原型属性会被所有实例共享——这也是为什么要在构造函数中而不是在原型对象中定义属性的原因）&lt;/mark&gt;。在通过原型来实现继承的时候，原型实际上会变成另一个类型的实例。于是，原先的实例属性也就顺理成章的变成了现在的原型属性了。P135
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function SuperType()&#123;</div><div class="line">	this.colors = [&quot;red&quot;, &quot;blue&quot;, &quot;green&quot;];</div><div class="line">&#125;</div><div class="line">function SubType()&#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//继承了SuperType</div><div class="line">Subtype.prototype = new SuperType();</div><div class="line">var instance1 = new SubType();</div><div class="line">instance1.colors.push(&quot;black&quot;);</div><div class="line">alert(instance1.colors);//&quot;red,blue,green,black&quot;</div><div class="line"></div><div class="line">var instance2 = new SubType();</div><div class="line">alert(instance1.colors);//&quot;red,blue,green,black&quot;</div></pre></td></tr></table></figure>
-
-
-* 在创建子类型的实例的时候，不能向超类型的构造函数中传递参数。实际上，应该说是没有办法在不影响所有对象实例的情况下，给超类型的构造函数传递参数
-</code></pre><ol>
-<li>借用构造函数（类式继承）</li>
-</ol>
-<p>为了解决原型中包含引用类型值所带来的问题，开发人员开始使用一种叫做借用构造函数的技术。（有时候也伪造对象或者经典继承）</p>
+</ul>
+<ul>
+<li>在创建子类型的实例的时候，不能向超类型的构造函数中传递参数。实际上，应该说是没有办法在不影响所有对象实例的情况下，给超类型的构造函数传递参数</li>
+</ul>
+<h3 id="2-借用构造函数（类式继承）"><a href="#2-借用构造函数（类式继承）" class="headerlink" title="2. 借用构造函数（类式继承）"></a>2. 借用构造函数（类式继承）</h3><p>为了解决原型中包含引用类型值所带来的问题，开发人员开始使用一种叫做借用构造函数的技术。（有时候也伪造对象或者经典继承）</p>
 <p>基本思想：在子类型构造函数的内部调用超类型的构造函数。</p>
 <p>常用方法： apply()/call()</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">function SuperType()&#123;</div><div class="line">		this.colors = [&quot;red&quot;, &quot;blue&quot;, &quot;green&quot;];</div><div class="line">&#125;</div><div class="line"></div><div class="line">function SubType()&#123;</div><div class="line">	//继承了SuperType</div><div class="line">	SuperType.call(this);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var instance1 = new SubType();</div><div class="line">instance1.color.push(&quot;black&quot;);</div><div class="line">alert(instance1.colors);//&quot;red,blue,green,black&quot;</div><div class="line"></div><div class="line">var instance2 = new SubType();</div><div class="line">alert(instance2.colors);//&quot;red,blue,green&quot;</div></pre></td></tr></table></figure>
 <p>这里在新创建的SubType实例的环境下调用了SuperType构造函数，这样一来，就会在新SubType对象上执行SuperType()函数中定义的所有对象初始化代码。结果，SubType的每个实例就都会有自己的colors属性的副本了。</p>
 <p>借用构造函数虽然解决了刚才两种问题，但没有原型，则复用无从谈起，这种继承方式是非常少见的。</p>
 <p>所以我们需要原型链+借用构造函数的模式，这种模式称为组合继承</p>
-<ol>
-<li>组合继承</li>
-</ol>
-<p>组合式继承是比较常用的一种继承方法，其背后的思路是 使用原型链实现对原型属性和方法的继承，而通过借用构造函数来实现对实例属性的继承。这样，既通过在原型上定义方法实现了函数复用，又保证每个实例都有它自己的属性。</p>
+<h3 id="3-组合继承"><a href="#3-组合继承" class="headerlink" title="3. 组合继承"></a>3. 组合继承</h3><p>组合式继承是比较常用的一种继承方法，其背后的思路是 使用原型链实现对原型属性和方法的继承，而通过借用构造函数来实现对实例属性的继承。这样，既通过在原型上定义方法实现了函数复用，又保证每个实例都有它自己的属性。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">function SuperType(name)&#123;</div><div class="line">	this.name = name;</div><div class="line">	this.color = [&quot;red&quot;, &quot;blue&quot;, &quot;green&quot;];</div><div class="line">&#125;</div><div class="line"></div><div class="line">SuperType.prototype.sayName = function()&#123;</div><div class="line">	alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">function SubType(name, age)&#123;</div><div class="line">	//	借用构造函数继承属性</div><div class="line">	SuperType.call(this.name);</div><div class="line">	this.age = age;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//继承方法</div><div class="line">SubType.prototype = new SuperType();</div><div class="line"></div><div class="line">SubType.prototype.sayAge = function()&#123;</div><div class="line">	alert(this.age);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var instance1 = new SubType(&quot;Nicholas&quot;, 29);</div><div class="line">instance1.colors.push(&quot;balck&quot;);</div><div class="line">alert(instance1.colors); //&quot;red,blue,green,black&quot;</div><div class="line"></div><div class="line">instance1.sayName();//&quot;Nicholas&quot;</div><div class="line">instance1.sayAge();//29</div><div class="line"></div><div class="line">var instance2 = new SubType(&quot;Greg&quot;, 27);</div><div class="line">alert(instance2.colors); //&quot;red,blue,green“</div><div class="line">instance2.sayName();//&quot;Greg&quot;</div><div class="line">instance2.sayAge();//27</div></pre></td></tr></table></figure>
 <p>最常用的方法</p>
 <p>最大的不足是无论什么情况下，都会调用两次超类型构造函数：</p>
@@ -120,8 +136,39 @@
 <li>另一次是在子类型构造函数内部</li>
 </ul>
 <p>解决：开发人员普遍认为寄生组合式继承是引用类型最理想的继承范式</p>
-<p>call()的用法：调用一个对象的一个方法，以另一个对象替换当前对象。</p>
-<p>call([thisObj[,arg1[, arg2[, [,.argN]]]]]) </p>
+<h3 id="确定原型和实例的关系"><a href="#确定原型和实例的关系" class="headerlink" title="确定原型和实例的关系"></a>确定原型和实例的关系</h3><p>可以通过两种方式来确定原型和实例之间的关系。操作符instanceof和isPrototypeof()方法.</p>
+<p>只要是原型链中出现过的原型，都可以说是该原型链派生的实例的原型，因此，isPrototypeof()方法也会返回true</p>
+<h3 id="call-apply-bind"><a href="#call-apply-bind" class="headerlink" title="call()/apply()/bind()"></a>call()/apply()/bind()</h3><p>在 JS 中，这三者都是用来改变函数的 this 对象的指向的。</p>
+<p>相似之处：</p>
+<ol>
+<li>都是用来改变函数的 this 对象的指向的。</li>
+<li>第一个参数都是 this 要指向的对象。</li>
+<li>都可以利用后续参数传参。</li>
+</ol>
+<p>那么他们的区别在哪里的，先看一个例子。    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var xw = &#123;</div><div class="line">    name : &quot;小王&quot;,</div><div class="line">    gender : &quot;男&quot;,</div><div class="line">    age : 24,</div><div class="line">    say : function() &#123;</div><div class="line">        alert(this.name + &quot; , &quot; + this.gender + &quot; ,今年&quot; + this.age);                </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var xh = &#123;</div><div class="line">    name : &quot;小红&quot;,</div><div class="line">    gender : &quot;女&quot;,</div><div class="line">    age : 18</div><div class="line">&#125;</div><div class="line">xw.say();</div></pre></td></tr></table></figure>
+<p>本身没什么好说的，显示的肯定是小王 ， 男 ， 今年 24。</p>
+<p>那么如何用 xw 的 say 方法来显示 xh 的数据呢?<br>对于 call 可以这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xw.say.call(xh);</div></pre></td></tr></table></figure>
+<p>对于 apply 可以这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xw.say.apply(xh);</div></pre></td></tr></table></figure>
+<p>而对于 bind 来说需要这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xw.say.bind(xh)();</div></pre></td></tr></table></figure>
+<p>如果直接写 xw.say.bind(xh) 是不会有任何结果的，看到区别了吗？call 和 apply 都是对函数的直接调用，而 bind 方法返回的仍然是一个函数，因此后面还需要 () 来进行调用才可以。<br>那么 call 和 apply 有什么区别呢？我们把例子稍微改写一下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var xw = &#123;</div><div class="line">    name : &quot;小王&quot;,</div><div class="line">    gender : &quot;男&quot;,</div><div class="line">    age : 24,</div><div class="line">    say : function(school,grade) &#123;</div><div class="line">        alert(this.name + &quot; , &quot; + this.gender + &quot; ,今年&quot; + this.age + &quot; ,在&quot; + school + &quot;上&quot; + grade);                </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var xh = &#123;</div><div class="line">    name : &quot;小红&quot;,</div><div class="line">    gender : &quot;女&quot;,</div><div class="line">    age : 18</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到 say 方法多了两个参数，我们通过 call/apply 的参数进行传参。<br>对于 call 来说是这样的</p>
+<pre><code>xw.say.call(xh,&quot;实验小学&quot;,&quot;六年级&quot;);   
+</code></pre><p>而对于 apply 来说是这样的</p>
+<pre><code>xw.say.apply(xh,[&quot;实验小学&quot;,&quot;六年级&quot;]);
+</code></pre><p>看到区别了吗，call 后面的参数与 say 方法中是一一对应的，而 apply 的第二个参数是一个数组，数组中的元素是和 say 方法中一一对应的，这就是两者最大的区别。</p>
+<p>那么 bind 怎么传参呢？它可以像 call 那样传参。</p>
+<pre><code>xw.say.bind(xh,&quot;实验小学&quot;,&quot;六年级&quot;)();
+</code></pre><p>但是由于 bind 返回的仍然是一个函数，所以我们还可以在调用的时候再进行传参。</p>
+<pre><code>xw.say.bind(xh)(&quot;实验小学&quot;,&quot;六年级&quot;);
+</code></pre><h3 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h3><ul>
+<li><a href="http://www.jb51.net/article/81963.htm" target="_blank" rel="external">javascript 中 apply、call 和 bind 的使用区别</a></li>
+<li><a href="https://segmentfault.com/a/1190000002440502" target="_blank" rel="external">JavaScript 继承方式详解</a></li>
+</ul>
 
       
     </div>
