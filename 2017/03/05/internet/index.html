@@ -66,6 +66,23 @@
         <p>计算机网络的知识</p>
 <a id="more"></a>
 <h3 id="网络分层"><a href="#网络分层" class="headerlink" title="网络分层"></a>网络分层</h3><p><img src="/images/internet/internet.jpeg" alt=""></p>
+<p>OSI网路的体系结构</p>
+<ul>
+<li>应用层</li>
+<li>表示层</li>
+<li>会话层</li>
+<li>运输层</li>
+<li>网络层</li>
+<li>数据链路层</li>
+<li>物理层</li>
+</ul>
+<p>TCP/IP的体系结构</p>
+<ul>
+<li>应用层</li>
+<li>运输层（TCP或UDP）</li>
+<li>网际层IP</li>
+<li>网络接口层</li>
+</ul>
 <h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>网络层向上只提供简单灵活的、无链接的、尽最大努力交付的数据报服务。</p>
 <p>不提供服务质量的承诺</p>
 <ul>
@@ -78,10 +95,19 @@
 <li>网际控制报文协议ICMP</li>
 <li>网际组管理协议IGMP</li>
 </ul>
+<p><img src="/images/internet/internet2.jpg" alt=""></p>
+<h4 id="各层中间设备"><a href="#各层中间设备" class="headerlink" title="各层中间设备"></a>各层中间设备</h4><ul>
+<li>物理层： 转发器</li>
+<li>数据链路层： 网桥或桥接器</li>
+<li>网络层： 路由器</li>
+<li>网络层以上的：网关，用网关连接两个不兼容的系统需要在高层进行协议的转换</li>
+</ul>
+<p><img src="/images/internet/internet3.jpg" alt=""></p>
+<p><img src="/images/internet/internet4.jpg" alt=""></p>
 <ul>
 <li>IP地址放在IP数据报的首部，而硬件地址则放在MAC帧的首部。在网络层和网络层以上使用的是IP地址，而数据链路层及以下使用的是硬件地址</li>
 </ul>
-<h3 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h3><ul>
+<h4 id="IP数据报的固定首部长度是20字节"><a href="#IP数据报的固定首部长度是20字节" class="headerlink" title="IP数据报的固定首部长度是20字节"></a>IP数据报的固定首部长度是20字节</h4><h3 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h3><ul>
 <li><p>传输协议</p>
 <ul>
 <li><p>TCP：传输控制协议</p>
