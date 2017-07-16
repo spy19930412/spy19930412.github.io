@@ -118,12 +118,25 @@
 <p>python、ruby 基于类来实现面向对象，和 java 类似，但是更纯粹些。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ python</div><div class="line">&gt;&gt;&gt; def func(): return 1</div><div class="line">&gt;&gt;&gt; type(func)</div><div class="line">&lt;type &apos;function&apos;&gt;</div><div class="line">&gt;&gt;&gt; func2 = lambda x: x</div><div class="line">&gt;&gt;&gt; type(func2)</div><div class="line">&lt;type &apos;function&apos;&gt;</div><div class="line">&gt;&gt;&gt; type(1)</div><div class="line">&lt;type &apos;int&apos;&gt;</div><div class="line">&gt;&gt;&gt; dir(1)</div><div class="line">[&apos;__abs__&apos;, &apos;__add__&apos;, .....]</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ irb</div><div class="line">&gt; def add(a, b)</div><div class="line">&gt;    a + b</div><div class="line">&gt; end</div><div class="line">&gt; method(:add)</div><div class="line">=&gt; #&lt;Method: Object#add&gt;</div><div class="line"># 上面 ruby 的例子中，使用了 Symbol 来表示 add 方法，这是由于 ruby 中直接写 add 表示函数调用</div><div class="line">&gt; 1.methods</div><div class="line">=&gt; [:%, :&amp;, :*, :+, :-, :/, .....]</div></pre></td></tr></table></figure>
-<p>目前感受Python实在是好用太多，幸好先学的Python</p>
+<h2 id="使用感受"><a href="#使用感受" class="headerlink" title="使用感受"></a>使用感受</h2><ul>
+<li>Python，一件事用一种方式实现</li>
+</ul>
+<p>设计思想，“There should be one– and preferably only one –obvious way to do it.”</p>
+<p>举个例子，Python里，只要数据结构是sequence，获取长度就是len(tuple/list/array) </p>
+<ul>
+<li>Ruby，  一件事用多种方式实现</li>
+</ul>
+<p>设计思想，“There are many ways to do it.”</p>
+<p>举个例子，Ruby里取数组长度，length，还可以用size，size是length的别名</p>
+<p>再举个例子，<br>点唱机可能希望记录每首歌被播放的次数。这个数目可能是Song对象的一个实例变量。当一首歌被播放时，实例中的值增加。但是，假如我们还想要了解下一共播放了多少首歌。通过搜索所有Song对象并累加它们的播放次数，或者可以直接使用全局变量来完成统计；再或者，让我们使用类变量。</p>
+<p>好晕哦</p>
+<p>还好先学的Python233</p>
 <h2 id="参考阅读"><a href="#参考阅读" class="headerlink" title="参考阅读"></a>参考阅读</h2><ul>
 <li><a href="http://liujiacai.net/blog/2017/03/05/method-vs-proc-in-ruby/" target="_blank" rel="external">辨析 Ruby 中的 Method 与 Proc</a></li>
 <li><a href="https://segmentfault.com/a/1190000004701146#articleHeader2" target="_blank" rel="external">动态语言浅析</a></li>
 <li><a href="https://segmentfault.com/a/1190000004349506#articleHeader13" target="_blank" rel="external">Ruby 语言简明入门与提高</a></li>
 <li><a href="http://www.yinwang.org/blog-cn/2017/07/06/master-pl" target="_blank" rel="external">如何掌握所有的程序语言</a></li>
+<li><a href="https://www.zhihu.com/question/19599358" target="_blank" rel="external">知乎问答</a></li>
 </ul>
 
       
