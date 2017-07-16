@@ -1,0 +1,401 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Bash常用命令 | Jane&#39;s blog</title>
+  <meta name="author" content="spy19930412">
+  
+  <meta name="description" content="sometimes ever sometimes never">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Bash常用命令"/>
+  <meta property="og:site_name" content="Jane&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+ <!--  <link href="/favicon.png" rel="icon"> -->
+ <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="Jane&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Jane&#39;s blog</a></h1>
+  <h2><a href="/">sometimes ever sometimes never</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">存档</a></li>
+    
+      <li><a href="/about">关于我</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-06-24T13:24:37.000Z"><a href="/2017/06/24/bash/">2017-06-24</a></time>
+      
+      
+  
+    <h1 class="title">Bash常用命令</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>一个关于命令行的小笔记</p>
+<a id="more"></a>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://coolshell.cn/articles/8883.html" target="_blank" rel="external">酷壳</a></li>
+</ul>
+<h2 id="基础常用命令"><a href="#基础常用命令" class="headerlink" title="基础常用命令"></a>基础常用命令</h2><ul>
+<li><code>某个命令 --h</code>，对这个命令进行解释</li>
+<li><code>某个命令 --help</code>，解释这个命令(更详细)</li>
+<li><p><code>man某个命令</code>，文档式解释这个命令(更更详细)(执行该命令后,还可以按/+关键字进行查询结果的搜索)</p>
+</li>
+<li><p><code>Ctrl + c</code>，结束命令</p>
+</li>
+<li><code>TAB键</code>，自动补全命令（按一次自动补全，连续按两次，提示所有以输入开头字母的所有命令）</li>
+<li><code>键盘上下键</code>，输入临近的历史命令</li>
+<li><code>history</code>，查看所有的历史命令</li>
+<li><code>Ctrl + r</code>，进入历史命令的搜索功能模式</li>
+<li><code>clear</code>，清除屏幕里面的所有命令</li>
+</ul>
+<hr>
+<ul>
+<li><code>pwd</code>，显示当前目录路径 ==（常用）==</li>
+<li><code>firefox&amp;</code>，最后后面的 <strong>&amp;</strong> 符号，表示使用后台方式打开 Firefox，然后显示该进程的 PID 值</li>
+<li><code>jobs</code>，查看后台运行的程序列表</li>
+<li><code>ifconfig</code>，查看 IP 等信息（常用）</li>
+<li><code>locate 搜索关键字</code>，快速搜索系统文件/文件夹（类似 Windows 上的 everything 索引式搜索） ==（常用）==<ul>
+<li><code>updatedb</code>，配合上面的 locate，给 locate 的索引更新（locate 默认是一天更新一次索引）（常用）</li>
+</ul>
+</li>
+<li><code>date</code>，查看系统时间（常用）<ul>
+<li><code>date -s20080103</code>，设置日期（常用）</li>
+<li><code>date -s18:24</code>，设置时间，如果要同时更改 BIOS 时间，再执行 <code>hwclock --systohc</code>（常用）</li>
+</ul>
+</li>
+<li><code>cal</code>，在终端中查看日历，肯定没有农历显示的</li>
+<li><code>uptime</code>，查看系统已经运行了多久，当前有几个用户等信息（常用）</li>
+<li><code>echo &quot;字符串内容&quot;</code>，输出 “字符串内容”  ==（常用）==</li>
+<li><code>cat 文件路名</code>，显示文件内容（属于打印语句） ==（常用）==</li>
+<li><code>cat -n 文件名</code>，显示文件，并每一行内容都编号   ==（常用）==</li>
+<li><code>more 文件名</code>，用分页的方式查看文件内容（按 space 翻下一页，按 <em>Ctrl + B</em> 返回上页）</li>
+<li><code>less</code>文件名，用分页的方式查看文件内容（带上下翻页）<ul>
+<li>按 <strong>j</strong> 向下移动，按 <strong>k</strong> 向上移动</li>
+<li>按 <strong>/</strong> 后，输入要查找的字符串内容，可以对文件进行向下查询，如果存在多个结果可以按 <strong>n</strong> 调到下一个结果出</li>
+<li>按 <strong>？</strong> 后，输入要查找的字符串内容，可以对文件进行向上查询，如果存在多个结果可以按 <strong>n</strong> 调到下一个结果出</li>
+</ul>
+</li>
+<li><code>tail -200f 文件名</code>，查看文件被更新的新内容尾 200 行，如果文件还有在新增可以动态查看到（一般用于查看日记文件）</li>
+<li><code>shutdown</code><ul>
+<li><code>shutdown -hnow</code>，立即关机</li>
+<li><code>shutdown -h+10</code>，10 分钟后关机</li>
+<li><code>shutdown -h23:30</code>，23:30 关机</li>
+<li><code>shutdown -rnew</code>，立即重启</li>
+</ul>
+</li>
+<li><code>poweroff</code>，立即关机（常用）</li>
+<li><code>reboot</code>，立即重启（常用）</li>
+<li><code>zip mytest.zip /opt/test/</code>，把 /opt 目录下的 test/ 目录进行压缩，压缩成一个名叫 mytest 的 zip 文件<ul>
+<li><code>unzip mytest.zip</code>，对 mytest.zip 这个文件进行解压，解压到当前所在目录</li>
+<li><code>unzip mytest.zip -d /opt/setups/</code>，对 mytest.zip 这个文件进行解压，解压到 /opt/setups/ 目录下</li>
+</ul>
+</li>
+<li><code>tar -cvf mytest.tar mytest/</code>，对 mytest/ 目录进行归档处理（归档和压缩不一样）</li>
+<li><code>tar -xvf mytest.tar</code>，释放 mytest.tar 这个归档文件，释放到当前目录<ul>
+<li><code>tar -xvf mytest.tar -C /opt/setups/</code>，释放 mytest.tar 这个归档文件，释放到 /opt/setups/ 目录下</li>
+</ul>
+</li>
+<li><code>last</code>，显示最近登录的帐户及时间</li>
+<li><code>lastlog</code>，显示系统所有用户各自在最近登录的记录，如果没有登录过的用户会显示 <strong>从未登陆过</strong></li>
+<li><p><code>ls</code>，列出当前目录下的所有没有隐藏的文件 / 文件夹。  ==（常用）==</p>
+<ul>
+<li><code>ls -a</code>，列出包括以．号开头的隐藏文件 / 文件夹（也就是所有文件）</li>
+<li><code>ls -R</code>，显示出目录下以及其所有子目录的文件 / 文件夹（递归地方式，不显示隐藏的文件）</li>
+<li><code>ls -a -R</code>，显示出目录下以及其所有子目录的文件 / 文件夹（递归地方式，显示隐藏的文件）</li>
+<li><p><code>ls -l</code>，列出目录下所有文件的权限、所有者、文件大小、修改时间及名称（也就是显示详细信息，不显示隐藏文件）。显示出来的效果如下：</p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-rwxr-xr-x. 1 root root 4096 3月 26 10:57，其中最前面的 - 表示这是一个普通文件</div><div class="line">lrwxrwxrwx. 1 root root 4096 3月 26 10:57，其中最前面的 l 表示这是一个链接文件，类似 Windows 的快捷方式</div><div class="line">drwxr-xr-x. 5 root root 4096 3月 26 10:57，其中最前面的 d 表示这是一个目录</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>ls -ld 目录名</code>，显示该目录的基本信息</p>
+</li>
+<li><code>ls -t</code>，依照文件最后修改时间的顺序列出文件名。</li>
+<li><code>ls -F</code>，列出当前目录下的文件名及其类型。以 <strong>/</strong> 结尾表示为目录名，以 <strong>*</strong> 结尾表示为可执行文件，以 <strong>@</strong> 结尾表示为符号连接</li>
+<li><code>ls -lg</code>，同上，并显示出文件的所有者工作组名。</li>
+<li><code>ls -lh</code>，查看文件夹类文件详细信息，文件大小，文件修改时间</li>
+<li><code>ls /opt | head -5</code>，显示 opt 目录下前 5 条记录</li>
+<li><code>ls -l /opt |grep &quot;^-&quot;|wc -l</code>，统计 opt 目录下文件的个数，不会递归统计</li>
+<li><code>ls -lR /opt |grep &quot;^-&quot;|wc -l</code>，统计 opt 目录下文件的个数，会递归统计</li>
+<li><code>ls -l /opt |grep &quot;^d&quot;|wc -l</code>，统计 opt 目录下目录的个数，不会递归统计</li>
+<li><code>ls -lR /opt |grep &quot;^d&quot;|wc -l</code>，统计 opt 目录下目录的个数，会递归统计</li>
+<li><code>ls -lR /opt |grep &quot;js&quot;|wc -l</code>，统计 opt 目录下 js 文件的个数，会递归统计</li>
+</ul>
+</li>
+<li><code>cd</code>，目录切换   ==（常用）==<ul>
+<li><code>cd ..</code>，改变目录位置至当前目录的父目录(上级目录)。</li>
+<li><code>cd ~</code>，改变目录位置至用户登录时的工作目录。</li>
+<li><code>cd 回车</code>，回到家目录</li>
+<li><code>cd -</code>，上一个工作目录</li>
+<li><code>cd dir1/</code>，改变目录位置至 dir1 目录下。</li>
+<li><code>cd ~user</code>，改变目录位置至用户的工作目录。</li>
+<li><code>cd ../user</code>，改变目录位置至相对路径user的目录下。</li>
+<li><code>cd /../..</code>，改变目录位置至绝对路径的目录位置下。</li>
+</ul>
+</li>
+<li><code>cp 源文件 目标文件</code>，复制文件     ==（常用）==<ul>
+<li><code>cp -r 源文件夹 目标文件夹</code>，复制文件夹</li>
+<li><code>cp -r -v 源文件夹 目标文件夹</code>，复制文件夹(显示详细信息，一般用于文件夹很大，需要查看复制进度的时候)</li>
+<li><code>cp /usr/share/easy-rsa/2.0/keys/{ca.crt,server.{crt,key},dh2048.pem,ta.key} /etc/openvpn/keys/</code>，复制同目录下花括号中的文件</li>
+</ul>
+</li>
+<li><code>tar cpf - . | tar xpf - -C /opt</code>，复制当前所有文件到 /opt 目录下，一般如果文件夹文件多的情况下用这个更好，用 cp 比较容易出问题</li>
+<li><code>mv 文件 目标文件夹</code>，移动文件到目标文件夹<ul>
+<li><code>mv 文件</code>，不指定目录重命名后的名字，用来重命名文件</li>
+</ul>
+</li>
+<li><code>touch 文件名</code>，创建一个空白文件/更新已有文件的时间(后者少用)   ==（常用）==</li>
+<li><code>mkdir 文件夹名</code>，创建文件夹    ==（常用）==</li>
+<li><code>mkdir -p /opt/setups/nginx/conf/</code>，创建一个名为 conf 文件夹，如果它的上级目录 nginx 没有也会跟着一起生成，如果有则跳过</li>
+<li><code>rmdir 文件夹名</code>，删除文件夹(只能删除文件夹里面是没有东西的文件夹)</li>
+<li><code>rm 文件</code>，删除文件    ==（常用）==<ul>
+<li><code>rm -r 文件夹</code>，删除文件夹</li>
+<li><code>rm -r -i 文件夹</code>，在删除文件夹里的文件会提示(要的话,在提示后面输入yes)</li>
+<li><code>rm -r -f 文件夹</code>，强制删除</li>
+<li><code>rm -r -f 文件夹1/ 文件夹2/ 文件夹3/</code>删除多个</li>
+</ul>
+</li>
+<li><code>find</code>，高级查找<ul>
+<li><code>find . -name *lin*</code>，其中 . 代表在当前目录找，-name 表示匹配文件名 / 文件夹名，*lin* 用通配符搜索含有lin的文件或是文件夹</li>
+<li><code>find . -iname *lin*</code>，其中 . 代表在当前目录找，-iname 表示匹配文件名 / 文件夹名（忽略大小写差异），*lin* 用通配符搜索含有lin的文件或是文件夹</li>
+<li><code>find / -name *.conf</code>，其中 / 代表根目录查找，*.conf代表搜索后缀会.conf的文件</li>
+<li><code>find /opt -name .oh-my-zsh</code>，其中 /opt 代表目录名，.oh-my-zsh 代表搜索的是隐藏文件 / 文件夹名字为 oh-my-zsh 的</li>
+<li><code>find /opt -type f -iname .oh-my-zsh</code>，其中 /opt 代表目录名，-type f 代表只找文件，.oh-my-zsh 代表搜索的是隐藏文件名字为 oh-my-zsh 的</li>
+<li><code>find /opt -type d -iname .oh-my-zsh</code>，其中 /opt 代表目录名，-type d 代表只找目录，.oh-my-zsh 代表搜索的是隐藏文件夹名字为 oh-my-zsh 的</li>
+<li><code>find . -name &quot;lin*&quot; -exec ls -l {} \;</code>，当前目录搜索lin开头的文件，然后用其搜索后的结果集，再执行ls -l的命令（这个命令可变，其他命令也可以），其中 -exec 和 {} \; 都是固定格式</li>
+<li><code>find /opt -type f -size +800M  -print0 | xargs -0 du -h | sort -nr</code>，找出 /opt 目录下大于 800 M 的文件</li>
+<li><code>find / -name &quot;*tower*&quot; -exec rm {} \;</code>，找到文件并删除</li>
+<li><code>du -hm --max-depth=2 | sort -nr | head -12</code>，找出系统中占用容量最大的前 12 个目录</li>
+</ul>
+</li>
+<li><code>cat /etc/resolv.conf</code>，查看 DNS 设置</li>
+<li><code>netstat -tlunp</code>，查看当前运行的服务，同时可以查看到：运行的程序已使用端口情况</li>
+<li><code>env</code>，查看所有系统变量</li>
+<li><code>export</code>，查看所有系统变量</li>
+<li><code>echo $JAVA_HOME</code>，查看指定系统变量的值，这里查看的是自己配置的 JAVA_HOME。</li>
+<li><code>unset $JAVA_HOME</code>，删除指定的环境变量</li>
+</ul>
+<h2 id="用户、权限-相关命令"><a href="#用户、权限-相关命令" class="headerlink" title="用户、权限-相关命令"></a>用户、权限-相关命令</h2><ul>
+<li><code>hostname</code>，查看当前登陆用户全名</li>
+<li><code>cat /etc/group</code>，查看所有组</li>
+<li><code>cat /etc/passwd</code>，查看所有用户</li>
+<li><code>groups youmeek</code>，查看 youmeek 用户属于哪个组</li>
+<li><code>useradd youmeek -g judasn</code>，添加用户并绑定到 judasn 组下</li>
+<li><code>userdel -r youmeek</code>，删除名字为 youmeek 的用户<ul>
+<li>参数：<code>-r</code>，表示删除用户的时候连同用户的家目录一起删除</li>
+</ul>
+</li>
+<li><p>修改普通用户 youmeek 的权限跟 root 权限一样：</p>
+<ul>
+<li><p>常用方法（原理是把该用户加到可以直接使用 sudo 的一个权限状态而已）：</p>
+<ul>
+<li>编辑配置文件：<code>vim /etc/sudoers</code></li>
+<li><p>找到 98 行（预估），有一个：<code>root    ALL=(ALL)   ALL</code>，在这一行下面再增加一行，效果如下：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">root</span>    ALL=(ALL)   ALL</div><div class="line">youmeek    ALL=(ALL)   ALL</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>另一种方法：</p>
+<ul>
+<li>编辑系统用户的配置文件：<code>vim /etc/passwd</code>，找到 <strong>root</strong> 和 <strong>youmeek</strong> 各自开头的那一行，比如 root 是：<code>root:x:0:0:root:/root:/bin/zsh</code>，这个代表的含义为：<em>用户名:密码:UserId:GroupId:描述:家目录:登录使用的 shell</em></li>
+<li>通过这两行对比，我们可以直接修改 youmeek 所在行的 UserId 值 和 GroupId 值，都改为 0。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>groupadd judasn</code>，添加一个名为 judasn 的用户组</li>
+<li><code>groupdel judasn</code>，删除一个名为 judasn 的用户组（前提：先删除组下面的所有用户）</li>
+<li><code>usermod 用户名 -g 组名</code>，把用户修改到其他组下</li>
+<li><code>passwd youmeek</code>，修改 youmeek 用户的密码（前提：只有 root 用户才有修改其他用户的权限，其他用户只能修改自己的）</li>
+<li><code>chmod 777 文件名/目录</code>，给指定文件增加最高权限，系统中的所有人都可以进行读写。<ul>
+<li>linux 的权限分为 rwx。r 代表：可读，w 代表：可写，x 代表：可执行</li>
+<li>这三个权限都可以转换成数值表示，r = 4，w = 2，x = 1，- = 0，所以总和是 7，也就是最大权限。第一个 7 是所属主（user）的权限，第二个 7 是所属组（group）的权限，最后一位 7 是非本群组用户（others）的权限。</li>
+</ul>
+</li>
+<li><code>su</code>：切换到 root 用户，终端目录还是原来的地方（常用）<ul>
+<li><code>su -</code>：切换到 root 用户，其中 <strong>-</strong> 号另起一个终端并切换账号</li>
+<li><code>su 用户名</code>，切换指定用户帐号登陆，终端目录还是原来地方。</li>
+<li><code>su - 用户名</code>，切换到指定用户帐号登陆，其中 <strong>-</strong> 号另起一个终端并切换账号</li>
+</ul>
+</li>
+<li><code>exit</code>，注销当前用户（常用）</li>
+<li><code>sudo 某个命令</code>，使用管理员权限使用命令，使用 sudo 回车之后需要输入当前登录账号的密码。（常用）</li>
+<li><code>passwd</code>，修改当前用户密码（常用）</li>
+</ul>
+<h2 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h2><ul>
+<li><code>df -h</code>，自动以合适的磁盘容量单位查看磁盘大小和使用空间<ul>
+<li><code>df -k</code>，以磁盘容量单位 K 为数值结果查看磁盘使用情况</li>
+<li><code>df -m</code>，以磁盘容量单位 M 为数值结果查看磁盘使用情况</li>
+</ul>
+</li>
+<li><code>du -sh /opt</code>，查看 opt 这个文件夹大小 （h 的意思 human-readable 用人类可读性较好方式显示，系统会自动调节单位，显示合适大小的单位）</li>
+<li><code>du -sh ./*</code>，查看当前目录下所有文件夹大小 （h 的意思 human-readable 用人类可读性较好方式显示，系统会自动调节单位，显示合适大小的单位）</li>
+<li><code>du -sh /opt/setups/</code>，显示 /opt/setups/ 目录所占硬盘空间大小（s 表示 –summarize 仅显示总计，即当前目录的大小。h 表示 –human-readable 以 KB，MB，GB 为单位，提高信息的可读性）</li>
+<li><code>mount /dev/sdb5 /newDir/</code>，把分区 sdb5 挂载在根目录下的一个名为 newDir 的空目录下，需要注意的是：这个目录最好为空，不然已有的那些文件将看不到，除非卸载挂载。<ul>
+<li>挂载好之后，通过：<code>df -h</code>，查看挂载情况。</li>
+</ul>
+</li>
+<li><code>umount /newDir/</code>，卸载挂载，用目录名<ul>
+<li>如果这样卸载不了可以使用：<code>umount -l /newDir/</code></li>
+</ul>
+</li>
+<li><code>umount /dev/sdb5</code>，卸载挂载，用分区名</li>
+</ul>
+<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><ul>
+<li><a href="http://wenku.baidu.com/view/1ad19bd226fff705cc170af3.html" target="_blank" rel="external">http://wenku.baidu.com/view/1ad19bd226fff705cc170af3.html</a></li>
+<li><a href="http://blog.csdn.net/nzing/article/details/9166057" target="_blank" rel="external">http://blog.csdn.net/nzing/article/details/9166057</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/bash/">bash</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/bash/">bash</a>
+  </div>
+
+        <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+    
+    <a href="/2017/07/02/python&js&ruby/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2017/06/01/2017_06/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/bash/">bash</a><small>1</small></li>
+  
+    <li><a href="/categories/blog/">blog</a><small>20</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>2</small></li>
+  
+    <li><a href="/categories/javascript-ES6/">javascript+ES6</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>2</small></li>
+  
+    <li><a href="/categories/weixin/">weixin</a><small>1</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>3</small></li>
+  
+    <li><a href="/categories/博客/">博客</a><small>1</small></li>
+  
+    <li><a href="/categories/性能优化/">性能优化</a><small>1</small></li>
+  
+    <li><a href="/categories/毕业设计/">毕业设计</a><small>4</small></li>
+  
+    <li><a href="/categories/算法/">算法</a><small>7</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Sass/" style="font-size: 12px;">Sass</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/edx/" style="font-size: 10px;">edx</a> <a href="/tags/javascript/" style="font-size: 12px;">javascript</a> <a href="/tags/languages/" style="font-size: 10px;">languages</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/前端/" style="font-size: 16px;">前端</a> <a href="/tags/博客/" style="font-size: 12px;">博客</a> <a href="/tags/博客，文章/" style="font-size: 10px;">博客，文章</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/托业/" style="font-size: 10px;">托业</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/毕业设计/" style="font-size: 14px;">毕业设计</a> <a href="/tags/算法/" style="font-size: 18px;">算法</a> <a href="/tags/计算机网络/" style="font-size: 10px;">计算机网络</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试心得/" style="font-size: 10px;">面试心得</a>
+  </div>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="https://github.com/spy19930412 " title="spy19930412">my github</a></li>
+<li><a href="http://wwj718.github.io/ " title="友情互链">writing for time超级棒</a></li>
+<li><a href="http://xueyi1230.github.io/ " title="友情互链">削一个博客一直施工中</a></li>
+</ul>
+</div>
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2298271483&verifier=401a0bfd&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 spy19930412
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
