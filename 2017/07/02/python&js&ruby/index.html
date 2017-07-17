@@ -72,7 +72,7 @@
 <li>JavaScript is a <strong>high-level, dynamic, untyped, and interpreted programming</strong> language.</li>
 </ul>
 <p>其实上面的关键字对于这三门语言来说都适用，只是每个语言的强调点不一样而已。</p>
-<p>这三门语言都是动态语言，支持函数式、面向对象两种编程范式。</p>
+<p>这三门语言都是<a href="https://www.zhihu.com/question/19918532/answer/21647195" target="_blank" rel="external">动态类型语言</a>，支持函数式、面向对象两种编程范式。</p>
 <h2 id="语言特性"><a href="#语言特性" class="headerlink" title="语言特性"></a>语言特性</h2><p>任何一种“语言”，都是各种“语言特性”的组合。</p>
 <p>这些语言特性，就像你在选择一台电脑的时候，看它里面是什么配置。选电脑的时候，没有人会说 Dell 一定是最好的，他们只会说这个型号里面装的是 Intel 的 i7 处理器，这个比 i5 的好，DDR3 的内存 比 DDR2 的快这么多，SSD 比磁盘快很多，ATI 的显卡是垃圾……</p>
 <p>如此等等。这些配置对应到程序语言里面，就是所谓“语言特性”。举一些语言特性的例子：</p>
@@ -129,9 +129,12 @@
 </ul>
 <p>设计思想，“There are many ways to do it.”</p>
 <p>举个例子，Ruby里取数组长度，length，还可以用size，size是length的别名</p>
-<p>再举个例子，<br>点唱机可能希望记录每首歌被播放的次数。这个数目可能是Song对象的一个实例变量。当一首歌被播放时，实例中的值增加。但是，假如我们还想要了解下一共播放了多少首歌。通过搜索所有Song对象并累加它们的播放次数，或者可以直接使用全局变量来完成统计；再或者，让我们使用类变量。</p>
-<p>好晕哦</p>
-<p>还好先学的Python哈哈</p>
+<p>再比如，<br>点唱机可能希望记录每首歌被播放的次数。这个数目可能是Song对象的一个实例变量。当一首歌被播放时，实例中的值增加。但是，假如我们还想要了解下一共播放了多少首歌。通过搜索所有Song对象并累加它们的播放次数，或者可以直接使用全局变量来完成统计；再或者，让我们使用类变量。</p>
+<p>再举个例子，<br>当你想要访问类的方法时，首先需要实例化类。然后，使用对象可以访问类的任何成员。<br>同时Ruby 提供了一种不用实例化即可访问方法的方式。让我们看看如何声明并访问类方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">class Accounts</div><div class="line">   def reading_charge</div><div class="line">   end</div><div class="line">   def Accounts.return_date</div><div class="line">   end</div><div class="line">end</div></pre></td></tr></table></figure>
+<p>我们已经知道方法 return_date 是如何声明的。它是通过在类名后跟着一个点号，点号后跟着方法名来声明的。可以直接访问类方法，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Accounts.return_date</div></pre></td></tr></table></figure>
+<p>如需访问该方法，就不需要创建类 Accounts 的对象了。</p>
 <p>以上</p>
 <h2 id="参考阅读"><a href="#参考阅读" class="headerlink" title="参考阅读"></a>参考阅读</h2><ul>
 <li><a href="http://liujiacai.net/blog/2017/03/05/method-vs-proc-in-ruby/" target="_blank" rel="external">辨析 Ruby 中的 Method 与 Proc</a></li>
@@ -139,6 +142,7 @@
 <li><a href="https://segmentfault.com/a/1190000004349506#articleHeader13" target="_blank" rel="external">Ruby 语言简明入门与提高</a></li>
 <li><a href="http://www.yinwang.org/blog-cn/2017/07/06/master-pl" target="_blank" rel="external">如何掌握所有的程序语言</a></li>
 <li><a href="https://www.zhihu.com/question/19599358" target="_blank" rel="external">知乎问答</a></li>
+<li><a href="https://www.zhihu.com/question/19918532/answer/21647195" target="_blank" rel="external">弱类型、强类型、动态类型、静态类型语言的区别是什么？</a></li>
 </ul>
 
       
